@@ -17,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E9279E2B2796BAA300CBF467 /* aze.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aze.png; sourceTree = "<group>"; };
 		E943279E2794CB3C00057345 /* OC_FrenchGameFactory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OC_FrenchGameFactory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E94327A12794CB3C00057345 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E94327A32794CB3C00057345 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +59,7 @@
 		E94327A02794CB3C00057345 /* OC_FrenchGameFactory */ = {
 			isa = PBXGroup;
 			children = (
+				E9279E2B2796BAA300CBF467 /* aze.png */,
 				E94327A12794CB3C00057345 /* AppDelegate.swift */,
 				E94327A32794CB3C00057345 /* SceneDelegate.swift */,
 				E94327A52794CB3C00057345 /* ViewController.swift */,
