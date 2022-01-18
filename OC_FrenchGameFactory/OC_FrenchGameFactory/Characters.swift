@@ -4,10 +4,11 @@
 //
 //  Created by Bertrand Dalleau on 16/01/2022.
 //
+//  This file contain all classes wich define every character that can be played
 
 import Foundation
 
-class CharacterList{
+class CharacterList{    //Store a list of every character existing in the game for easy retrieve
     var characterList : [String:AnyObject] = [:]
     init(){
         characterList["Dps1"] = Dps1()

@@ -15,8 +15,10 @@ class ViewController: UIViewController {
     }
     
     class GameSession{
-        
+        init(){
+        }
     }
+    var sessionStarted = GameSession()
     class Characters{
         var name : String
         var health: Int
