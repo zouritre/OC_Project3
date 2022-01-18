@@ -9,12 +9,21 @@
 import Foundation
 
 class CharacterList{    //Store a list of every character existing in the game for easy retrieve
-    var characterList : [String:AnyObject] = [:]
+    static func characterList() -> [String:AnyObject] {
+        var characterList : [String:AnyObject] = [:]
+            characterList["Dps1"] = Dps1()
+            characterList["Dps2"] = Dps2()
+            characterList["Dps3"] = Dps3()
+            characterList["Healer"] = Healer()
+//
+//            var characterList : [String:Int] = [:]
+//                characterList["Dps1"] = 1
+//                characterList["Dps2"] = 2
+//                characterList["Dps3"] = 3
+//                characterList["Healer"] = 4
+        return characterList
+    }
     init(){
-        characterList["Dps1"] = Dps1()
-        characterList["Dps2"] = Dps2()
-        characterList["Dps3"] = Dps3()
-        characterList["Healer"] = Healer()
     }
 }
 
