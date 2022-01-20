@@ -7,17 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E93E1542279A0C7700634010 /* Classes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93E1541279A0C7700634010 /* Classes.swift */; };
+		E93E1543279A0D1C00634010 /* Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94327B52794D47A00057345 /* Characters.swift */; };
 		E94327A22794CB3C00057345 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94327A12794CB3C00057345 /* AppDelegate.swift */; };
 		E94327A42794CB3C00057345 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94327A32794CB3C00057345 /* SceneDelegate.swift */; };
 		E94327A62794CB3C00057345 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94327A52794CB3C00057345 /* ViewController.swift */; };
 		E94327A92794CB3C00057345 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E94327A72794CB3C00057345 /* Main.storyboard */; };
 		E94327AB2794CB3D00057345 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E94327AA2794CB3D00057345 /* Assets.xcassets */; };
 		E94327AE2794CB3D00057345 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E94327AC2794CB3D00057345 /* LaunchScreen.storyboard */; };
-		E94327B62794D47A00057345 /* Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94327B52794D47A00057345 /* Characters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E9279E2B2796BAA300CBF467 /* aze.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aze.png; sourceTree = "<group>"; };
+		E93E1541279A0C7700634010 /* Classes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classes.swift; sourceTree = "<group>"; };
 		E943279E2794CB3C00057345 /* OC_FrenchGameFactory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OC_FrenchGameFactory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E94327A12794CB3C00057345 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E94327A32794CB3C00057345 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				E94327AA2794CB3D00057345 /* Assets.xcassets */,
 				E94327AC2794CB3D00057345 /* LaunchScreen.storyboard */,
 				E94327AF2794CB3D00057345 /* Info.plist */,
+				E93E1541279A0C7700634010 /* Classes.swift */,
 			);
 			path = OC_FrenchGameFactory;
 			sourceTree = "<group>";
@@ -146,7 +149,8 @@
 				E94327A62794CB3C00057345 /* ViewController.swift in Sources */,
 				E94327A22794CB3C00057345 /* AppDelegate.swift in Sources */,
 				E94327A42794CB3C00057345 /* SceneDelegate.swift in Sources */,
-				E94327B62794D47A00057345 /* Characters.swift in Sources */,
+				E93E1542279A0C7700634010 /* Classes.swift in Sources */,
+				E93E1543279A0D1C00634010 /* Characters.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

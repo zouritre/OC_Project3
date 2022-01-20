@@ -11,9 +11,9 @@ import UIKit
 extension UIColor {
     static var random: UIColor {
         return UIColor(
-            red: .random(in: 0...1),
-            green: .random(in: 0...1),
-            blue: .random(in: 0...1),
+            red: .random(in: 0...0.5),
+            green: .random(in: 0...0.5),
+            blue: .random(in: 0...0.5),
             alpha: 1.0
         )
     }
@@ -29,42 +29,19 @@ class ViewController: UIViewController {
 //        Create as much buttons as there are playable characters in the game
 //        And set their default names on the buttons
 //        The characters list is located in Characters.swift file
-        for(key, _) in CharacterList.characterList(){
+        for characters in CharacterList.characterList{
             let button = UIButton()
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.setTitle(key, for: .normal)
+            button.setTitle(characters.name, for: .normal)
             button.backgroundColor = UIColor.random
             player1CharacterList.addArrangedSubview(button)
             
             let button1 = UIButton()
             button1.translatesAutoresizingMaskIntoConstraints = false
-            button1.setTitle(key, for: .normal)
+            button1.setTitle(characters.name, for: .normal)
             button1.backgroundColor = UIColor.random
             player2CharacterList.addArrangedSubview(button1)
         }
         
     }
-    
-    class GameSession{
-        init(){
-        }
-    }
-    var sessionStarted = GameSession()
-    class Characters{
-        var name : String
-        var health: Int
-        var weapon: Weapon
-        var ability: String
-        init(name : String, health: Int, weapon: Weapon, ability: String){
-            self.name = name
-            self.health = health
-            self.weapon = weapon
-            self.ability = ability
-        }
-    }
-    class Weapon{
-        
-    }
-
-
 }
