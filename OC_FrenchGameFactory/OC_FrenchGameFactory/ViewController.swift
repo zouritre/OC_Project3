@@ -29,16 +29,16 @@ class ViewController: UIViewController {
 //        Create as much buttons as there are playable characters in the game
 //        And set their default names on the buttons
 //        The characters list is located in Characters.swift file
-        for characters in CharacterList.characterList{
+        for character in CharacterList.characterList{
             let button = UIButton()
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.setTitle(characters.name, for: .normal)
+            button.setTitle(character.name, for: .normal)
             button.backgroundColor = UIColor.random
             player1CharacterList.addArrangedSubview(button)
             
             let button1 = UIButton()
             button1.translatesAutoresizingMaskIntoConstraints = false
-            button1.setTitle(characters.name, for: .normal)
+            button1.setTitle(character.name, for: .normal)
             button1.backgroundColor = UIColor.random
             player2CharacterList.addArrangedSubview(button1)
         }
