@@ -20,7 +20,6 @@ extension UIColor {
 }
 
 class ViewController: UIViewController {
-
     @IBOutlet weak var player1CharacterList: UIStackView!
     @IBOutlet weak var player2CharacterList: UIStackView!
     override func viewDidLoad() {
@@ -28,19 +27,35 @@ class ViewController: UIViewController {
         
 //        Create as much buttons as there are playable characters in the game
 //        And set their default names on the buttons
-//        The characters list is located in Characters.swift file
         for character in CharacterList.characterList{
+            let stackView = UIStackView()
+            stackView.axis = NSLayoutConstraint.Axis.horizontal
+            stackView.alignment = UIStackView.Alignment.fill
+            stackView.distribution = UIStackView.Distribution.fillEqually
+            stackView.spacing = 2
+            
             let button = UIButton()
             button.translatesAutoresizingMaskIntoConstraints = false
             button.setTitle(character.name, for: .normal)
             button.backgroundColor = UIColor.random
-            player1CharacterList.addArrangedSubview(button)
+            stackView.addArrangedSubview(button)
             
+            let textView = UITextView()
+            textView.isScrollEnabled = false
+            stackView.addArrangedSubview(textView)
+            
+            player1CharacterList.addArrangedSubview(stackView)
+            
+
             let button1 = UIButton()
             button1.translatesAutoresizingMaskIntoConstraints = false
             button1.setTitle(character.name, for: .normal)
             button1.backgroundColor = UIColor.random
             player2CharacterList.addArrangedSubview(button1)
+            
+//            let textView1 = UITextView()
+//            textView1.translatesAutoresizingMaskIntoConstraints = false
+//            player1CustomNames.addArrangedSubview(textView1)
         }
         
     }

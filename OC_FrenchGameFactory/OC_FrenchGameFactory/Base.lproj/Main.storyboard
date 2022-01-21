@@ -16,99 +16,81 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="IVA-hb-4OK">
-                                <rect key="frame" x="5" y="76" width="402" height="647"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="caD-6x-IVS">
+                                <rect key="frame" x="20" y="44" width="374" height="818"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choisissez vos personnages" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZA-Ju-9jz">
-                                        <rect key="frame" x="0.0" y="0.0" width="402" height="105.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select your characters" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Grv-IX-0OO">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="80"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="105.5" id="4SO-oz-UgK"/>
-                                            <constraint firstAttribute="width" constant="402" id="AJU-Bm-pkD"/>
+                                            <constraint firstAttribute="height" constant="80" id="mf8-L6-Q4C"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="40"/>
-                                        <color key="textColor" systemColor="tintColor"/>
+                                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="35"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" distribution="fillEqually" spacing="100" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jih-gx-kl0">
-                                        <rect key="frame" x="0.0" y="155.5" width="402" height="491.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="IhZ-Gx-z65" userLabel="Player1">
+                                        <rect key="frame" x="0.0" y="85" width="374" height="364"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jcu-rT-rsM">
-                                                <rect key="frame" x="0.0" y="0.0" width="402" height="217.5"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Joueur 1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nWq-m7-7yV">
-                                                        <rect key="frame" x="0.0" y="0.0" width="402" height="54.5"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="50"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zRC-yM-1eK">
-                                                        <rect key="frame" x="0.0" y="64.5" width="402" height="153"/>
-                                                        <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="BNQ-2D-cCa">
-                                                                <rect key="frame" x="0.0" y="0.0" width="402" height="153"/>
-                                                            </stackView>
-                                                        </subviews>
-                                                        <constraints>
-                                                            <constraint firstItem="BNQ-2D-cCa" firstAttribute="top" secondItem="nbq-TS-ZIw" secondAttribute="top" id="4J6-bV-0u0"/>
-                                                            <constraint firstItem="BNQ-2D-cCa" firstAttribute="height" secondItem="nbq-TS-ZIw" secondAttribute="height" id="GjC-cr-Kf0"/>
-                                                            <constraint firstAttribute="bottom" secondItem="BNQ-2D-cCa" secondAttribute="bottom" id="IHx-dY-reQ"/>
-                                                            <constraint firstAttribute="trailing" secondItem="BNQ-2D-cCa" secondAttribute="trailing" id="UxT-pI-PZp"/>
-                                                            <constraint firstItem="BNQ-2D-cCa" firstAttribute="leading" secondItem="nbq-TS-ZIw" secondAttribute="leading" id="fq4-AL-6iq"/>
-                                                            <constraint firstItem="BNQ-2D-cCa" firstAttribute="centerX" secondItem="zRC-yM-1eK" secondAttribute="centerX" id="g4a-fA-H3W"/>
-                                                        </constraints>
-                                                        <viewLayoutGuide key="contentLayoutGuide" id="mlF-Rm-75G"/>
-                                                        <viewLayoutGuide key="frameLayoutGuide" id="nbq-TS-ZIw"/>
-                                                    </scrollView>
-                                                </subviews>
-                                                <viewLayoutGuide key="safeArea" id="d5x-lK-Nyi"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYz-W2-YwV">
+                                                <rect key="frame" x="0.0" y="160.5" width="137" height="43.5"/>
+                                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="40"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="o9E-7J-SEn" userLabel="CharacterList">
+                                                <rect key="frame" x="156" y="157" width="50" height="50"/>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="IDG-Vb-cnm">
-                                                <rect key="frame" x="0.0" y="274" width="402" height="217.5"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Joueur 2" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YZl-uf-4Ne">
-                                                        <rect key="frame" x="0.0" y="0.0" width="402" height="54.5"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="50"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMo-CK-or2">
-                                                        <rect key="frame" x="0.0" y="64.5" width="402" height="153"/>
-                                                        <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="1s6-Nd-pMZ">
-                                                                <rect key="frame" x="0.0" y="0.0" width="402" height="153"/>
-                                                            </stackView>
-                                                        </subviews>
-                                                        <constraints>
-                                                            <constraint firstItem="1s6-Nd-pMZ" firstAttribute="leading" secondItem="OXQ-Xe-P3z" secondAttribute="leading" id="OnJ-QQ-whX"/>
-                                                            <constraint firstAttribute="bottom" secondItem="1s6-Nd-pMZ" secondAttribute="bottom" id="lkb-Dm-qmt"/>
-                                                            <constraint firstAttribute="trailing" secondItem="1s6-Nd-pMZ" secondAttribute="trailing" id="mwO-b8-SZb"/>
-                                                            <constraint firstItem="1s6-Nd-pMZ" firstAttribute="top" secondItem="OXQ-Xe-P3z" secondAttribute="top" id="nXd-ND-J1a"/>
-                                                            <constraint firstItem="1s6-Nd-pMZ" firstAttribute="centerX" secondItem="iMo-CK-or2" secondAttribute="centerX" id="tZd-31-BjR"/>
-                                                            <constraint firstItem="1s6-Nd-pMZ" firstAttribute="height" secondItem="OXQ-Xe-P3z" secondAttribute="height" id="yw9-an-VFJ"/>
-                                                        </constraints>
-                                                        <viewLayoutGuide key="contentLayoutGuide" id="bia-WE-lYv"/>
-                                                        <viewLayoutGuide key="frameLayoutGuide" id="OXQ-Xe-P3z"/>
-                                                    </scrollView>
-                                                </subviews>
-                                                <viewLayoutGuide key="safeArea" id="PRV-Va-F2X"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9bY-Bl-Ive" userLabel="ValidateChoices">
+                                                <rect key="frame" x="225" y="166.5" width="149" height="31"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Confirm"/>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="364" id="ELj-vM-XGX"/>
+                                            <constraint firstItem="9bY-Bl-Ive" firstAttribute="leading" secondItem="o9E-7J-SEn" secondAttribute="trailing" constant="19" id="at3-ke-M7C"/>
+                                            <constraint firstItem="o9E-7J-SEn" firstAttribute="leading" secondItem="gYz-W2-YwV" secondAttribute="trailing" constant="19" id="qTm-uW-Ql2"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="i2N-zX-1mg" userLabel="Player2">
+                                        <rect key="frame" x="0.0" y="454" width="374" height="364"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6vp-lv-e2J" userLabel="Player 2">
+                                                <rect key="frame" x="0.0" y="160.5" width="236" height="43.5"/>
+                                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="40"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="v7J-He-lTH" userLabel="CharacterList">
+                                                <rect key="frame" x="238" y="82" width="0.0" height="200"/>
                                             </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kd8-w8-h1u" userLabel="ValidateChoices">
+                                                <rect key="frame" x="240" y="166.5" width="134" height="31"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Confirm"/>
+                                            </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="Grv-IX-0OO" firstAttribute="top" secondItem="caD-6x-IVS" secondAttribute="top" id="9Xz-Op-yWD"/>
+                                    <constraint firstItem="Grv-IX-0OO" firstAttribute="leading" secondItem="caD-6x-IVS" secondAttribute="leading" id="UPL-s6-0cF"/>
+                                    <constraint firstAttribute="trailing" secondItem="Grv-IX-0OO" secondAttribute="trailing" id="dRv-us-DbP"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                         <constraints>
-                            <constraint firstItem="IVA-hb-4OK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-48.5" id="Wdp-Pt-3nJ"/>
-                            <constraint firstItem="IVA-hb-4OK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-1" id="X36-jk-EmO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="caD-6x-IVS" secondAttribute="bottom" id="aac-4d-3TC"/>
+                            <constraint firstItem="caD-6x-IVS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="bgD-UQ-Dll"/>
+                            <constraint firstItem="caD-6x-IVS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="esl-YZ-m3N"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="caD-6x-IVS" secondAttribute="trailing" constant="20" id="tJL-7f-Ruj"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="player1CharacterList" destination="BNQ-2D-cCa" id="J8d-Hg-ROG"/>
-                        <outlet property="player2CharacterList" destination="1s6-Nd-pMZ" id="s2g-j6-etJ"/>
+                        <outlet property="player1CharacterList" destination="o9E-7J-SEn" id="zbj-1K-iim"/>
+                        <outlet property="player2CharacterList" destination="v7J-He-lTH" id="yRR-Gg-sg6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -119,9 +101,6 @@
     <resources>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
