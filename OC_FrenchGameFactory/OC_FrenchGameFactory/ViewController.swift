@@ -25,37 +25,45 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        Create as much buttons as there are playable characters in the game
-//        And set their default names on the buttons
-        for character in CharacterList.characterList{
+        func createButton(name: String) -> UIButton{
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.setTitle(name, for: .normal)
+            button.backgroundColor = UIColor.random
+            
+            return button
+        }
+        
+        func createTextView() -> UITextView {
+            let textView = UITextView()
+            textView.isScrollEnabled = false
+            
+            return textView
+        }
+        
+        func createStackView() -> UIStackView{
             let stackView = UIStackView()
             stackView.axis = NSLayoutConstraint.Axis.horizontal
             stackView.alignment = UIStackView.Alignment.fill
             stackView.distribution = UIStackView.Distribution.fillEqually
             stackView.spacing = 2
             
-            let button = UIButton()
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.setTitle(character.name, for: .normal)
-            button.backgroundColor = UIColor.random
-            stackView.addArrangedSubview(button)
+            return stackView
+        }
+//        Create as much buttons as there are playable characters in the game
+//        And set their default names on the buttons
+        for character in CharacterList.characterList{
+            let rowPlayer1 = createStackView()
+            rowPlayer1.addArrangedSubview(createButton(name: character.name))
+            rowPlayer1.addArrangedSubview(createTextView())
             
-            let textView = UITextView()
-            textView.isScrollEnabled = false
-            stackView.addArrangedSubview(textView)
-            
-            player1CharacterList.addArrangedSubview(stackView)
+            let rowPlayer2 = createStackView()
+            rowPlayer2.addArrangedSubview(createButton(name: character.name))
+            rowPlayer2.addArrangedSubview(createTextView())
+            player1CharacterList.addArrangedSubview(rowPlayer1)
+            player2CharacterList.addArrangedSubview(rowPlayer2)
             
 
-            let button1 = UIButton()
-            button1.translatesAutoresizingMaskIntoConstraints = false
-            button1.setTitle(character.name, for: .normal)
-            button1.backgroundColor = UIColor.random
-            player2CharacterList.addArrangedSubview(button1)
-            
-//            let textView1 = UITextView()
-//            textView1.translatesAutoresizingMaskIntoConstraints = false
-//            player1CustomNames.addArrangedSubview(textView1)
         }
         
     }

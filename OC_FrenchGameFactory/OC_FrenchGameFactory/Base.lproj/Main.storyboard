@@ -19,7 +19,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="caD-6x-IVS">
                                 <rect key="frame" x="20" y="44" width="374" height="818"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select your characters" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Grv-IX-0OO">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select 3 characters" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Grv-IX-0OO">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="mf8-L6-Q4C"/>
@@ -28,48 +28,53 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="IhZ-Gx-z65" userLabel="Player1">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="IhZ-Gx-z65" userLabel="Player1">
                                         <rect key="frame" x="0.0" y="85" width="374" height="364"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYz-W2-YwV">
-                                                <rect key="frame" x="0.0" y="160.5" width="137" height="43.5"/>
-                                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="40"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYz-W2-YwV">
+                                                <rect key="frame" x="0.0" y="163.5" width="114.5" height="37"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="o9E-7J-SEn" userLabel="CharacterList">
-                                                <rect key="frame" x="156" y="157" width="50" height="50"/>
+                                                <rect key="frame" x="129.5" y="157" width="115" height="50"/>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9bY-Bl-Ive" userLabel="ValidateChoices">
-                                                <rect key="frame" x="225" y="166.5" width="149" height="31"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9bY-Bl-Ive" userLabel="ValidateChoices">
+                                                <rect key="frame" x="259.5" y="161.5" width="114.5" height="41.5"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Confirm"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Confirm">
+                                                    <fontDescription key="titleFontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="25"/>
+                                                </buttonConfiguration>
                                             </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="364" id="ELj-vM-XGX"/>
-                                            <constraint firstItem="9bY-Bl-Ive" firstAttribute="leading" secondItem="o9E-7J-SEn" secondAttribute="trailing" constant="19" id="at3-ke-M7C"/>
-                                            <constraint firstItem="o9E-7J-SEn" firstAttribute="leading" secondItem="gYz-W2-YwV" secondAttribute="trailing" constant="19" id="qTm-uW-Ql2"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="i2N-zX-1mg" userLabel="Player2">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XYQ-jm-JNX" userLabel="Player2">
                                         <rect key="frame" x="0.0" y="454" width="374" height="364"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6vp-lv-e2J" userLabel="Player 2">
-                                                <rect key="frame" x="0.0" y="160.5" width="236" height="43.5"/>
-                                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="40"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZI6-G6-neV" userLabel="Player 2">
+                                                <rect key="frame" x="0.0" y="163.5" width="121.5" height="37"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="v7J-He-lTH" userLabel="CharacterList">
-                                                <rect key="frame" x="238" y="82" width="0.0" height="200"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="qAD-7F-2DX" userLabel="CharacterList">
+                                                <rect key="frame" x="126.5" y="157" width="121" height="50"/>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kd8-w8-h1u" userLabel="ValidateChoices">
-                                                <rect key="frame" x="240" y="166.5" width="134" height="31"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qvz-KI-Ejr" userLabel="ValidateChoices">
+                                                <rect key="frame" x="252.5" y="161.5" width="121.5" height="41.5"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Confirm"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Confirm">
+                                                    <fontDescription key="titleFontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="25"/>
+                                                </buttonConfiguration>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="364" id="kdj-tQ-5tD"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -90,7 +95,7 @@
                     </view>
                     <connections>
                         <outlet property="player1CharacterList" destination="o9E-7J-SEn" id="zbj-1K-iim"/>
-                        <outlet property="player2CharacterList" destination="v7J-He-lTH" id="yRR-Gg-sg6"/>
+                        <outlet property="player2CharacterList" destination="qAD-7F-2DX" id="GMc-dr-NKP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
