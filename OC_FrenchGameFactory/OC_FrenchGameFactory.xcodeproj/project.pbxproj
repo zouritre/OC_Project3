@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E935B4E5279CD2A300467908 /* CreateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E935B4E4279CD2A300467908 /* CreateButton.swift */; };
 		E938549A279B232400AE6E53 /* GameSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9385499279B232400AE6E53 /* GameSession.swift */; };
 		E938549C279B24D300AE6E53 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E938549B279B24D300AE6E53 /* Player.swift */; };
 		E938549E279B250E00AE6E53 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = E938549D279B250E00AE6E53 /* Character.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E935B4E4279CD2A300467908 /* CreateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateButton.swift; sourceTree = "<group>"; };
 		E9385499279B232400AE6E53 /* GameSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSession.swift; sourceTree = "<group>"; };
 		E938549B279B24D300AE6E53 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		E938549D279B250E00AE6E53 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				E938549B279B24D300AE6E53 /* Player.swift */,
 				E938549D279B250E00AE6E53 /* Character.swift */,
 				E938549F279B253400AE6E53 /* Weapon.swift */,
+				E935B4E4279CD2A300467908 /* CreateButton.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 			files = (
 				E94327A62794CB3C00057345 /* ViewController.swift in Sources */,
 				E94327A22794CB3C00057345 /* AppDelegate.swift in Sources */,
+				E935B4E5279CD2A300467908 /* CreateButton.swift in Sources */,
 				E94327A42794CB3C00057345 /* SceneDelegate.swift in Sources */,
 				E93854A8279B25F100AE6E53 /* Orange.swift in Sources */,
 				E938549C279B24D300AE6E53 /* Player.swift in Sources */,
