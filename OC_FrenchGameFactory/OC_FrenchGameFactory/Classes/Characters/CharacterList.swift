@@ -17,9 +17,11 @@ class CharacterList{    //Store a list of every character existing in the game f
         characterList.append(Citron())
         return characterList
     }
+    
+    
+//        Create as much buttons and custom name text fields as there are playable characters in the game
+//        And set their default names on the buttons
     internal static func displayAvailableCharacters(in vStackView: UIStackView){
-        //Create as much buttons as there are playable characters in the game
-        //And set their default names on the buttons
         for character in CharacterList.characterList{
             let row = self.createStackView(axis: NSLayoutConstraint.Axis.horizontal, alignement: UIStackView.Alignment.fill, distribution: UIStackView.Distribution.fillEqually, spacing: 2, baselineRelative: false)
             let customButton1 = CreateButton()
@@ -31,6 +33,8 @@ class CharacterList{    //Store a list of every character existing in the game f
         }
                     
     }
+    
+//    Create a customizable stackView
     private static func createStackView(axis: NSLayoutConstraint.Axis, alignement: UIStackView.Alignment, distribution: UIStackView.Distribution, spacing: CGFloat, baselineRelative: Bool) -> UIStackView{
         let stackView = UIStackView()
         stackView.axis = axis
@@ -41,6 +45,8 @@ class CharacterList{    //Store a list of every character existing in the game f
         
         return stackView
     }
+    
+//    Create a simple textView
     private static func createTextView() -> UITextView {
         let textView = UITextView()
         textView.isScrollEnabled = false

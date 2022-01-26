@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        Populate the empty character list for each players when the app starts
         CharacterList.displayAvailableCharacters(in: player1CharacterList)
         CharacterList.displayAvailableCharacters(in: player2CharacterList)
         

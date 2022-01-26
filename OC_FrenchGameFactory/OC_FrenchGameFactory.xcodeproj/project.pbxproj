@@ -101,16 +101,40 @@
 		E94327A02794CB3C00057345 /* OC_FrenchGameFactory */ = {
 			isa = PBXGroup;
 			children = (
+				E97404BD27A18E8300CBFAEF /* Controller */,
+				E97404BC27A18E7A00CBFAEF /* View */,
+				E97404BB27A18E7000CBFAEF /* Model */,
 				E9385493279B20E400AE6E53 /* Classes */,
 				E94327A12794CB3C00057345 /* AppDelegate.swift */,
 				E94327A32794CB3C00057345 /* SceneDelegate.swift */,
-				E94327A52794CB3C00057345 /* ViewController.swift */,
-				E94327A72794CB3C00057345 /* Main.storyboard */,
 				E94327AA2794CB3D00057345 /* Assets.xcassets */,
 				E94327AC2794CB3D00057345 /* LaunchScreen.storyboard */,
 				E94327AF2794CB3D00057345 /* Info.plist */,
 			);
 			path = OC_FrenchGameFactory;
+			sourceTree = "<group>";
+		};
+		E97404BB27A18E7000CBFAEF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E97404BC27A18E7A00CBFAEF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E94327A72794CB3C00057345 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E97404BD27A18E8300CBFAEF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E94327A52794CB3C00057345 /* ViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
