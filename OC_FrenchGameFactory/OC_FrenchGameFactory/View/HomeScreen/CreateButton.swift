@@ -22,6 +22,7 @@ extension UIColor {
 
 class CreateButton: UIButton{
     var corespondingCharacter: Character?
+    var correspondingCustomName: UITextView?
     var pressed : Bool?
     
     override init(frame: CGRect) {
@@ -34,11 +35,12 @@ class CreateButton: UIButton{
     
     
 // Create a customized button
-    func customButton(for character: Character) -> UIButton{
+    func customButton(for character: Character, customName: UITextView) -> UIButton{
         let button = CreateButton()
+        button.corespondingCharacter = character
+        button.correspondingCustomName = customName
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(character.originalName, for: .normal)
-        button.corespondingCharacter = character
         button.backgroundColor = UIColor.green
         button.setTitleColor(.darkText, for: .normal)
         button.addTarget(self, action: #selector(self.pressed(_:)), for: .touchUpInside)
@@ -51,18 +53,20 @@ class CreateButton: UIButton{
         print(sender.corespondingCharacter!.originalName)
         if  let pressed = sender.pressed{
             sender.pressed = !sender.pressed!
-//            print(sender.pressed!)
-            if pressed{
+            if pressed{ //  if button is pressed while being grey
                 sender.backgroundColor = .green
+                sender.correspondingCustomName?.isHidden = true
+                sender.correspondingCustomName?.text = "" //    Reset the text if button is unselected
             }
-            else{
+            else{   //  if button is pressed while being green
                 sender.backgroundColor = .gray
+                sender.correspondingCustomName?.isHidden = false
             }
         }
         else{
             sender.pressed = true
-//            print(sender.pressed!)
             sender.backgroundColor = .gray
+            sender.correspondingCustomName?.isHidden = false
         }
     }
 }

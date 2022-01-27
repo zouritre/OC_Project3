@@ -49,7 +49,7 @@
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="364" id="ELj-vM-XGX"/>
+                                            <constraint firstAttribute="height" constant="364" id="s38-ue-ZRi"/>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XYQ-jm-JNX" userLabel="Player2">
@@ -72,9 +72,6 @@
                                                 </buttonConfiguration>
                                             </button>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="364" id="kdj-tQ-5tD"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>

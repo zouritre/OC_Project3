@@ -13,13 +13,14 @@ class CharacterList: UIStackView{    //Store a list of every character existing 
     
 //        Create as much buttons and custom name text fields as there are playable characters in the game
 //        And set their default names on the buttons
-    func displayAvailableCharacters(for characters: Characters){
+    func displayAvailableCharacters(for characters: CharactersList){
         for character in characters.list{
             let row = self.createStackView(axis: NSLayoutConstraint.Axis.horizontal, alignement: UIStackView.Alignment.fill, distribution: UIStackView.Distribution.fillEqually, spacing: 2, baselineRelative: false) // Create a custom  horizontal StackView
-            let customButton1 = CreateButton()
+            let customButton = CreateButton()
+            let customName = createTextView()
             
-            row.addArrangedSubview(customButton1.customButton(for: character)) // Add a custom Button to that StackView
-            row.addArrangedSubview(self.createTextView()) // add a TextView next to the button
+            row.addArrangedSubview(customButton.customButton(for: character, customName: customName)) // Add a custom Button to that StackView
+            row.addArrangedSubview(customName) // add a TextView next to the button
             
             addArrangedSubview(row)  // Add the customly filled StackView to CharacterList vertical StackView as a row
         }
@@ -41,7 +42,7 @@ class CharacterList: UIStackView{    //Store a list of every character existing 
 //    Create a simple textView
     private func createTextView() -> UITextView {
         let textView = UITextView()
-        textView.isScrollEnabled = false
+        textView.isHidden = true
         
         return textView
     }

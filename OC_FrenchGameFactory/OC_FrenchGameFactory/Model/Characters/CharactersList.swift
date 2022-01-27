@@ -8,7 +8,7 @@
 import Foundation
 
 /// Return a list of all playable characters
-class Characters {
+class CharactersList {
     
     var list: [Character] {
         var characterList : [Character] = []

@@ -19,7 +19,7 @@
 		E94327A92794CB3C00057345 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E94327A72794CB3C00057345 /* Main.storyboard */; };
 		E94327AB2794CB3D00057345 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E94327AA2794CB3D00057345 /* Assets.xcassets */; };
 		E94327AE2794CB3D00057345 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E94327AC2794CB3D00057345 /* LaunchScreen.storyboard */; };
-		E9D2EB2F27A2C5D10083FE04 /* Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D2EB2E27A2C5D10083FE04 /* Characters.swift */; };
+		E9D2EB2F27A2C5D10083FE04 /* CharactersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D2EB2E27A2C5D10083FE04 /* CharactersList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +37,7 @@
 		E94327AA2794CB3D00057345 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E94327AD2794CB3D00057345 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E94327AF2794CB3D00057345 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E9D2EB2E27A2C5D10083FE04 /* Characters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Characters.swift; sourceTree = "<group>"; };
+		E9D2EB2E27A2C5D10083FE04 /* CharactersList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +56,6 @@
 			children = (
 				E9385499279B232400AE6E53 /* GameSession.swift */,
 				E938549B279B24D300AE6E53 /* Player.swift */,
-				E938549D279B250E00AE6E53 /* Character.swift */,
-				E938549F279B253400AE6E53 /* Weapon.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -65,7 +63,9 @@
 		E9385497279B22D900AE6E53 /* Characters */ = {
 			isa = PBXGroup;
 			children = (
-				E9D2EB2E27A2C5D10083FE04 /* Characters.swift */,
+				E938549D279B250E00AE6E53 /* Character.swift */,
+				E938549F279B253400AE6E53 /* Weapon.swift */,
+				E9D2EB2E27A2C5D10083FE04 /* CharactersList.swift */,
 			);
 			path = Characters;
 			sourceTree = "<group>";
@@ -216,7 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E94327A62794CB3C00057345 /* ViewController.swift in Sources */,
-				E9D2EB2F27A2C5D10083FE04 /* Characters.swift in Sources */,
+				E9D2EB2F27A2C5D10083FE04 /* CharactersList.swift in Sources */,
 				E94327A22794CB3C00057345 /* AppDelegate.swift in Sources */,
 				E935B4E5279CD2A300467908 /* CreateButton.swift in Sources */,
 				E94327A42794CB3C00057345 /* SceneDelegate.swift in Sources */,
