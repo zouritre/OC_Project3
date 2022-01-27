@@ -58,7 +58,6 @@
 				E938549B279B24D300AE6E53 /* Player.swift */,
 				E938549D279B250E00AE6E53 /* Character.swift */,
 				E938549F279B253400AE6E53 /* Weapon.swift */,
-				E935B4E4279CD2A300467908 /* CreateButton.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -115,8 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				E9D2EB3027A2CC000083FE04 /* HomeScreen */,
-				E93854A1279B256E00AE6E53 /* CharacterList.swift */,
-				E94327A72794CB3C00057345 /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -124,7 +121,7 @@
 		E97404BD27A18E8300CBFAEF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E94327A52794CB3C00057345 /* ViewController.swift */,
+				E9D2EB3127A2D53B0083FE04 /* HomeScreen */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -132,6 +129,17 @@
 		E9D2EB3027A2CC000083FE04 /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
+				E93854A1279B256E00AE6E53 /* CharacterList.swift */,
+				E94327A72794CB3C00057345 /* Main.storyboard */,
+				E935B4E4279CD2A300467908 /* CreateButton.swift */,
+			);
+			path = HomeScreen;
+			sourceTree = "<group>";
+		};
+		E9D2EB3127A2D53B0083FE04 /* HomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				E94327A52794CB3C00057345 /* ViewController.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";

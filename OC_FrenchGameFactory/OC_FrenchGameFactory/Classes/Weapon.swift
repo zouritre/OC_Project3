@@ -7,9 +7,6 @@
 
 import Foundation
 
-class Weapon{
+struct Weapon{
     var damage: Int
-    init(damage: Int){
-        self.damage = damage
-    }
 }

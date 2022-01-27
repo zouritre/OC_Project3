@@ -7,14 +7,9 @@
 
 import Foundation
 
-class GameSession{
+struct GameSession{
     var players: [Player]
-    var isFinished: Bool
-    var actualRound: Int
+    var isFinished: Bool = false
+    var actualRound: Int = 0
     var winner: String?
-    init(){
-        players = []
-        isFinished = false
-        actualRound = 0
-    }
 }

@@ -8,12 +8,13 @@
 import Foundation
 import UIKit
 
+///  Populate each players character list view
 class CharacterList: UIStackView{    //Store a list of every character existing in the game for easy retrieve
     
 //        Create as much buttons and custom name text fields as there are playable characters in the game
 //        And set their default names on the buttons
-    func displayAvailableCharacters(){
-        for character in Characters.list{
+    func displayAvailableCharacters(for characters: Characters){
+        for character in characters.list{
             let row = self.createStackView(axis: NSLayoutConstraint.Axis.horizontal, alignement: UIStackView.Alignment.fill, distribution: UIStackView.Distribution.fillEqually, spacing: 2, baselineRelative: false) // Create a custom  horizontal StackView
             let customButton1 = CreateButton()
             

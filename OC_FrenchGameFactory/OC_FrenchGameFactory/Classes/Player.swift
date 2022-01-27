@@ -7,9 +7,7 @@
 
 import Foundation
 
-class Player{
+struct Player{
+    var name: String
     var characters: [Character]
-    init(){
-        characters = []
-    }
 }

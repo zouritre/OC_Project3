@@ -7,9 +7,10 @@
 
 import Foundation
 
+/// Return a list of all playable characters
 class Characters {
     
-    static var list: [Character] {
+    var list: [Character] {
         var characterList : [Character] = []
         characterList.append(Character.init(originalName: "Raisin", customName: "", health: 20, weapon: Weapon(damage: 5)))
         characterList.append(Character.init(originalName: "Kiwi", customName: "", health: 21, weapon: Weapon(damage: 6)))

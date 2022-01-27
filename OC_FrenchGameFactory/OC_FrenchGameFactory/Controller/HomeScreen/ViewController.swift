@@ -15,8 +15,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
 //        Populate the empty character list for each players when the app starts
-        player1CharacterList.displayAvailableCharacters()
-        player2CharacterList.displayAvailableCharacters()
+            player1CharacterList.displayAvailableCharacters(for: Characters())
+            player2CharacterList.displayAvailableCharacters(for: Characters())
         
     }
 }
