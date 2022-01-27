@@ -37,7 +37,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="o9E-7J-SEn" userLabel="CharacterList">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="o9E-7J-SEn" userLabel="CharacterList" customClass="CharacterList" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                 <rect key="frame" x="129.5" y="157" width="115" height="50"/>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9bY-Bl-Ive" userLabel="ValidateChoices">
@@ -61,7 +61,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="qAD-7F-2DX" userLabel="CharacterList">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="qAD-7F-2DX" userLabel="CharacterList" customClass="CharacterList" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                 <rect key="frame" x="126.5" y="157" width="121" height="50"/>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qvz-KI-Ejr" userLabel="ValidateChoices">
@@ -94,8 +94,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="player1CharacterList" destination="o9E-7J-SEn" id="zbj-1K-iim"/>
-                        <outlet property="player2CharacterList" destination="qAD-7F-2DX" id="GMc-dr-NKP"/>
+                        <outlet property="player1CharacterList" destination="o9E-7J-SEn" id="mj4-tk-nkH"/>
+                        <outlet property="player2CharacterList" destination="qAD-7F-2DX" id="ebB-x2-rc5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
