@@ -54,6 +54,8 @@
 		E9385493279B20E400AE6E53 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E938549F279B253400AE6E53 /* Weapon.swift */,
+				E938549D279B250E00AE6E53 /* Character.swift */,
 				E9385499279B232400AE6E53 /* GameSession.swift */,
 				E938549B279B24D300AE6E53 /* Player.swift */,
 			);
@@ -63,8 +65,6 @@
 		E9385497279B22D900AE6E53 /* Characters */ = {
 			isa = PBXGroup;
 			children = (
-				E938549D279B250E00AE6E53 /* Character.swift */,
-				E938549F279B253400AE6E53 /* Weapon.swift */,
 				E9D2EB2E27A2C5D10083FE04 /* CharactersList.swift */,
 			);
 			path = Characters;

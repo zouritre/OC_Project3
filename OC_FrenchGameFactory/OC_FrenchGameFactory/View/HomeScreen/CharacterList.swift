@@ -9,17 +9,20 @@ import Foundation
 import UIKit
 
 ///  Populate each players character list view
-class CharacterList: UIStackView{    //Store a list of every character existing in the game for easy retrieve
+class CharacterList: UIStackView{
     
-//        Create as much buttons and custom name text fields as there are playable characters in the game
-//        And set their default names on the buttons
-    func displayAvailableCharacters(for characters: CharactersList){
+    var chosenCharacters: [Character] = []
+    
+    var chosenCustomName: [UITextView] = []
+    
+///       Create as much buttons and custom name text fields as there are playable characters in the game and set their default names on the buttons
+    func displayAvailableCharacters(with characters: CharactersList){
         for character in characters.list{
             let row = self.createStackView(axis: NSLayoutConstraint.Axis.horizontal, alignement: UIStackView.Alignment.fill, distribution: UIStackView.Distribution.fillEqually, spacing: 2, baselineRelative: false) // Create a custom  horizontal StackView
-            let customButton = CreateButton()
             let customName = createTextView()
+            let customButton = customButton(for: character, customName: customName)
             
-            row.addArrangedSubview(customButton.customButton(for: character, customName: customName)) // Add a custom Button to that StackView
+            row.addArrangedSubview(customButton) // Add a custom Button to that StackView
             row.addArrangedSubview(customName) // add a TextView next to the button
             
             addArrangedSubview(row)  // Add the customly filled StackView to CharacterList vertical StackView as a row
@@ -27,7 +30,49 @@ class CharacterList: UIStackView{    //Store a list of every character existing 
                     
     }
     
-//    Create a customizable stackView
+/// Create a customized button
+    func customButton(for character: Character, customName: UITextView) -> UIButton{
+        let button = CreateButton()
+        button.correspondingCharacter = character
+        button.correspondingCustomName = customName
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(character.originalName, for: .normal)
+        button.backgroundColor = UIColor.green
+        button.setTitleColor(.darkText, for: .normal)
+        button.addTarget(self, action: #selector(self.pressed(_:)), for: .touchUpInside)
+        
+        return button
+    }
+    
+    ///    Set button backgorund color to grey if pressed or green if not pressed - Default: Green
+        @objc func pressed(_ sender: CreateButton) {
+            if  let pressed = sender.pressed{
+                sender.pressed = !sender.pressed!
+                if pressed{ //  if button is pressed while being grey
+                    sender.backgroundColor = .green
+                    sender.correspondingCustomName?.isHidden = true // Hide the text field
+                    sender.correspondingCustomName?.text = "" //    Reset the text if button is unselected
+                    self.chosenCharacters.removeAll{value in    //  Remove that character previously selected from the chosenCharacter array
+                        return value.originalName == sender.correspondingCharacter?.originalName
+                    }
+                }
+                else{   //  if button is pressed while being green
+                    sender.backgroundColor = .gray
+                    sender.correspondingCustomName?.isHidden = false
+                    self.chosenCharacters.append(sender.correspondingCharacter!)
+                    
+                }
+            }
+            else{
+                sender.pressed = true
+                sender.backgroundColor = .gray
+                sender.correspondingCustomName?.isHidden = false
+                self.chosenCharacters.append(sender.correspondingCharacter!)
+                self.chosenCustomName.append(sender.correspondingCustomName!)
+            }
+        }
+    
+///    Create a customizable stackView
     private func createStackView(axis: NSLayoutConstraint.Axis, alignement: UIStackView.Alignment, distribution: UIStackView.Distribution, spacing: CGFloat, baselineRelative: Bool) -> UIStackView{
         let stackView = UIStackView()
         stackView.axis = axis
@@ -39,10 +84,11 @@ class CharacterList: UIStackView{    //Store a list of every character existing 
         return stackView
     }
     
-//    Create a simple textView
+///    Create a simple textView
     private func createTextView() -> UITextView {
         let textView = UITextView()
         textView.isHidden = true
+        textView.text = ""
         
         return textView
     }

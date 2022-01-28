@@ -8,8 +8,24 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBAction func confirmPlayer2(_ sender: UIButton) {
+        for character in player2CharacterList.chosenCharacters{
+            player2.characters.append(character)
+        }
+        print(player2.characters)
+    }
+    @IBAction func confirmPlayer1(_ sender: UIButton) {
+        for character in player1CharacterList.chosenCharacters{
+            player1.characters.append(character)
+        }
+        print(player1.characters)
+    }
     @IBOutlet weak var player2CharacterList: CharacterList!
     @IBOutlet weak var player1CharacterList: CharacterList!
+    
+    var player1 = Player(name: "Player 1",characters: [])
+
+    var player2 = Player(name: "Player 2", characters: [])
     
     //Calls this function when the tap is recognized.
     @objc func dismissKeyboard() {
@@ -31,9 +47,10 @@ class ViewController: UIViewController {
         
         avoidButtonsFreeze()
         
+        
 //        Populate the empty character list for each players when the app starts
-        player1CharacterList.displayAvailableCharacters(for: CharactersList())
-        player2CharacterList.displayAvailableCharacters(for: CharactersList())
+        player1CharacterList.displayAvailableCharacters(with: CharactersList())
+        player2CharacterList.displayAvailableCharacters(with: CharactersList())
 
     }
 }

@@ -46,6 +46,9 @@
                                                 <buttonConfiguration key="configuration" style="filled" title="Confirm">
                                                     <fontDescription key="titleFontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="25"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="confirmPlayer1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="m78-ft-Aod"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -70,6 +73,9 @@
                                                 <buttonConfiguration key="configuration" style="filled" title="Confirm">
                                                     <fontDescription key="titleFontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="25"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="confirmPlayer2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jcf-f3-fXa"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
