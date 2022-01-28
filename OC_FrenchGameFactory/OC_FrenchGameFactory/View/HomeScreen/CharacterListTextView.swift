@@ -147,74 +147,48 @@ class CharacterListTextView: UIStackView{
     
     
     ///    Set button backgorund color to grey if pressed or green if not pressed - Default: Green
-        @objc func pressed(_ sender: CreateButton) {
+    @objc func pressed(_ sender: CreateButton) {
+        
+        
+        
+        //  if button is pressed while being greyed (unselected)
+        if sender.pressed{
             
             
             
-            if  let pressed = sender.pressed{
-                
-                
-                
-                sender.pressed = !sender.pressed!
-                
-                
-                
-                //  if button is pressed while being greyed (unselect)
-                if pressed{
-                    
-                    
-                    
-                    sender.backgroundColor = .green
-                    sender.correspondingCustomName?.isHidden = true
-                    //    Reset the text if button is unselected
-                    sender.correspondingCustomName?.text = ""
-                    
-                    // Delete the unselected character corresponding to that button from the array of selected characters
-                    self.chosenCharacters[sender.correspondingCustomName!] = nil
-                    
-                    
-                    
-                }
-                
-                
-                
-                //  if button is pressed while being green (selected)
-                else{
-                    
-                    
-                    
-                    sender.backgroundColor = .gray
-                    sender.correspondingCustomName?.isHidden = false
-                    
-                    self.chosenCharacters[sender.correspondingCustomName!] = sender.correspondingCharacter!
-                    
-                    
-                    
-                }
-                
-                
-                
-            }
+            sender.pressed = !sender.pressed
+            sender.backgroundColor = .green
+            sender.correspondingCustomName?.isHidden = true
+            //    Reset the text if button is unselected
+            sender.correspondingCustomName?.text = ""
             
-            
-            
-            else{
-                
-                
-                
-                sender.pressed = true
-                sender.backgroundColor = .gray
-                sender.correspondingCustomName?.isHidden = false
-                
-                self.chosenCharacters[sender.correspondingCustomName!] = sender.correspondingCharacter!
-            
-            
-            
-            }
+            // Delete the unselected character corresponding to that button from the array of selected characters
+            self.chosenCharacters[sender.correspondingCustomName!] = nil
             
             
             
         }
+        
+        
+        
+        //  if button is pressed while being green (selected)
+        else{
+            
+            
+            
+            sender.pressed = !sender.pressed
+            sender.backgroundColor = .gray
+            sender.correspondingCustomName?.isHidden = false
+            
+            self.chosenCharacters[sender.correspondingCustomName!] = sender.correspondingCharacter!
+        
+        
+        
+        }
+        
+        
+        
+    }
     
     
     

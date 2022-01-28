@@ -36,7 +36,7 @@ class CreateButton: UIButton{
     var correspondingCustomName: UITextView?
     
     // Used for button actions when pressed
-    var pressed : Bool?
+    var pressed : Bool = false
     
     
     
