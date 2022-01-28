@@ -8,17 +8,21 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBAction func confirmPlayer2(_ sender: UIButton) {
-        for character in player2CharacterList.chosenCharacters{
-            player2.characters.append(character)
-        }
-        print(player2.characters)
-    }
     @IBAction func confirmPlayer1(_ sender: UIButton) {
-        for character in player1CharacterList.chosenCharacters{
-            player1.characters.append(character)
+        for (customName, character) in player1CharacterList.chosenCharacters{
+            var custChar = character
+            custChar.customName = customName.text
+            player1.characters.append(custChar)
         }
-        print(player1.characters)
+        print("\(player1.name): \(player1.characters)")
+    }
+    @IBAction func confirmPlayer2(_ sender: UIButton) {
+        for (customName, character) in player2CharacterList.chosenCharacters{
+            var custChar = character
+            custChar.customName = customName.text
+            player2.characters.append(custChar)
+        }
+        print("\(player2.name): \(player2.characters)")
     }
     @IBOutlet weak var player2CharacterList: CharacterList!
     @IBOutlet weak var player1CharacterList: CharacterList!

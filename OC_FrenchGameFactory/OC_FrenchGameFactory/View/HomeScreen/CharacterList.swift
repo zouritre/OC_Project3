@@ -11,9 +11,7 @@ import UIKit
 ///  Populate each players character list view
 class CharacterList: UIStackView{
     
-    var chosenCharacters: [Character] = []
-    
-    var chosenCustomName: [UITextView] = []
+    var chosenCharacters: [UITextView:Character] = [:]
     
 ///       Create as much buttons and custom name text fields as there are playable characters in the game and set their default names on the buttons
     func displayAvailableCharacters(with characters: CharactersList){
@@ -52,14 +50,12 @@ class CharacterList: UIStackView{
                     sender.backgroundColor = .green
                     sender.correspondingCustomName?.isHidden = true // Hide the text field
                     sender.correspondingCustomName?.text = "" //    Reset the text if button is unselected
-                    self.chosenCharacters.removeAll{value in    //  Remove that character previously selected from the chosenCharacter array
-                        return value.originalName == sender.correspondingCharacter?.originalName
-                    }
+                    self.chosenCharacters[sender.correspondingCustomName!] = nil
                 }
                 else{   //  if button is pressed while being green
                     sender.backgroundColor = .gray
                     sender.correspondingCustomName?.isHidden = false
-                    self.chosenCharacters.append(sender.correspondingCharacter!)
+                    self.chosenCharacters[sender.correspondingCustomName!] = sender.correspondingCharacter!
                     
                 }
             }
@@ -67,8 +63,7 @@ class CharacterList: UIStackView{
                 sender.pressed = true
                 sender.backgroundColor = .gray
                 sender.correspondingCustomName?.isHidden = false
-                self.chosenCharacters.append(sender.correspondingCharacter!)
-                self.chosenCustomName.append(sender.correspondingCustomName!)
+                self.chosenCharacters[sender.correspondingCustomName!] = sender.correspondingCharacter!
             }
         }
     
