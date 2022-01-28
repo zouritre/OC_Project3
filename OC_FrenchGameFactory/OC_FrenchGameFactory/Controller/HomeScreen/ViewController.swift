@@ -8,35 +8,73 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBAction func confirmPlayer1(_ sender: UIButton) {
-        for (customName, character) in player1CharacterList.chosenCharacters{
-            var custChar = character
-            custChar.customName = customName.text
-            player1.characters.append(custChar)
-        }
-        print("\(player1.name): \(player1.characters)")
-    }
-    @IBAction func confirmPlayer2(_ sender: UIButton) {
-        for (customName, character) in player2CharacterList.chosenCharacters{
-            var custChar = character
-            custChar.customName = customName.text
-            player2.characters.append(custChar)
-        }
-        print("\(player2.name): \(player2.characters)")
-    }
-    @IBOutlet weak var player2CharacterList: CharacterList!
-    @IBOutlet weak var player1CharacterList: CharacterList!
     
-    var player1 = Player(name: "Player 1",characters: [])
-
-    var player2 = Player(name: "Player 2", characters: [])
+    
+    
+    
+    
+    //MARK: - IBOutlets
+    
+    
+    
+    @IBAction func confirmPlayer1(_ sender: UIButton) {
+        
+        
+        
+        let player1 = confirmPlayerChoice(playerName: "Player 1", charactersList: player1CharacterList)
+        print("\(player1.name): \(player1.characters)")
+        
+        
+        
+    }
+    
+    
+    
+    @IBAction func confirmPlayer2(_ sender: UIButton) {
+        
+        
+        
+        let player2 = confirmPlayerChoice(playerName: "Player 2", charactersList: player2CharacterList)
+        print("\(player2.name): \(player2.characters)")
+        
+        
+        
+    }
+    
+    
+    
+    @IBOutlet weak var player2CharacterList: CharacterListTextView!
+    
+    
+    
+    @IBOutlet weak var player1CharacterList: CharacterListTextView!
+    
+    
+    
+    
+    
+    //MARK: - Dismiss Keyboard Outside TextViews
+    
+    
     
     //Calls this function when the tap is recognized.
     @objc func dismissKeyboard() {
+        
+        
+        
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)}
+        view.endEditing(true)
+        
+        
+        
+    }
     
-    func avoidButtonsFreeze(){    // When editing textview and trying to interact with other buttons
+    
+    
+    /// When editing textView and trying to interact with other buttons
+    func dismissKeyboardOutsideTextView(){
+        
+        
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
 
@@ -44,17 +82,62 @@ class ViewController: UIViewController {
             tap.cancelsTouchesInView = false
 
             view.addGestureRecognizer(tap)
+        
+        
+        
     }
+    
+    
+    
+    
+    
+    //MARK: - Confirm Players Choices
+    
+    
+    
+    func confirmPlayerChoice(playerName: String, charactersList: CharacterListTextView) -> Player {
+        
+        
+        
+        var player = Player(name: playerName, characters: [])
+        
+        for (customName, character) in charactersList.chosenCharacters{
+            var character = character
+            character.customName = customName.text
+            player.characters.append(character)
+        }
+        
+        return player
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    //MARK: - viewDidLoad
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        avoidButtonsFreeze()
+        
+        
+        dismissKeyboardOutsideTextView()
         
         
 //        Populate the empty character list for each players when the app starts
         player1CharacterList.displayAvailableCharacters(with: CharactersList())
+        
         player2CharacterList.displayAvailableCharacters(with: CharactersList())
 
+        
+        
     }
+    
+    
+    
 }

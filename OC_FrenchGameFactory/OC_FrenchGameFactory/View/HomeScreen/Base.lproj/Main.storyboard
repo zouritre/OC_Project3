@@ -37,7 +37,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="o9E-7J-SEn" userLabel="CharacterList" customClass="CharacterList" customModule="OC_FrenchGameFactory" customModuleProvider="target">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="o9E-7J-SEn" userLabel="CharacterList" customClass="CharacterListTextView" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                 <rect key="frame" x="129.5" y="157" width="115" height="50"/>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9bY-Bl-Ive" userLabel="ValidateChoices">
@@ -64,7 +64,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="qAD-7F-2DX" userLabel="CharacterList" customClass="CharacterList" customModule="OC_FrenchGameFactory" customModuleProvider="target">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="qAD-7F-2DX" userLabel="CharacterList" customClass="CharacterListTextView" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                 <rect key="frame" x="126.5" y="157" width="121" height="50"/>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qvz-KI-Ejr" userLabel="ValidateChoices">

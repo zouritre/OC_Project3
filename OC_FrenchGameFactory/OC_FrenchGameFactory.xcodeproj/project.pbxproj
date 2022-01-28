@@ -12,7 +12,7 @@
 		E938549C279B24D300AE6E53 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E938549B279B24D300AE6E53 /* Player.swift */; };
 		E938549E279B250E00AE6E53 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = E938549D279B250E00AE6E53 /* Character.swift */; };
 		E93854A0279B253400AE6E53 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E938549F279B253400AE6E53 /* Weapon.swift */; };
-		E93854A2279B256E00AE6E53 /* CharacterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93854A1279B256E00AE6E53 /* CharacterList.swift */; };
+		E93854A2279B256E00AE6E53 /* CharacterListTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93854A1279B256E00AE6E53 /* CharacterListTextView.swift */; };
 		E94327A22794CB3C00057345 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94327A12794CB3C00057345 /* AppDelegate.swift */; };
 		E94327A42794CB3C00057345 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94327A32794CB3C00057345 /* SceneDelegate.swift */; };
 		E94327A62794CB3C00057345 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94327A52794CB3C00057345 /* ViewController.swift */; };
@@ -28,7 +28,7 @@
 		E938549B279B24D300AE6E53 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		E938549D279B250E00AE6E53 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		E938549F279B253400AE6E53 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
-		E93854A1279B256E00AE6E53 /* CharacterList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterList.swift; sourceTree = "<group>"; };
+		E93854A1279B256E00AE6E53 /* CharacterListTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListTextView.swift; sourceTree = "<group>"; };
 		E943279E2794CB3C00057345 /* OC_FrenchGameFactory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OC_FrenchGameFactory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E94327A12794CB3C00057345 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E94327A32794CB3C00057345 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 		E9D2EB3027A2CC000083FE04 /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
-				E93854A1279B256E00AE6E53 /* CharacterList.swift */,
+				E93854A1279B256E00AE6E53 /* CharacterListTextView.swift */,
 				E94327A72794CB3C00057345 /* Main.storyboard */,
 				E935B4E4279CD2A300467908 /* CreateButton.swift */,
 			);
@@ -222,7 +222,7 @@
 				E94327A42794CB3C00057345 /* SceneDelegate.swift in Sources */,
 				E938549C279B24D300AE6E53 /* Player.swift in Sources */,
 				E938549A279B232400AE6E53 /* GameSession.swift in Sources */,
-				E93854A2279B256E00AE6E53 /* CharacterList.swift in Sources */,
+				E93854A2279B256E00AE6E53 /* CharacterListTextView.swift in Sources */,
 				E938549E279B250E00AE6E53 /* Character.swift in Sources */,
 				E93854A0279B253400AE6E53 /* Weapon.swift in Sources */,
 			);
