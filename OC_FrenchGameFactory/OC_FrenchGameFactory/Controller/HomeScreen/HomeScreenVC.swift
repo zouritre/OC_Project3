@@ -16,30 +16,19 @@ class HomeScreenVC: UIViewController {
     //MARK: - IBOutlets
     
     
+    @IBAction func StartGame(_ sender: UIButton) {
+        
+        if verifyCustomNamesValidity(for: player1CharacterList, and: player2CharacterList) {
+            
+            let player1 = confirmPlayersChoices(playerName: "Player 1", charactersList: player1CharacterList)
+            print("\(player1.name): \(player1.characters)")
+            let player2 = confirmPlayersChoices(playerName: "Player 2", charactersList: player2CharacterList)
+            print("\(player2.name): \(player2.characters)")
+        }
+        
+        
+    }
     
-//    @IBAction func confirmPlayer1(_ sender: UIButton) {
-//
-//
-//
-//        let player1 = confirmPlayerChoice(playerName: "Player 1", charactersList: player1CharacterList)
-//        print("\(player1.name): \(player1.characters)")
-//
-//
-//
-//    }
-//
-//
-//
-//    @IBAction func confirmPlayer2(_ sender: UIButton) {
-//
-//
-//
-//        let player2 = confirmPlayerChoice(playerName: "Player 2", charactersList: player2CharacterList)
-//        print("\(player2.name): \(player2.characters)")
-//
-//
-//
-//    }
     
     
     @IBOutlet weak var StartGameButton: UIButton!
@@ -63,6 +52,8 @@ class HomeScreenVC: UIViewController {
     var player1IsReady : Bool = false
     
     var player2IsReady : Bool = false
+    
+    var duplicateNames : [String] = []
     
     
     
@@ -106,18 +97,20 @@ class HomeScreenVC: UIViewController {
     
     
     
-    //MARK: - Confirm Players Choices
+    //MARK: - Check Players Characters Informations
     
     
     
-    func confirmPlayerChoice(playerName: String, charactersList: CharacterListTextView) -> Player {
+    func confirmPlayersChoices(playerName: String, charactersList: CharacterListTextView) -> Player {
         
         
         
         var player = Player(name: playerName, characters: [])
         
         for (customName, character) in charactersList.chosenCharacters{
+            
             var character = character
+            
             character.customName = customName.text
             player.characters.append(character)
         }
@@ -127,6 +120,120 @@ class HomeScreenVC: UIViewController {
         
         
     }
+    
+    
+    func foundDuplicateCustomNames (compare player1: CharacterListTextView, with player2: CharacterListTextView) -> Bool{
+        
+        var foundDuplicate : Bool = false
+        for (playerCustomName, _) in player1.chosenCharacters{
+            if duplicateNames.first(where: { $0 == playerCustomName.text}) != nil {
+                foundDuplicate = true
+                playerCustomName.backgroundColor = .red
+            }
+            else {
+                playerCustomName.backgroundColor = .tintColor
+                duplicateNames.append(playerCustomName.text)
+                
+            }
+        }
+        for (playerCustomName, _) in player2.chosenCharacters{
+            if duplicateNames.first(where: { $0 == playerCustomName.text}) != nil {
+                foundDuplicate = true
+                playerCustomName.backgroundColor = .red
+            }
+            else {
+                playerCustomName.backgroundColor = .tintColor
+                duplicateNames.append(playerCustomName.text)
+                
+            }
+        }
+        
+        duplicateNames.removeAll()
+        
+        return foundDuplicate
+    }
+    
+    
+    
+    func foundIncorrectFormatingForCustomNames(for player: CharacterListTextView) -> Bool{
+
+        var incorrectFormating : Bool = false
+        for (customName, _) in player.chosenCharacters{
+            if customName.text.count < 1 {
+                incorrectFormating = true
+                customName.backgroundColor = .red
+            }
+            else {
+                customName.backgroundColor = .tintColor
+            }
+        }
+        
+        
+        
+        return incorrectFormating
+        
+        
+        
+    }
+    
+    
+    
+    
+    func verifyCustomNamesValidity(for player1: CharacterListTextView, and player2: CharacterListTextView) -> Bool {
+        
+        
+        
+        var correctNames: Bool = true
+        
+        let checkPlayer1CustomNameFormat = foundIncorrectFormatingForCustomNames(for: player1)
+        
+        let checkPlayer2CustomNameFormat = foundIncorrectFormatingForCustomNames(for: player2)
+        
+        let checkPlayersDuplicateCustomNames = foundDuplicateCustomNames(compare: player1, with: player2)
+        
+        
+        
+        if checkPlayer1CustomNameFormat || checkPlayer2CustomNameFormat || checkPlayersDuplicateCustomNames{
+//        if checkPlayer1CustomNameFormat || checkPlayer2CustomNameFormat {
+                
+            
+                correctNames = false
+                
+                alert(title: "Empty/Duplicate names detected")
+        
+        
+        
+        }
+        
+        
+        
+        return correctNames
+        
+        
+        
+    }
+    
+    
+    
+    func alert(title: String) {
+        
+        
+        
+        let alert = UIAlertController(title: title, message: "They have been marked in red", preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    //MARK: - Notification Receiver
     
     
     
@@ -147,6 +254,8 @@ class HomeScreenVC: UIViewController {
             StartGameButton.isEnabled = false
         }
     }
+    
+    
     
 
     

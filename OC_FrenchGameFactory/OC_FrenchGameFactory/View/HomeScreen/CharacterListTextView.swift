@@ -26,8 +26,7 @@ class CharacterListTextView: UIStackView{
     
     var viewOwningPlayer: String?
     
-    var playerIsReady: [String:Bool] = [:]
-    
+    var notifyPlayerIsReady: [String:Bool] = [:]
     
     
     
@@ -130,16 +129,15 @@ class CharacterListTextView: UIStackView{
     
     func checkSelectedCharactersCount(){
         if chosenCharacters.count == 3 {
-            playerIsReady = [viewOwningPlayer!:true]
-            print(playerIsReady)
+            notifyPlayerIsReady = [viewOwningPlayer!:true]
             
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PlayerIsReady"), object: nil, userInfo: playerIsReady)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PlayerIsReady"), object: nil, userInfo: notifyPlayerIsReady)
 
         }
         else {
-            playerIsReady = [viewOwningPlayer!:false]
+            notifyPlayerIsReady = [viewOwningPlayer!:false]
             
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PlayerIsReady"), object: nil, userInfo: playerIsReady)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PlayerIsReady"), object: nil, userInfo: notifyPlayerIsReady)
         }
     }
     
@@ -159,7 +157,7 @@ class CharacterListTextView: UIStackView{
         let button = CreateButton()
         
         button.correspondingCharacter = character
-        button.correspondingCustomName = customName
+        button.customNameTextView = customName
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(character.originalName, for: .normal)
         button.backgroundColor = UIColor.green
@@ -186,12 +184,13 @@ class CharacterListTextView: UIStackView{
             
             sender.pressed = !sender.pressed
             sender.backgroundColor = .green
-            sender.correspondingCustomName?.isHidden = true
+            sender.customNameTextView?.isHidden = true
+            sender.customNameTextView?.backgroundColor = .white
             //    Reset the text if button is unselected
-            sender.correspondingCustomName?.text = ""
+            sender.customNameTextView?.text = ""
             
             // Delete the unselected character corresponding to that button from the array of selected characters
-            self.chosenCharacters[sender.correspondingCustomName!] = nil
+            self.chosenCharacters[sender.customNameTextView!] = nil
             
             checkSelectedCharactersCount()
             
@@ -208,9 +207,9 @@ class CharacterListTextView: UIStackView{
             
             sender.pressed = !sender.pressed
             sender.backgroundColor = .gray
-            sender.correspondingCustomName?.isHidden = false
+            sender.customNameTextView?.isHidden = false
             
-            self.chosenCharacters[sender.correspondingCustomName!] = sender.correspondingCharacter!
+            self.chosenCharacters[sender.customNameTextView!] = sender.correspondingCharacter!
             
             checkSelectedCharactersCount()
         

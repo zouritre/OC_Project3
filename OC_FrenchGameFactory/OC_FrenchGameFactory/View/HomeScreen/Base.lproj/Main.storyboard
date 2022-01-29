@@ -49,6 +49,9 @@
                                         <rect key="frame" x="0.0" y="454" width="374" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Fight !"/>
+                                        <connections>
+                                            <action selector="StartGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QSY-Q0-Ge5"/>
+                                        </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XYQ-jm-JNX" userLabel="Player2">
                                         <rect key="frame" x="0.0" y="490" width="374" height="328"/>

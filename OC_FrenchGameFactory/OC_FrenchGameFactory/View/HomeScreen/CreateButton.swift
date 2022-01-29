@@ -33,7 +33,7 @@ class CreateButton: UIButton{
     var correspondingCharacter: Character?
     
     // Used to display or hide the textView corresponding to the character custom name of this button instance when it is pressed
-    var correspondingCustomName: UITextView?
+    var customNameTextView: UITextView?
     
     // Used for button actions when pressed
     var pressed : Bool = false
