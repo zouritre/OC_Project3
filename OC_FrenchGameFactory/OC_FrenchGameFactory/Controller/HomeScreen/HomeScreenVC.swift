@@ -25,10 +25,10 @@ class HomeScreenVC: UIViewController {
     @IBAction func StartGame(_ sender: UIButton) {
         
         
-        
+//        Verify if players chosen characters custom names are not empty and not duplicated
         if verifyCustomNamesValidity(for: player1CharacterList, and: player2CharacterList) {
             
-            
+//            if the custom names respect the correct pattern then create a player object for each players with their chosen characters
             
             let player1 = confirmPlayersChoices(playerName: "Player 1", charactersList: player1CharacterList)
             
@@ -46,9 +46,9 @@ class HomeScreenVC: UIViewController {
         
         else {
             
+//            If an error occurred during character selection reset the array containing every custom names chosen by players to avoid infinite appending everytime they click on "Fight!" button
             
-            
-            duplicateNames.removeAll()
+            charactersCustomName.removeAll()
             
             
             
@@ -83,7 +83,8 @@ class HomeScreenVC: UIViewController {
     
     var player2IsReady : Bool = false
     
-    var duplicateNames : [String] = []
+//    Store every custom names chosen by players for their characters to check for duplicates
+    var charactersCustomName : [String] = []
     
     
     
@@ -98,12 +99,12 @@ class HomeScreenVC: UIViewController {
     
     
     
-    //Calls this function when the tap is recognized.
+//    Calls this function when the tap is recognized.
     @objc func dismissKeyboard() {
         
         
         
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+//        Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
         
         
@@ -112,7 +113,7 @@ class HomeScreenVC: UIViewController {
     
     
     
-    /// When editing textView and trying to interact with other buttons
+///     Hide keyboard when clicking outside textViews to avoid UI freeze when  trying to interact with other elements
     func dismissKeyboardOutsideTextView(){
         
         
@@ -140,7 +141,7 @@ class HomeScreenVC: UIViewController {
     
     
     
-    
+///     Return a player object with a custom player name and a custom list of characters
     func confirmPlayersChoices(playerName: String, charactersList: CharacterListTextView) -> Player {
         
         
@@ -173,16 +174,16 @@ class HomeScreenVC: UIViewController {
     }
     
     
-    
-    func getPlayerCharactersCustomNames(listOf player: CharacterListTextView){
+///     Append the custom characters name of a character list in the charactersCustomNames array
+    func getPlayerCharactersCustomNames(for playerCharacterList: CharacterListTextView){
         
         
         
-        for (customNameTextView, _) in player.chosenCharacters{
+        for (customNameTextView, _) in playerCharacterList.chosenCharacters{
             
             
             
-            duplicateNames.append(customNameTextView.text)
+            charactersCustomName.append(customNameTextView.text)
             
             
             
@@ -193,30 +194,32 @@ class HomeScreenVC: UIViewController {
     }
     
     
-    
-    func foundDuplicateCustomNames (compare player1: CharacterListTextView, with player2: CharacterListTextView) -> Bool{
+///     Compare two list of characters to find duplicates custom character names. Return a bool : true if a duplicate has been found
+    func foundDuplicateCustomNames (compare player1CharacterList: CharacterListTextView, with player2CharacterList: CharacterListTextView) -> Bool{
         
         
         var foundDuplicate : Bool = false
         
         
-        
-        func findDuplicates (in listOf: CharacterListTextView){
+///     Compare the custom names of a character list with those store in the charactersCustomNames array and find if it appears at least 2 times
+        func findDuplicates (for playerCharacterList: CharacterListTextView){
             
             
             
-            for (customNameTextView, _) in listOf.chosenCharacters{
+            for (customNameTextView, _) in playerCharacterList.chosenCharacters{
                 
                 
+//                Create a mock array of charactersCustomName to preserve it's original state wich is needed for other processings
+                var copyOfDuplicateNames = charactersCustomName
                 
-                var copyOfDuplicateNames = duplicateNames
+//                Get the first index of copyOfDuplicateNames where the actual custom name customNameTextView.text appear
+                let customNameOriginalAppearance = copyOfDuplicateNames.firstIndex(of: customNameTextView.text)
                 
-                let customNameFirstAppearance = copyOfDuplicateNames.firstIndex(of: customNameTextView.text)
-                
-                copyOfDuplicateNames.remove(at: customNameFirstAppearance!)
-                
+//                Delete the first element corresponding to the actual customNameTextView.text
+                copyOfDuplicateNames.remove(at: customNameOriginalAppearance!)
                 
                 
+//                Check if a second element matching customNameTextView.text is present (duplicate)
                 if copyOfDuplicateNames.first(where: { $0 == customNameTextView.text}) != nil {
                     
                     
@@ -234,7 +237,7 @@ class HomeScreenVC: UIViewController {
                 
                 else {
                     
-                    
+//                    Check passed successfully
                     
                     customNameTextView.backgroundColor = .tintColor
                     customNameTextView.textColor = .white
@@ -253,8 +256,8 @@ class HomeScreenVC: UIViewController {
         
         
         
-        findDuplicates(in: player1)
-        findDuplicates(in: player2)
+        findDuplicates(for: player1CharacterList)
+        findDuplicates(for: player2CharacterList)
         
         
         
@@ -265,8 +268,8 @@ class HomeScreenVC: UIViewController {
     }
     
     
-    
-    func foundIncorrectFormatingForCustomNames(for player: CharacterListTextView) -> Bool{
+///    Check if custom names are at least 1 character long
+    func foundIncorrectFormatingInCustomNames(for player: CharacterListTextView) -> Bool{
         
         
 
@@ -285,6 +288,7 @@ class HomeScreenVC: UIViewController {
                 incorrectFormating = true
                 
                 customNameTextView.backgroundColor = .red
+                customNameTextView.textColor = .white
                 
                 
                 
@@ -297,6 +301,7 @@ class HomeScreenVC: UIViewController {
                 
                 
                 customNameTextView.backgroundColor = .white
+                customNameTextView.textColor = .black
                 
                 
                 
@@ -315,21 +320,19 @@ class HomeScreenVC: UIViewController {
     }
     
     
-    
+///     Perform a full check of players character custom names formatting. Send true if all check have passed successfully
     func verifyCustomNamesValidity(for player1: CharacterListTextView, and player2: CharacterListTextView) -> Bool {
         
         
         
         var correctNames: Bool = true
         
-        getPlayerCharactersCustomNames(listOf: player1)
-        getPlayerCharactersCustomNames(listOf: player2)
+        getPlayerCharactersCustomNames(for: player1)
+        getPlayerCharactersCustomNames(for: player2)
         
-        print(duplicateNames)
+        let foundIncorrectFormatingForPlayer1CustomNames = foundIncorrectFormatingInCustomNames(for: player1)
         
-        let foundIncorrectFormatingForPlayer1CustomNames = foundIncorrectFormatingForCustomNames(for: player1)
-        
-        let foundIncorrectFormatingForPlayer2CustomNames = foundIncorrectFormatingForCustomNames(for: player2)
+        let foundIncorrectFormatingForPlayer2CustomNames = foundIncorrectFormatingInCustomNames(for: player2)
         
         
         
@@ -380,7 +383,7 @@ class HomeScreenVC: UIViewController {
     }
     
     
-    
+///     Create a simple alert with a customizable title
     func alert(title: String) {
         
         
@@ -407,7 +410,7 @@ class HomeScreenVC: UIViewController {
     
     
     
-    
+///     Set player1IsReady variable to true if the player has selected exactly 3 characters and enable the "Fight!" button, otherwise false and disable the button.
     @objc func setPlayersWhoAreReady (_ sender: Notification) {
         
         
@@ -416,11 +419,11 @@ class HomeScreenVC: UIViewController {
             
             
             
-            if let id = dict["Player 1"] as? Bool{
+            if let ready = dict["Player 1"] as? Bool{
                 
                 
                 
-                player1IsReady = id
+                player1IsReady = ready
                 
                 
                 
@@ -428,11 +431,11 @@ class HomeScreenVC: UIViewController {
             
             
             
-            if let id = dict["Player 2"] as? Bool{
+            if let ready = dict["Player 2"] as? Bool{
                 
                 
                 
-                player2IsReady = id
+                player2IsReady = ready
                 
                 
                 
@@ -487,7 +490,7 @@ class HomeScreenVC: UIViewController {
         super.viewDidLoad()
         
         
-        
+//        Prevent UI freeze if TextViews are focused
         dismissKeyboardOutsideTextView()
         
         
@@ -506,7 +509,7 @@ class HomeScreenVC: UIViewController {
         
         
         
-        //MARK: - Check if players are ready
+        //MARK: - Observe when players are ready
         
         
         
