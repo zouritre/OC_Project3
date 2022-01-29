@@ -9,6 +9,6 @@ import Foundation
 
 class Citron: Character{
     init(){
-        super.init(name: "Citron", health: 23, weapon: Weapon(damage: 8))
+        super.init(originalName: "Citron", customName: "", health: 23, weapon: Weapon(damage: 8))
     }
 }

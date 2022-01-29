@@ -7,14 +7,10 @@
 
 import Foundation
 
-class Character{
-    var name : String
+struct Character{
+    var originalName : String
+    var customName: String
     var health: Int
     var weapon: Weapon
     var chestAvailable: Bool?
-    init(name : String, health: Int, weapon: Weapon){
-        self.name = name
-        self.health = health
-        self.weapon = weapon
-    }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 class Raisin: Character{
-    init(){
-        super.init(name: "Raisin", health: 20, weapon: Weapon(damage: 5))
-    }
+//    init(){
+//        super.init(originalName: "Raisin", customName: "", health: 20, weapon: Weapon(damage: 5))
+//    }
 }
