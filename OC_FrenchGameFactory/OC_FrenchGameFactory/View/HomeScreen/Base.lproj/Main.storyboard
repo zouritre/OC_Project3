@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Home ScreenVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="OC_FrenchGameFactory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="HomeScreenVC" customModule="OC_FrenchGameFactory" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -32,51 +32,36 @@
                                         <rect key="frame" x="0.0" y="85" width="374" height="364"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYz-W2-YwV">
-                                                <rect key="frame" x="0.0" y="163.5" width="114.5" height="37"/>
+                                                <rect key="frame" x="0.0" y="163.5" width="179.5" height="37"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="o9E-7J-SEn" userLabel="CharacterList" customClass="CharacterListTextView" customModule="OC_FrenchGameFactory" customModuleProvider="target">
-                                                <rect key="frame" x="129.5" y="157" width="115" height="50"/>
+                                                <rect key="frame" x="194.5" y="157" width="179.5" height="50"/>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9bY-Bl-Ive" userLabel="ValidateChoices">
-                                                <rect key="frame" x="259.5" y="161.5" width="114.5" height="41.5"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Confirm">
-                                                    <fontDescription key="titleFontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="25"/>
-                                                </buttonConfiguration>
-                                                <connections>
-                                                    <action selector="confirmPlayer1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="m78-ft-Aod"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="364" id="s38-ue-ZRi"/>
                                         </constraints>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qs3-J9-qnU" userLabel="StartGame">
+                                        <rect key="frame" x="0.0" y="454" width="374" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Fight !"/>
+                                    </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XYQ-jm-JNX" userLabel="Player2">
-                                        <rect key="frame" x="0.0" y="454" width="374" height="364"/>
+                                        <rect key="frame" x="0.0" y="490" width="374" height="328"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZI6-G6-neV" userLabel="Player 2">
-                                                <rect key="frame" x="0.0" y="163.5" width="121.5" height="37"/>
+                                                <rect key="frame" x="0.0" y="145.5" width="184.5" height="37"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="qAD-7F-2DX" userLabel="CharacterList" customClass="CharacterListTextView" customModule="OC_FrenchGameFactory" customModuleProvider="target">
-                                                <rect key="frame" x="126.5" y="157" width="121" height="50"/>
+                                                <rect key="frame" x="189.5" y="139" width="184.5" height="50"/>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qvz-KI-Ejr" userLabel="ValidateChoices">
-                                                <rect key="frame" x="252.5" y="161.5" width="121.5" height="41.5"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Confirm">
-                                                    <fontDescription key="titleFontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="25"/>
-                                                </buttonConfiguration>
-                                                <connections>
-                                                    <action selector="confirmPlayer2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jcf-f3-fXa"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -97,6 +82,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="StartGameButton" destination="qs3-J9-qnU" id="lsp-Ez-LQ5"/>
                         <outlet property="player1CharacterList" destination="o9E-7J-SEn" id="mj4-tk-nkH"/>
                         <outlet property="player2CharacterList" destination="qAD-7F-2DX" id="ebB-x2-rc5"/>
                     </connections>

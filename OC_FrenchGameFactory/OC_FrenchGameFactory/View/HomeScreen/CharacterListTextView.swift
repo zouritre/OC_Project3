@@ -24,6 +24,11 @@ class CharacterListTextView: UIStackView{
     
     var chosenCharacters: [UITextView:Character] = [:]
     
+    var viewOwningPlayer: String?
+    
+    var playerIsReady: [String:Bool] = [:]
+    
+    
     
     
     
@@ -119,6 +124,29 @@ class CharacterListTextView: UIStackView{
     
     
     
+    //MARK: - Check If Player Is Ready
+    
+    
+    
+    func checkSelectedCharactersCount(){
+        if chosenCharacters.count == 3 {
+            playerIsReady = [viewOwningPlayer!:true]
+            print(playerIsReady)
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PlayerIsReady"), object: nil, userInfo: playerIsReady)
+
+        }
+        else {
+            playerIsReady = [viewOwningPlayer!:false]
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PlayerIsReady"), object: nil, userInfo: playerIsReady)
+        }
+    }
+    
+    
+    
+    
+    
     //MARK: - Custom Button Setup
     
     
@@ -151,7 +179,7 @@ class CharacterListTextView: UIStackView{
         
         
         
-        //  if button is pressed while being greyed (unselected)
+        //  if button state goes from pressed to unpressed (is now unselected)
         if sender.pressed{
             
             
@@ -165,13 +193,15 @@ class CharacterListTextView: UIStackView{
             // Delete the unselected character corresponding to that button from the array of selected characters
             self.chosenCharacters[sender.correspondingCustomName!] = nil
             
+            checkSelectedCharactersCount()
+            
             
             
         }
         
         
         
-        //  if button is pressed while being green (selected)
+        //  if button is being selected
         else{
             
             
@@ -181,8 +211,10 @@ class CharacterListTextView: UIStackView{
             sender.correspondingCustomName?.isHidden = false
             
             self.chosenCharacters[sender.correspondingCustomName!] = sender.correspondingCharacter!
+            
+            checkSelectedCharactersCount()
         
-        
+            
         
         }
         

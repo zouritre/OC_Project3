@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeScreenVC: UIViewController {
     
     
     
@@ -17,29 +17,32 @@ class ViewController: UIViewController {
     
     
     
-    @IBAction func confirmPlayer1(_ sender: UIButton) {
-        
-        
-        
-        let player1 = confirmPlayerChoice(playerName: "Player 1", charactersList: player1CharacterList)
-        print("\(player1.name): \(player1.characters)")
-        
-        
-        
-    }
+//    @IBAction func confirmPlayer1(_ sender: UIButton) {
+//
+//
+//
+//        let player1 = confirmPlayerChoice(playerName: "Player 1", charactersList: player1CharacterList)
+//        print("\(player1.name): \(player1.characters)")
+//
+//
+//
+//    }
+//
+//
+//
+//    @IBAction func confirmPlayer2(_ sender: UIButton) {
+//
+//
+//
+//        let player2 = confirmPlayerChoice(playerName: "Player 2", charactersList: player2CharacterList)
+//        print("\(player2.name): \(player2.characters)")
+//
+//
+//
+//    }
     
     
-    
-    @IBAction func confirmPlayer2(_ sender: UIButton) {
-        
-        
-        
-        let player2 = confirmPlayerChoice(playerName: "Player 2", charactersList: player2CharacterList)
-        print("\(player2.name): \(player2.characters)")
-        
-        
-        
-    }
+    @IBOutlet weak var StartGameButton: UIButton!
     
     
     
@@ -48,6 +51,18 @@ class ViewController: UIViewController {
     
     
     @IBOutlet weak var player1CharacterList: CharacterListTextView!
+    
+    
+    
+    
+    
+    //MARK: - Variables
+    
+    
+    
+    var player1IsReady : Bool = false
+    
+    var player2IsReady : Bool = false
     
     
     
@@ -115,7 +130,25 @@ class ViewController: UIViewController {
     
     
     
+    @objc func setPlayersWhoAreReady (_ sender: Notification) {
+        
+        if let dict = sender.userInfo as NSDictionary? {
+            if let id = dict["Player 1"] as? Bool{
+                player1IsReady = id
+            }
+            if let id = dict["Player 2"] as? Bool{
+                player2IsReady = id
+            }
+        }
+        if player1IsReady && player2IsReady {
+            StartGameButton.isEnabled = true
+        }
+        else {
+            StartGameButton.isEnabled = false
+        }
+    }
     
+
     
     //MARK: - viewDidLoad
     
@@ -131,10 +164,27 @@ class ViewController: UIViewController {
         
 //        Populate the empty character list for each players when the app starts
         player1CharacterList.displayAvailableCharacters(with: CharactersList())
+        player1CharacterList.viewOwningPlayer = "Player 1"
         
         player2CharacterList.displayAvailableCharacters(with: CharactersList())
+        player2CharacterList.viewOwningPlayer = "Player 2"
+        
+        
+        
+        
+        //MARK: - Check if players are ready
+        
+        
+        
+        let listenPlayersForReadiness = Notification.Name(rawValue: "PlayerIsReady")
+        
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(setPlayersWhoAreReady(_:)),
+            name: listenPlayersForReadiness, object: nil)
+        
 
         
+       
         
     }
     
