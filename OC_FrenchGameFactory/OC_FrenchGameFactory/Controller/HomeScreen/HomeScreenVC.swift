@@ -25,6 +25,10 @@ class HomeScreenVC: UIViewController {
             let player2 = confirmPlayersChoices(playerName: "Player 2", charactersList: player2CharacterList)
             print("\(player2.name): \(player2.characters)")
         }
+        else {
+            
+            duplicateNames.removeAll()
+        }
         
         
     }
@@ -122,33 +126,58 @@ class HomeScreenVC: UIViewController {
     }
     
     
+    
+    func getPlayerCharactersCustomNames(listOf player: CharacterListTextView){
+        
+        
+        
+        for (customName, _) in player.chosenCharacters{
+            
+            
+            
+            duplicateNames.append(customName.text)
+            
+            
+            
+        }
+        
+        
+        
+    }
+    
+    
     func foundDuplicateCustomNames (compare player1: CharacterListTextView, with player2: CharacterListTextView) -> Bool{
         
+        
         var foundDuplicate : Bool = false
-        for (playerCustomName, _) in player1.chosenCharacters{
-            if duplicateNames.first(where: { $0 == playerCustomName.text}) != nil {
-                foundDuplicate = true
-                playerCustomName.backgroundColor = .red
-            }
-            else {
-                playerCustomName.backgroundColor = .tintColor
-                duplicateNames.append(playerCustomName.text)
+        
+        func findDuplicates (in listOf: CharacterListTextView){
+            
+            for (playerCustomName, _) in listOf.chosenCharacters{
                 
-            }
-        }
-        for (playerCustomName, _) in player2.chosenCharacters{
-            if duplicateNames.first(where: { $0 == playerCustomName.text}) != nil {
-                foundDuplicate = true
-                playerCustomName.backgroundColor = .red
-            }
-            else {
-                playerCustomName.backgroundColor = .tintColor
-                duplicateNames.append(playerCustomName.text)
+                var copyOfDuplicateNames = duplicateNames
                 
+                let customNameFirstAppearance = copyOfDuplicateNames.firstIndex(of: playerCustomName.text)
+                
+                copyOfDuplicateNames.remove(at: customNameFirstAppearance!)
+                
+                if copyOfDuplicateNames.first(where: { $0 == playerCustomName.text}) != nil {
+                    foundDuplicate = true
+                    playerCustomName.backgroundColor = .red
+                    playerCustomName.textColor = .white
+                    print("found duplicate")
+                }
+                else {
+                    playerCustomName.backgroundColor = .tintColor
+                    playerCustomName.textColor = .white
+                    print("no duplicate found")
+                }
             }
+            
         }
         
-        duplicateNames.removeAll()
+        findDuplicates(in: player1)
+        findDuplicates(in: player2)
         
         return foundDuplicate
     }
@@ -162,9 +191,11 @@ class HomeScreenVC: UIViewController {
             if customName.text.count < 1 {
                 incorrectFormating = true
                 customName.backgroundColor = .red
+                print("incorrect format")
             }
             else {
-                customName.backgroundColor = .tintColor
+                customName.backgroundColor = .white
+                print("correct format")
             }
         }
         
@@ -185,24 +216,37 @@ class HomeScreenVC: UIViewController {
         
         var correctNames: Bool = true
         
-        let checkPlayer1CustomNameFormat = foundIncorrectFormatingForCustomNames(for: player1)
+        getPlayerCharactersCustomNames(listOf: player1)
+        getPlayerCharactersCustomNames(listOf: player2)
         
-        let checkPlayer2CustomNameFormat = foundIncorrectFormatingForCustomNames(for: player2)
+        print(duplicateNames)
         
-        let checkPlayersDuplicateCustomNames = foundDuplicateCustomNames(compare: player1, with: player2)
+        let foundIncorrectFormatingForPlayer1CustomNames = foundIncorrectFormatingForCustomNames(for: player1)
+        
+        let foundIncorrectFormatingForPlayer2CustomNames = foundIncorrectFormatingForCustomNames(for: player2)
         
         
         
-        if checkPlayer1CustomNameFormat || checkPlayer2CustomNameFormat || checkPlayersDuplicateCustomNames{
-//        if checkPlayer1CustomNameFormat || checkPlayer2CustomNameFormat {
-                
+        if foundIncorrectFormatingForPlayer1CustomNames || foundIncorrectFormatingForPlayer2CustomNames{
             
+            
+            correctNames = false
+            
+            alert(title: "Empty names detected")
+            
+        
+        }
+        else {
+            
+            let foundDuplicateCustomNames = foundDuplicateCustomNames(compare: player1, with: player2)
+            
+            if foundDuplicateCustomNames {
+                
                 correctNames = false
                 
-                alert(title: "Empty/Duplicate names detected")
-        
-        
-        
+                alert(title: "Duplicated names detected")
+                
+            }
         }
         
         
