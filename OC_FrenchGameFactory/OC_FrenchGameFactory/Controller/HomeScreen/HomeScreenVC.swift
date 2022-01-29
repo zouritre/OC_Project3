@@ -13,22 +13,47 @@ class HomeScreenVC: UIViewController {
     
     
     
-    //MARK: - IBOutlets
+    
+    
+    
+    
+        //MARK: - IBOutlets
+    
+    
     
     
     @IBAction func StartGame(_ sender: UIButton) {
         
+        
+        
         if verifyCustomNamesValidity(for: player1CharacterList, and: player2CharacterList) {
             
+            
+            
             let player1 = confirmPlayersChoices(playerName: "Player 1", charactersList: player1CharacterList)
+            
             print("\(player1.name): \(player1.characters)")
+            
             let player2 = confirmPlayersChoices(playerName: "Player 2", charactersList: player2CharacterList)
+            
             print("\(player2.name): \(player2.characters)")
+            
+            
+            
         }
+        
+        
+        
         else {
             
+            
+            
             duplicateNames.removeAll()
+            
+            
+            
         }
+        
         
         
     }
@@ -37,11 +62,7 @@ class HomeScreenVC: UIViewController {
     
     @IBOutlet weak var StartGameButton: UIButton!
     
-    
-    
     @IBOutlet weak var player2CharacterList: CharacterListTextView!
-    
-    
     
     @IBOutlet weak var player1CharacterList: CharacterListTextView!
     
@@ -49,7 +70,12 @@ class HomeScreenVC: UIViewController {
     
     
     
+    
+    
+    
+    
     //MARK: - Variables
+    
     
     
     
@@ -63,7 +89,12 @@ class HomeScreenVC: UIViewController {
     
     
     
+    
+    
+    
+    
     //MARK: - Dismiss Keyboard Outside TextViews
+    
     
     
     
@@ -88,10 +119,10 @@ class HomeScreenVC: UIViewController {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
 
-            //Uncomment the line below if you want the tap not to interfere and cancel other interactions.
-            tap.cancelsTouchesInView = false
+        //Uncomment the line below if you want the tap not to interfere and cancel other interactions.
+        tap.cancelsTouchesInView = false
 
-            view.addGestureRecognizer(tap)
+        view.addGestureRecognizer(tap)
         
         
         
@@ -101,7 +132,12 @@ class HomeScreenVC: UIViewController {
     
     
     
+    
+    
+    
+    
     //MARK: - Check Players Characters Informations
+    
     
     
     
@@ -111,13 +147,24 @@ class HomeScreenVC: UIViewController {
         
         var player = Player(name: playerName, characters: [])
         
-        for (customName, character) in charactersList.chosenCharacters{
+        
+        
+        for (customNameTextView, character) in charactersList.chosenCharacters{
+            
+            
             
             var character = character
             
-            character.customName = customName.text
+            character.customName = customNameTextView.text
+            
             player.characters.append(character)
+            
+            
+            
         }
+        
+        
+        
         
         return player
         
@@ -131,11 +178,11 @@ class HomeScreenVC: UIViewController {
         
         
         
-        for (customName, _) in player.chosenCharacters{
+        for (customNameTextView, _) in player.chosenCharacters{
             
             
             
-            duplicateNames.append(customName.text)
+            duplicateNames.append(customNameTextView.text)
             
             
             
@@ -144,6 +191,7 @@ class HomeScreenVC: UIViewController {
         
         
     }
+    
     
     
     func foundDuplicateCustomNames (compare player1: CharacterListTextView, with player2: CharacterListTextView) -> Bool{
@@ -151,52 +199,111 @@ class HomeScreenVC: UIViewController {
         
         var foundDuplicate : Bool = false
         
+        
+        
         func findDuplicates (in listOf: CharacterListTextView){
             
-            for (playerCustomName, _) in listOf.chosenCharacters{
+            
+            
+            for (customNameTextView, _) in listOf.chosenCharacters{
+                
+                
                 
                 var copyOfDuplicateNames = duplicateNames
                 
-                let customNameFirstAppearance = copyOfDuplicateNames.firstIndex(of: playerCustomName.text)
+                let customNameFirstAppearance = copyOfDuplicateNames.firstIndex(of: customNameTextView.text)
                 
                 copyOfDuplicateNames.remove(at: customNameFirstAppearance!)
                 
-                if copyOfDuplicateNames.first(where: { $0 == playerCustomName.text}) != nil {
+                
+                
+                if copyOfDuplicateNames.first(where: { $0 == customNameTextView.text}) != nil {
+                    
+                    
+                    
                     foundDuplicate = true
-                    playerCustomName.backgroundColor = .red
-                    playerCustomName.textColor = .white
-                    print("found duplicate")
+                    
+                    customNameTextView.backgroundColor = .red
+                    customNameTextView.textColor = .white
+                    
+                    
+                    
                 }
+                
+                
+                
                 else {
-                    playerCustomName.backgroundColor = .tintColor
-                    playerCustomName.textColor = .white
-                    print("no duplicate found")
+                    
+                    
+                    
+                    customNameTextView.backgroundColor = .tintColor
+                    customNameTextView.textColor = .white
+                    
+                    
+                    
                 }
+                
+                
+                
             }
             
+            
+            
         }
+        
+        
         
         findDuplicates(in: player1)
         findDuplicates(in: player2)
         
+        
+        
         return foundDuplicate
+        
+        
+        
     }
     
     
     
     func foundIncorrectFormatingForCustomNames(for player: CharacterListTextView) -> Bool{
+        
+        
 
         var incorrectFormating : Bool = false
-        for (customName, _) in player.chosenCharacters{
-            if customName.text.count < 1 {
+        
+        
+        
+        for (customNameTextView, _) in player.chosenCharacters{
+            
+            
+            
+            if customNameTextView.text.count < 1 {
+                
+                
+                
                 incorrectFormating = true
-                customName.backgroundColor = .red
-                print("incorrect format")
+                
+                customNameTextView.backgroundColor = .red
+                
+                
+                
             }
+            
+            
+            
             else {
-                customName.backgroundColor = .white
-                print("correct format")
+                
+                
+                
+                customNameTextView.backgroundColor = .white
+                
+                
+                
             }
+            
+            
+            
         }
         
         
@@ -206,7 +313,6 @@ class HomeScreenVC: UIViewController {
         
         
     }
-    
     
     
     
@@ -230,23 +336,39 @@ class HomeScreenVC: UIViewController {
         if foundIncorrectFormatingForPlayer1CustomNames || foundIncorrectFormatingForPlayer2CustomNames{
             
             
+            
             correctNames = false
             
             alert(title: "Empty names detected")
             
+            
         
         }
+        
+        
+        
         else {
+            
+            
             
             let foundDuplicateCustomNames = foundDuplicateCustomNames(compare: player1, with: player2)
             
+            
+            
             if foundDuplicateCustomNames {
+                
+                
                 
                 correctNames = false
                 
                 alert(title: "Duplicated names detected")
                 
+                
+                
             }
+            
+            
+            
         }
         
         
@@ -277,33 +399,87 @@ class HomeScreenVC: UIViewController {
     
     
     
+    
+    
+    
+    
     //MARK: - Notification Receiver
+    
     
     
     
     @objc func setPlayersWhoAreReady (_ sender: Notification) {
         
+        
+        
         if let dict = sender.userInfo as NSDictionary? {
+            
+            
+            
             if let id = dict["Player 1"] as? Bool{
+                
+                
+                
                 player1IsReady = id
+                
+                
+                
             }
+            
+            
+            
             if let id = dict["Player 2"] as? Bool{
+                
+                
+                
                 player2IsReady = id
+                
+                
+                
             }
+            
+            
+            
         }
+        
+        
+        
         if player1IsReady && player2IsReady {
+            
+            
+            
             StartGameButton.isEnabled = true
+            
+            
+            
         }
+        
+        
+        
         else {
+            
+            
+            
             StartGameButton.isEnabled = false
+        
+        
+        
         }
+        
+        
+        
     }
     
     
     
 
     
+    
+    
+    
+    
     //MARK: - viewDidLoad
+    
     
     
     
@@ -325,19 +501,25 @@ class HomeScreenVC: UIViewController {
         
         
         
+        
+        
+        
+        
+        
         //MARK: - Check if players are ready
+        
         
         
         
         let listenPlayersForReadiness = Notification.Name(rawValue: "PlayerIsReady")
         
         NotificationCenter.default.addObserver(
+            
             self, selector: #selector(setPlayersWhoAreReady(_:)),
+            
             name: listenPlayersForReadiness, object: nil)
         
 
-        
-       
         
     }
     
