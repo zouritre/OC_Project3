@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6v7-6o-OrI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
@@ -8,16 +8,32 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home ScreenVC-->
+        <!--Navigation Controller-->
+        <scene sceneID="WK6-Qt-5TW">
+            <objects>
+                <navigationController id="6v7-6o-OrI" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mCS-MN-SuJ">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="YoZ-t4-VFx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="41r-pG-1cX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1583" y="-577"/>
+        </scene>
+        <!--Home Screen-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeScreenVC" customModule="OC_FrenchGameFactory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Home Screen" id="BYZ-38-t0r" customClass="HomeScreenVC" customModule="OC_FrenchGameFactory" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="caD-6x-IVS">
-                                <rect key="frame" x="20" y="44" width="374" height="818"/>
+                                <rect key="frame" x="20" y="88" width="374" height="774"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select 3 characters" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Grv-IX-0OO">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="80"/>
@@ -37,7 +53,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="o9E-7J-SEn" userLabel="CharacterList" customClass="CharacterListTextView" customModule="OC_FrenchGameFactory" customModuleProvider="target">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="o9E-7J-SEn" userLabel="CharacterList" customClass="CharacterListStackView" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                 <rect key="frame" x="194.5" y="157" width="179.5" height="50"/>
                                             </stackView>
                                         </subviews>
@@ -54,16 +70,16 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XYQ-jm-JNX" userLabel="Player2">
-                                        <rect key="frame" x="0.0" y="490" width="374" height="328"/>
+                                        <rect key="frame" x="0.0" y="490" width="374" height="284"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZI6-G6-neV" userLabel="Player 2">
-                                                <rect key="frame" x="0.0" y="145.5" width="184.5" height="37"/>
+                                                <rect key="frame" x="0.0" y="123.5" width="184.5" height="37"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="qAD-7F-2DX" userLabel="CharacterList" customClass="CharacterListTextView" customModule="OC_FrenchGameFactory" customModuleProvider="target">
-                                                <rect key="frame" x="189.5" y="139" width="184.5" height="50"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="qAD-7F-2DX" userLabel="CharacterList" customClass="CharacterListStackView" customModule="OC_FrenchGameFactory" customModuleProvider="target">
+                                                <rect key="frame" x="189.5" y="117" width="184.5" height="50"/>
                                             </stackView>
                                         </subviews>
                                     </stackView>
@@ -84,18 +100,41 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="caD-6x-IVS" secondAttribute="trailing" constant="20" id="tJL-7f-Ruj"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="jPp-BD-vCK"/>
                     <connections>
                         <outlet property="StartGameButton" destination="qs3-J9-qnU" id="lsp-Ez-LQ5"/>
                         <outlet property="player1CharacterList" destination="o9E-7J-SEn" id="mj4-tk-nkH"/>
                         <outlet property="player2CharacterList" destination="qAD-7F-2DX" id="ebB-x2-rc5"/>
+                        <segue destination="gxq-sm-dMp" kind="show" identifier="goToCombatScreen" id="qfu-G3-0Wv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="34.782608695652179" y="97.098214285714278"/>
+            <point key="canvasLocation" x="-551" y="-577"/>
+        </scene>
+        <!--Combat Screen-->
+        <scene sceneID="ID3-Es-9NZ">
+            <objects>
+                <viewController id="gxq-sm-dMp" customClass="CombatScreenVC" customModule="OC_FrenchGameFactory" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Unb-pB-PmG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="gjZ-TO-uux"/>
+                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Combat Screen" id="8C5-ZN-Jmo">
+                        <barButtonItem key="backBarButtonItem" title="Characters selection" id="eyS-wh-yvN"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WZj-Rd-XTa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="362" y="-576"/>
         </scene>
     </scenes>
     <resources>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
