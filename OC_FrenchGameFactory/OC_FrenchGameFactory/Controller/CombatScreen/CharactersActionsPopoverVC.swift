@@ -9,13 +9,45 @@ import UIKit
 
 class CharactersActionsPopoverVC: UIViewController {
     
+    
+    
+    
+    // MARK: - IBOutlets
+    
+    
+    
+    
+    @IBOutlet weak var actionDetail: ActionDetail!
+    
+    @IBAction func actionToPerfom(_ sender: UIButton) {
+        
+        sender.backgroundColor = .orange
+        switch sender.currentTitle {
+            
+        case "Heal":
+            actionDetail.subviews.forEach({ $0.removeFromSuperview() });
+            actionDetail.displayAvailableTargetCharacters(action: "Heal");
+            actionDetail.alliesAndFoes = alliesAndFoes
+        case "Attack":
+            actionDetail.subviews.forEach({ $0.removeFromSuperview() });
+            actionDetail.displayAvailableTargetCharacters(action: "Attack");
+            actionDetail.alliesAndFoes = alliesAndFoes
+        default: return
+            
+        }
+    }
+    
+    
     var alliesAndFoes: [String:Player] = [:]
+    
+
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        print("Action screen: \(alliesAndFoes)")
 
-        print(alliesAndFoes)
         // Do any additional setup after loading the view.
     }
     
