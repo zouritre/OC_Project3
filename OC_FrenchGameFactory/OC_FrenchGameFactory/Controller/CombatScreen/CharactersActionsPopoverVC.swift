@@ -19,26 +19,93 @@ class CharactersActionsPopoverVC: UIViewController {
     
     @IBOutlet weak var actionDetail: ActionDetail!
     
+//    Linked to "Heal" and "Attack" buttons. Create a button for each character of ally team if "Heal" is pressed or each character in ennemy team if "Attack" is pressed
     @IBAction func actionToPerfom(_ sender: UIButton) {
         
+        
+        
+//        Set previously selected button to default blue
+        previousSender.backgroundColor = .systemBlue
+        previousSender = sender
+        
         sender.backgroundColor = .orange
+        
+        
+        
         switch sender.currentTitle {
+        
             
-        case "Heal":
-            actionDetail.subviews.forEach({ $0.removeFromSuperview() });
-            actionDetail.displayAvailableTargetCharacters(action: "Heal");
-            actionDetail.alliesAndFoes = alliesAndFoes
-        case "Attack":
-            actionDetail.subviews.forEach({ $0.removeFromSuperview() });
-            actionDetail.displayAvailableTargetCharacters(action: "Attack");
-            actionDetail.alliesAndFoes = alliesAndFoes
+            
+        case "Heal": populateCharacterListForActions(action: "Heal")
+            
+        case "Attack": populateCharacterListForActions(action: "Attack")
+            
         default: return
             
+            
+            
         }
+        
+        
+        
     }
     
     
+    
+    
+    
+    
+    
+    
+    
+    // MARK: - Variables
+    
+    
+    
+//    Used to display the character list in ActionDetail StackView according to the action selected: Heal or Attack
     var alliesAndFoes: [String:Player] = [:]
+    
+    var previousSender : UIButton = UIButton()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // MARK: - Populate List for "Heal" Button and "Attack" Button
+    
+    
+    
+    
+    func populateCharacterListForActions(action: String) {
+        
+        
+        
+//      Remove all existing subviews (buttons) in the ActionDetail StackView to avoid        infinite stacking
+        actionDetail.subviews.forEach({ $0.removeFromSuperview() });
+        
+//      Tell the stackView wich player is on the side of the selected character (the one     who is performing the  action) and wich is not to create their corresponding         buttons in the StackView
+        actionDetail.alliesAndFoes = alliesAndFoes
+        
+//      Populate the StackView with new buttons
+        actionDetail.displayAvailableTargetCharacters(action: action);
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // MARK: - View Did Load
     
 
 
@@ -46,20 +113,10 @@ class CharactersActionsPopoverVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        print("Action screen: \(alliesAndFoes)")
 
-        // Do any additional setup after loading the view.
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }

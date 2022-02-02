@@ -21,6 +21,7 @@
 		E94327AE2794CB3D00057345 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E94327AC2794CB3D00057345 /* LaunchScreen.storyboard */; };
 		E94F674027AAA1A900A40FE9 /* CharactersActionsPopoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F673F27AAA1A900A40FE9 /* CharactersActionsPopoverVC.swift */; };
 		E94F674227AAFED700A40FE9 /* ActionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F674127AAFED700A40FE9 /* ActionDetail.swift */; };
+		E94F674427AB309E00A40FE9 /* UpdateCharactersStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F674327AB309E00A40FE9 /* UpdateCharactersStats.swift */; };
 		E9C0353127A7150000C89285 /* CombatScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C0353027A7150000C89285 /* CombatScreenVC.swift */; };
 		E9D2EB2F27A2C5D10083FE04 /* CharactersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D2EB2E27A2C5D10083FE04 /* CharactersList.swift */; };
 /* End PBXBuildFile section */
@@ -41,7 +42,8 @@
 		E94327AD2794CB3D00057345 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E94327AF2794CB3D00057345 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E94F673F27AAA1A900A40FE9 /* CharactersActionsPopoverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersActionsPopoverVC.swift; sourceTree = "<group>"; };
-		E94F674127AAFED700A40FE9 /* ActionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActionDetail.swift; path = CombatScreen/ActionDetail.swift; sourceTree = "<group>"; };
+		E94F674127AAFED700A40FE9 /* ActionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionDetail.swift; sourceTree = "<group>"; };
+		E94F674327AB309E00A40FE9 /* UpdateCharactersStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCharactersStats.swift; sourceTree = "<group>"; };
 		E9C0353027A7150000C89285 /* CombatScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CombatScreenVC.swift; path = OC_FrenchGameFactory/Controller/CombatScreen/CombatScreenVC.swift; sourceTree = SOURCE_ROOT; };
 		E9D2EB2E27A2C5D10083FE04 /* CharactersList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,12 +70,12 @@
 			path = Structures;
 			sourceTree = "<group>";
 		};
-		E9385497279B22D900AE6E53 /* Characters */ = {
+		E9385497279B22D900AE6E53 /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
 				E9D2EB2E27A2C5D10083FE04 /* CharactersList.swift */,
 			);
-			path = Characters;
+			path = HomeScreen;
 			sourceTree = "<group>";
 		};
 		E94327952794CB3C00057345 = {
@@ -108,10 +110,19 @@
 			path = OC_FrenchGameFactory;
 			sourceTree = "<group>";
 		};
+		E94F674527AB30C000A40FE9 /* CombatScreen */ = {
+			isa = PBXGroup;
+			children = (
+				E94F674327AB309E00A40FE9 /* UpdateCharactersStats.swift */,
+			);
+			path = CombatScreen;
+			sourceTree = "<group>";
+		};
 		E97404BB27A18E7000CBFAEF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E9385497279B22D900AE6E53 /* Characters */,
+				E94F674527AB30C000A40FE9 /* CombatScreen */,
+				E9385497279B22D900AE6E53 /* HomeScreen */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -121,7 +132,6 @@
 			children = (
 				E94327A72794CB3C00057345 /* Main.storyboard */,
 				E9C0353327A745D600C89285 /* CombatScreen */,
-				E94F674127AAFED700A40FE9 /* ActionDetail.swift */,
 				E9D2EB3027A2CC000083FE04 /* HomeScreen */,
 			);
 			path = View;
@@ -148,6 +158,7 @@
 		E9C0353327A745D600C89285 /* CombatScreen */ = {
 			isa = PBXGroup;
 			children = (
+				E94F674127AAFED700A40FE9 /* ActionDetail.swift */,
 			);
 			path = CombatScreen;
 			sourceTree = "<group>";
@@ -252,6 +263,7 @@
 				E93854A2279B256E00AE6E53 /* CharacterListStackView.swift in Sources */,
 				E938549E279B250E00AE6E53 /* Character.swift in Sources */,
 				E93854A0279B253400AE6E53 /* Weapon.swift in Sources */,
+				E94F674427AB309E00A40FE9 /* UpdateCharactersStats.swift in Sources */,
 				E94F674227AAFED700A40FE9 /* ActionDetail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
