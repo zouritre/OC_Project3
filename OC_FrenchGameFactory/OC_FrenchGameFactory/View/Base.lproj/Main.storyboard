@@ -359,16 +359,22 @@
                     <navigationItem key="navigationItem" title="Combat Screen" id="8C5-ZN-Jmo"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="player1Char1Button" destination="5ed-pl-0Zh" id="Xnh-PE-nas"/>
                         <outlet property="player1Char1HP" destination="pHs-kw-2WR" id="VCF-aV-FYc"/>
                         <outlet property="player1Char1WeaponDamage" destination="ZSA-9Z-K12" id="7e4-bM-Y4X"/>
+                        <outlet property="player1Char2Button" destination="Gnz-UR-OjI" id="iGk-W9-aSE"/>
                         <outlet property="player1Char2HP" destination="4Qe-dh-YU3" id="lcU-8y-Nn2"/>
                         <outlet property="player1Char2WeaponDamage" destination="p6o-pn-4go" id="FNE-nU-Ec8"/>
+                        <outlet property="player1Char3Button" destination="f5h-hi-1Vx" id="1Xj-zr-Tc2"/>
                         <outlet property="player1Char3HP" destination="8PE-Sa-Fcc" id="Kzn-8D-ODm"/>
                         <outlet property="player1Char3WeaponDamage" destination="36W-jS-PVr" id="RyF-dM-5aq"/>
+                        <outlet property="player2Char1Button" destination="f12-32-RdI" id="DcJ-Xd-jUX"/>
                         <outlet property="player2Char1HP" destination="KVU-Xp-5Bz" id="srQ-Ix-6cU"/>
                         <outlet property="player2Char1WeaponDamage" destination="Luh-ih-yto" id="oEa-i0-LOF"/>
+                        <outlet property="player2Char2Button" destination="Ji0-rm-BZc" id="Vi0-bK-LJh"/>
                         <outlet property="player2Char2HP" destination="nmW-lS-bzL" id="aGS-Hr-A51"/>
                         <outlet property="player2Char2WeaponDamage" destination="bXb-9z-Xzn" id="Dcn-aS-Pti"/>
+                        <outlet property="player2Char3Button" destination="3Zm-VY-Y0n" id="CAn-dj-8Ot"/>
                         <outlet property="player2Char3HP" destination="9LT-md-FUM" id="oyg-Hw-fBD"/>
                         <outlet property="player2Char3WeaponDamage" destination="04t-na-9VJ" id="tg0-t8-1eG"/>
                         <segue destination="uF6-Ah-hT0" kind="presentation" identifier="selectCharActions" id="boc-3D-zVC"/>
