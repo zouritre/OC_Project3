@@ -30,13 +30,11 @@ class HomeScreenVC: UIViewController {
             
 //            if the custom names respect the correct pattern then create a player object for each players with their chosen characters
             
-            let player1 = confirmPlayersChoices(playerName: "Player 1", charactersList: player1CharacterList)
+            player1 = confirmPlayersChoices(playerName: "Player 1", charactersList: player1CharacterList)
             
-            print("\(player1.name): \(player1.characters)")
+            player2 = confirmPlayersChoices(playerName: "Player 2", charactersList: player2CharacterList)
             
-            let player2 = confirmPlayersChoices(playerName: "Player 2", charactersList: player2CharacterList)
-            
-            print("\(player2.name): \(player2.characters)")
+            performSegue(withIdentifier: "goToCombatScreen", sender: self)
             
             
             
@@ -62,9 +60,9 @@ class HomeScreenVC: UIViewController {
     
     @IBOutlet weak var StartGameButton: UIButton!
     
-    @IBOutlet weak var player2CharacterList: CharacterListTextView!
+    @IBOutlet weak var player2CharacterList: CharacterListStackView!
     
-    @IBOutlet weak var player1CharacterList: CharacterListTextView!
+    @IBOutlet weak var player1CharacterList: CharacterListStackView!
     
     
     
@@ -77,11 +75,15 @@ class HomeScreenVC: UIViewController {
     //MARK: - Variables
     
     
+    var player1 : Player = Player(name: "", characters: [])
     
+    var player2: Player = Player(name: "", characters: [])
     
     var player1IsReady : Bool = false
     
     var player2IsReady : Bool = false
+    
+    let listenNotificationForPlayersReadiness = Notification.Name(rawValue: "PlayerIsReady")
     
 //    Store every custom names chosen by players for their characters to check for duplicates
     var charactersCustomName : [String] = []
@@ -142,7 +144,7 @@ class HomeScreenVC: UIViewController {
     
     
 ///     Return a player object with a custom player name and a custom list of characters
-    func confirmPlayersChoices(playerName: String, charactersList: CharacterListTextView) -> Player {
+    func confirmPlayersChoices(playerName: String, charactersList: CharacterListStackView) -> Player {
         
         
         
@@ -175,7 +177,7 @@ class HomeScreenVC: UIViewController {
     
     
 ///     Append the custom characters name of a character list in the charactersCustomNames array
-    func getPlayerCharactersCustomNames(for playerCharacterList: CharacterListTextView){
+    func getPlayerCharactersCustomNames(for playerCharacterList: CharacterListStackView){
         
         
         
@@ -195,14 +197,14 @@ class HomeScreenVC: UIViewController {
     
     
 ///     Compare two list of characters to find duplicates custom character names. Return a bool : true if a duplicate has been found
-    func foundDuplicateCustomNames (compare player1CharacterList: CharacterListTextView, with player2CharacterList: CharacterListTextView) -> Bool{
+    func foundDuplicateCustomNames (compare player1CharacterList: CharacterListStackView, with player2CharacterList: CharacterListStackView) -> Bool{
         
         
         var foundDuplicate : Bool = false
         
         
 ///     Compare the custom names of a character list with those store in the charactersCustomNames array and find if it appears at least 2 times
-        func findDuplicates (for playerCharacterList: CharacterListTextView){
+        func findDuplicates (for playerCharacterList: CharacterListStackView){
             
             
             
@@ -269,7 +271,7 @@ class HomeScreenVC: UIViewController {
     
     
 ///    Check if custom names are at least 1 character long
-    func foundIncorrectFormatingInCustomNames(for player: CharacterListTextView) -> Bool{
+    func foundIncorrectFormatingInCustomNames(for player: CharacterListStackView) -> Bool{
         
         
 
@@ -321,7 +323,7 @@ class HomeScreenVC: UIViewController {
     
     
 ///     Perform a full check of players character custom names formatting. Send true if all check have passed successfully
-    func verifyCustomNamesValidity(for player1: CharacterListTextView, and player2: CharacterListTextView) -> Bool {
+    func verifyCustomNamesValidity(for player1: CharacterListStackView, and player2: CharacterListStackView) -> Bool {
         
         
         
@@ -494,6 +496,18 @@ class HomeScreenVC: UIViewController {
         dismissKeyboardOutsideTextView()
         
         
+        
+        
+        
+        
+        
+        
+        
+        //MARK: - Setup character list
+        
+        
+        
+        
 //        Populate the empty character list for each players when the app starts
         player1CharacterList.displayAvailableCharacters(with: CharactersList())
         player1CharacterList.viewOwningPlayer = "Player 1"
@@ -514,18 +528,48 @@ class HomeScreenVC: UIViewController {
         
         
         
-        let listenPlayersForReadiness = Notification.Name(rawValue: "PlayerIsReady")
-        
         NotificationCenter.default.addObserver(
             
             self, selector: #selector(setPlayersWhoAreReady(_:)),
             
-            name: listenPlayersForReadiness, object: nil)
+            name: listenNotificationForPlayersReadiness, object: nil)
         
 
         
     }
     
     
+    
+    
+    
+    
+    
+    
+    
+    // MARK: - Navigation
+    
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        
+        
+        
+        if segue.destination is CombatScreenVC {
+            
+            
+            
+            let vc = segue.destination as? CombatScreenVC
+                
+            vc?.gameSession.players = [player1, player2]
+        
+        
+        
+        }
+        
+        
+        
+    }
     
 }

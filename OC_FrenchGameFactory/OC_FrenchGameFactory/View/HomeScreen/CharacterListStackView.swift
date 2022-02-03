@@ -12,7 +12,7 @@ import UIKit
 
 
 ///  Populate each players character list view
-class CharacterListTextView: UIStackView{
+class CharacterListStackView: UIStackView{
     
     
     
@@ -123,6 +123,40 @@ class CharacterListTextView: UIStackView{
     
     
     
+ 
+    //MARK: - Custom Button Setup
+    
+    
+    
+    /// Create a customized button
+    func customButton(for character: Character, customName: UITextView) -> UIButton{
+        
+        
+        
+        let button = CreateButton()
+        
+        button.correspondingCharacter = character
+        button.customNameTextView = customName
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(character.originalName, for: .normal)
+        button.backgroundColor = UIColor.green
+        button.setTitleColor(.darkText, for: .normal)
+        button.addTarget(self, action: #selector(self.buttonPressed(_:)), for: .touchUpInside)
+        
+        return button
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //MARK: - Check If Player Is Ready
     
     
@@ -144,36 +178,19 @@ class CharacterListTextView: UIStackView{
     
     
     
-    
-    //MARK: - Custom Button Setup
-    
+   
     
     
-    /// Create a customized button
-    func customButton(for character: Character, customName: UITextView) -> UIButton{
-        
-        
-        
-        let button = CreateButton()
-        
-        button.correspondingCharacter = character
-        button.customNameTextView = customName
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(character.originalName, for: .normal)
-        button.backgroundColor = UIColor.green
-        button.setTitleColor(.darkText, for: .normal)
-        button.addTarget(self, action: #selector(self.pressed(_:)), for: .touchUpInside)
-        
-        return button
-        
-        
-        
-    }
+    
+    
+    //MARK: - Action on button pressed
+    
+    
     
     
     
     ///    Set button backgorund color to grey if pressed or green if not pressed - Default: Green
-    @objc func pressed(_ sender: CreateButton) {
+    @objc func buttonPressed(_ sender: CreateButton) {
         
         
         
@@ -190,7 +207,7 @@ class CharacterListTextView: UIStackView{
             sender.customNameTextView?.text = ""
             
             // Delete the unselected character corresponding to that button from the array of selected characters
-            self.chosenCharacters[sender.customNameTextView!] = nil
+            chosenCharacters[sender.customNameTextView!] = nil
             
             checkSelectedCharactersCount()
             
@@ -209,7 +226,7 @@ class CharacterListTextView: UIStackView{
             sender.backgroundColor = .gray
             sender.customNameTextView?.isHidden = false
             
-            self.chosenCharacters[sender.customNameTextView!] = sender.correspondingCharacter!
+            chosenCharacters[sender.customNameTextView!] = sender.correspondingCharacter!
             
             checkSelectedCharactersCount()
         
