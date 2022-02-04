@@ -52,18 +52,6 @@ class CharactersActionsPopoverVC: UIViewController {
     
     
     
-    @objc func actionToTargettedCharacter (_ sender: UIButton){
-        
-        
-        
-        print(sender.currentTitle!)
-        
-        
-        
-    }
-    
-    
-    
     
     
     
@@ -101,8 +89,6 @@ class CharactersActionsPopoverVC: UIViewController {
         
 //      Tell the stackView wich player is on the side of the selected character (the one     who is performing the  action) and wich is not to create their corresponding         buttons in the StackView
         actionDetail.alliesAndFoes = alliesAndFoes
-        
-        actionDetail.vc = self
         
 //      Populate the StackView with new buttons
         actionDetail.displayAvailableTargetCharacters(action: action);

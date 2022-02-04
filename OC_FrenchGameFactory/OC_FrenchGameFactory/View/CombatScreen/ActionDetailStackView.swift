@@ -14,9 +14,6 @@ class ActionDetailStackView: UIStackView {
 /// Store a list of the selected character's allies and foes
     internal var alliesAndFoes: [String:Player] = [:]
     
-/// Store the instance of the parent view controller class
-    internal var vc : CharactersActionsPopoverVC = CharactersActionsPopoverVC()
-
     
     
     internal func displayAvailableTargetCharacters (action: String) {
@@ -64,11 +61,12 @@ class ActionDetailStackView: UIStackView {
             
                 
                 
-                let characterButton = UIButton()
+                let characterButton = CharactersButton()
                 
-                characterButton.setTitle(character.customName, for: .normal)
-                characterButton.backgroundColor = .orange
-                characterButton.addTarget(self, action: #selector(vc.actionToTargettedCharacter(_:)), for: .touchUpInside)
+                characterButton.correspondingCharacter = character
+                characterButton.backgroundColor = .cyan
+                characterButton.setTitleColor(.red, for: .normal)
+                characterButton.addTarget(self, action: #selector(actionToTargettedCharacter(_:)), for: .touchUpInside)
                 
                 addArrangedSubview(characterButton)
                 
@@ -84,15 +82,22 @@ class ActionDetailStackView: UIStackView {
             
     }
     
-    
-    @objc func actionToTargettedCharacter (_ sender: UIButton){
-        
-        
-        
-        print(sender.currentTitle!)
-        
-        
-        
+    ///     Send the targetted character info to CombatScreenVC using Notification
+    @objc func actionToTargettedCharacter (_ sender: CharactersButton){
+
+        var target: [String:Character] = [:]
+
+        target["target"] = sender.correspondingCharacter
+
+        let name = Notification.Name(rawValue: "targettedCharacter")
+
+        let notification = Notification(name: name, userInfo: target)
+
+        NotificationCenter.default.post(notification)
+
+        print(sender.correspondingCharacter.customName)
+
+
     }
     
     

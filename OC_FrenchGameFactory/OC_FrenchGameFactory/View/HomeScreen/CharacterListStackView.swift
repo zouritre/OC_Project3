@@ -162,17 +162,27 @@ class CharacterListStackView: UIStackView{
     
     
     func checkSelectedCharactersCount(){
+        
+        
         if chosenCharacters.count == 3 {
-            notifyPlayerIsReady = [viewOwningPlayer!:true]
             
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PlayerIsReady"), object: nil, userInfo: notifyPlayerIsReady)
+            
+            notifyPlayerIsReady = [viewOwningPlayer!:true]
 
+            
         }
         else {
+            
+            
             notifyPlayerIsReady = [viewOwningPlayer!:false]
             
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PlayerIsReady"), object: nil, userInfo: notifyPlayerIsReady)
+            
         }
+        
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PlayerIsReady"), object: nil, userInfo: notifyPlayerIsReady)
+        
+        
     }
     
     

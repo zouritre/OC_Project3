@@ -77,6 +77,8 @@ class CombatScreenVC: UIViewController {
 ///    Apply this value on targetted character Health depending if "Heal" button is pressed (perform addition for healing) or "Attack" button is pressed (perform substraction)
     private var selectedCharacter = Character()
     
+    private var selectedCharacterButton = CharactersButton()
+    
 //    Below variables contains match every character of each players with his corresponding UI elements
     
     private var player1Character1 : charactersStatsUIElements!
@@ -112,6 +114,8 @@ class CombatScreenVC: UIViewController {
     
 ///    Show CharactersActionsPopoverVC as popover/modal when a character is selected to perform an action
     @IBAction func showCharActions(_ sender: CharactersButton) {
+        
+        selectedCharacterButton = sender
         
         sender.backgroundColor = .orange
         
@@ -231,6 +235,34 @@ class CombatScreenVC: UIViewController {
     
     
     
+    @objc func updateTargettedCharacterUIs(_ sender: Notification){
+
+
+        if let dict = sender.userInfo as NSDictionary? {
+
+
+
+            if let target = dict["target"] as? Character{
+
+                
+                selectedCharacterButton.backgroundColor = .systemBlue
+                
+                print("Targetted Character: \(target.customName)")
+                
+                dismiss(animated: true, completion: nil)
+
+
+
+            }
+
+
+        }
+        
+        
+    }
+    
+    
+    
     
     
     //MARK: - View Did Load
@@ -244,9 +276,14 @@ class CombatScreenVC: UIViewController {
         
         super.viewDidLoad()
         
-        print("GameSession: \(gameSession)")
-        
         setupCharactersStats()
+        
+        
+        NotificationCenter.default.addObserver(
+            
+            self, selector: #selector(updateTargettedCharacterUIs(_:)),
+            
+            name: Notification.Name("targettedCharacter"), object: nil)
         
     }
     

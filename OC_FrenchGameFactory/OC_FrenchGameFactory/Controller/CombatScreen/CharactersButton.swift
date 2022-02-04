@@ -10,9 +10,18 @@ import UIKit
 class CharactersButton: UIButton {
 
     var correspondingCharacter = Character() {
+        
+        
         willSet{
+            
+            
             setTitle(newValue.customName, for: .normal)
+            
+            
         }
+        
+        
     }
+    
 
 }
