@@ -18,17 +18,17 @@ class CombatScreenVC: UIViewController {
     
     
     
-    @IBOutlet weak var player1Char1WeaponDamage: UILabel!
-    @IBOutlet weak var player1Char1HP: UILabel!
-    @IBOutlet weak var player1Char1Button: UIButton!
+    @IBOutlet weak var player1Char1WeaponDamage: CharactersWeaponDamageLabel!
+    @IBOutlet weak var player1Char1HP: CharactersHPLabel!
+    @IBOutlet weak var player1Char1Button: CharactersButton!
     
-    @IBOutlet weak var player1Char2WeaponDamage: UILabel!
-    @IBOutlet weak var player1Char2HP: UILabel!
-    @IBOutlet weak var player1Char2Button: UIButton!
+    @IBOutlet weak var player1Char2WeaponDamage: CharactersWeaponDamageLabel!
+    @IBOutlet weak var player1Char2HP: CharactersHPLabel!
+    @IBOutlet weak var player1Char2Button: CharactersButton!
     
-    @IBOutlet weak var player1Char3WeaponDamage: UILabel!
-    @IBOutlet weak var player1Char3HP: UILabel!
-    @IBOutlet weak var player1Char3Button: UIButton!
+    @IBOutlet weak var player1Char3WeaponDamage: CharactersWeaponDamageLabel!
+    @IBOutlet weak var player1Char3HP: CharactersHPLabel!
+    @IBOutlet weak var player1Char3Button: CharactersButton!
     
     
     
@@ -43,17 +43,17 @@ class CombatScreenVC: UIViewController {
     
     
     
-    @IBOutlet weak var player2Char1WeaponDamage: UILabel!
-    @IBOutlet weak var player2Char1HP: UILabel!
-    @IBOutlet weak var player2Char1Button: UIButton!
+    @IBOutlet weak var player2Char1WeaponDamage: CharactersWeaponDamageLabel!
+    @IBOutlet weak var player2Char1HP: CharactersHPLabel!
+    @IBOutlet weak var player2Char1Button: CharactersButton!
     
-    @IBOutlet weak var player2Char2WeaponDamage: UILabel!
-    @IBOutlet weak var player2Char2HP: UILabel!
-    @IBOutlet weak var player2Char2Button: UIButton!
+    @IBOutlet weak var player2Char2WeaponDamage: CharactersWeaponDamageLabel!
+    @IBOutlet weak var player2Char2HP: CharactersHPLabel!
+    @IBOutlet weak var player2Char2Button: CharactersButton!
     
-    @IBOutlet weak var player2Char3WeaponDamage: UILabel!
-    @IBOutlet weak var player2Char3HP: UILabel!
-    @IBOutlet weak var player2Char3Button: UIButton!
+    @IBOutlet weak var player2Char3WeaponDamage: CharactersWeaponDamageLabel!
+    @IBOutlet weak var player2Char3HP: CharactersHPLabel!
+    @IBOutlet weak var player2Char3Button: CharactersButton!
     
    
     
@@ -69,34 +69,34 @@ class CombatScreenVC: UIViewController {
     
     
 ///    Contains all informations about the current state of the game
-    var gameSession = GameSession(players: [])
+    internal var gameSession = GameSession(players: [])
     
 ///  Sent to CharactersActionsPopoverVC to display the list of allies if the "Heal" button is pressed or the list of foes if "Attack" button is pressed depending of the selected character
-    var alliesAndFoes: [String:Player] = [:]
+    private var alliesAndFoes: [String:Player] = [:]
     
 ///    Apply this value on targetted character Health depending if "Heal" button is pressed (perform addition for healing) or "Attack" button is pressed (perform substraction)
-    var selectedAllyWeaponDamage: Int = 0
+    private var selectedCharacter = Character()
     
-    var selectedAllyOwningPlayer: Player = Player(name: "", characters: [])
+    private var selectedCharacterButton = CharactersButton()
     
 //    Below variables contains match every character of each players with his corresponding UI elements
     
-    var player1Character1 : UpdateCharactersStats!
+    private var player1Character1 : charactersStatsUIElements!
     
-    var player1Character2 : UpdateCharactersStats!
+    private var player1Character2 : charactersStatsUIElements!
     
-    var player1Character3 : UpdateCharactersStats!
+    private var player1Character3 : charactersStatsUIElements!
     
-    var player2Character1 : UpdateCharactersStats!
+    private var player2Character1 : charactersStatsUIElements!
 
-    var player2Character2 : UpdateCharactersStats!
+    private var player2Character2 : charactersStatsUIElements!
 
-    var player2Character3 : UpdateCharactersStats!
+    private var player2Character3 : charactersStatsUIElements!
     
 //    Match very characters corresponding UI elements to their respective owning player to be processed at at game start in setupCharactersStats()
-    var player1UIElements : [UpdateCharactersStats] = []
+    private var player1UIElements : [charactersStatsUIElements] = []
     
-    var player2UIElements : [UpdateCharactersStats] = []
+    private var player2UIElements : [charactersStatsUIElements] = []
 
     
     
@@ -106,93 +106,29 @@ class CombatScreenVC: UIViewController {
     
   
     
-   //MARK: - Characters button pressed
+   //MARK: - Segue when Characters button pressed
     
     
     
     
     
-//    Show CharactersActionsPopoverVC as popover/modal when a character is selected to perform an action
-    @IBAction func showCharActions(_ sender: UIButton) {
+///    Show CharactersActionsPopoverVC as popover/modal when a character is selected to perform an action
+    @IBAction func showCharActions(_ sender: CharactersButton) {
         
+        selectedCharacterButton = sender
         
+        sender.backgroundColor = .orange
         
-        getCharacterOwningPlayer(name: sender.currentTitle!)
+        selectedCharacter = sender.correspondingCharacter
+        
+        alliesAndFoes["Ally"] = selectedCharacter.owningPlayer
+        
+        alliesAndFoes["Foe"] = selectedCharacter.opponent
         
         performSegue(withIdentifier: "selectCharActions", sender: self)
     
     
     
-    }
-    
-    
-///    When a character is selected to perform an action, get his owning (ally) player and his opponent player (foe) and store it in alliesAndFoes variable
-    func getCharacterOwningPlayer(name: String){
-        
-        
-        
-        var foundAlly = false
-        
-        
-        
-        for player in gameSession.players {
-        
-            
-            
-            if foundAlly {
-            
-                
-                
-                alliesAndFoes["Foe"] = player
-                
-                
-                
-            }
-            
-            
-            
-            for character in player.characters {
-            
-                
-                
-                if character.customName == name {
-                
-                    
-                    
-                    alliesAndFoes["Ally"] = player
-                    
-                    foundAlly = true
-                    selectedAllyWeaponDamage = character.weapon.damage
-                    selectedAllyOwningPlayer = player
-                    
-                    break
-                
-                
-                
-                }
-                
-                
-                
-            }
-            
-            
-            
-            if foundAlly == false {
-            
-                
-                
-                alliesAndFoes["Foe"] = player
-                
-                
-                
-            }
-            
-            
-            
-        }
-        
-        
-        
     }
     
     
@@ -208,55 +144,35 @@ class CombatScreenVC: UIViewController {
     
     
 
-    func setupCharactersStats(){
+    private func setupCharactersStats(){
         
-        
-        
-        func setLabelValues (playerUIElements: [UpdateCharactersStats], player: Player) {
-            
-            
-            
-            for (index, character) in player.characters.enumerated() {
-                
-                
-                
-                playerUIElements[index].characterButton.setTitle(character.customName, for: .normal)
-                playerUIElements[index].characterHPLabel.text = "Health: \(character.health)"
-                playerUIElements[index].chararacterWeaponDamageLabel.text = "Weapon: \(character.weapon.damage)"
-                    
-                    
-            
-            }
-            
-            
-        }
         
         
 //        Match every character with their corresponding UI elements and push them to an array respective to their owning player
         
-        player1Character1 = UpdateCharactersStats(characterHPLabel: player1Char1HP, chararacterWeaponDamageLabel: player1Char1WeaponDamage, characterButton: player1Char1Button)
+        player1Character1 = charactersStatsUIElements(characterHPLabel: player1Char1HP, chararacterWeaponDamageLabel: player1Char1WeaponDamage, characterButton: player1Char1Button)
         
         player1UIElements.append(player1Character1)
         
-        player1Character2 = UpdateCharactersStats(characterHPLabel: player1Char2HP, chararacterWeaponDamageLabel: player1Char2WeaponDamage, characterButton: player1Char2Button)
+        player1Character2 = charactersStatsUIElements(characterHPLabel: player1Char2HP, chararacterWeaponDamageLabel: player1Char2WeaponDamage, characterButton: player1Char2Button)
         
         player1UIElements.append(player1Character2)
         
-        player1Character3 = UpdateCharactersStats(characterHPLabel: player1Char3HP, chararacterWeaponDamageLabel: player1Char3WeaponDamage, characterButton: player1Char3Button)
+        player1Character3 = charactersStatsUIElements(characterHPLabel: player1Char3HP, chararacterWeaponDamageLabel: player1Char3WeaponDamage, characterButton: player1Char3Button)
         
         player1UIElements.append(player1Character3)
         
         
         
-        player2Character1 = UpdateCharactersStats(characterHPLabel: player2Char1HP, chararacterWeaponDamageLabel: player2Char1WeaponDamage, characterButton: player2Char1Button)
+        player2Character1 = charactersStatsUIElements(characterHPLabel: player2Char1HP, chararacterWeaponDamageLabel: player2Char1WeaponDamage, characterButton: player2Char1Button)
         
         player2UIElements.append(player2Character1)
         
-        player2Character2 = UpdateCharactersStats(characterHPLabel: player2Char2HP, chararacterWeaponDamageLabel: player2Char2WeaponDamage, characterButton: player2Char2Button)
+        player2Character2 = charactersStatsUIElements(characterHPLabel: player2Char2HP, chararacterWeaponDamageLabel: player2Char2WeaponDamage, characterButton: player2Char2Button)
         
         player2UIElements.append(player2Character2)
         
-        player2Character3 = UpdateCharactersStats(characterHPLabel: player2Char3HP, chararacterWeaponDamageLabel: player2Char3WeaponDamage, characterButton: player2Char3Button)
+        player2Character3 = charactersStatsUIElements(characterHPLabel: player2Char3HP, chararacterWeaponDamageLabel: player2Char3WeaponDamage, characterButton: player2Char3Button)
         
         player2UIElements.append(player2Character3)
         
@@ -298,7 +214,52 @@ class CombatScreenVC: UIViewController {
     
     
     
+    private func setLabelValues (playerUIElements: [charactersStatsUIElements], player: Player) {
+        
+        
+        
+        for (index, character) in player.characters.enumerated() {
+            
+            
+            
+            playerUIElements[index].characterButton.correspondingCharacter = character
+            playerUIElements[index].characterHPLabel.hp = character.health
+            playerUIElements[index].chararacterWeaponDamageLabel.weaponDamage = character.weapon.damage
+                
+                
+        
+        }
+        
+        
+    }
     
+    
+    
+    @objc func updateTargettedCharacterUIs(_ sender: Notification){
+
+
+        if let dict = sender.userInfo as NSDictionary? {
+
+
+
+            if let target = dict["target"] as? Character{
+
+                
+                selectedCharacterButton.backgroundColor = .systemBlue
+                
+                print("Targetted Character: \(target.customName)")
+                
+                dismiss(animated: true, completion: nil)
+
+
+
+            }
+
+
+        }
+        
+        
+    }
     
     
     
@@ -315,9 +276,14 @@ class CombatScreenVC: UIViewController {
         
         super.viewDidLoad()
         
-        
-        
         setupCharactersStats()
+        
+        
+        NotificationCenter.default.addObserver(
+            
+            self, selector: #selector(updateTargettedCharacterUIs(_:)),
+            
+            name: Notification.Name("targettedCharacter"), object: nil)
         
     }
     

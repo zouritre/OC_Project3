@@ -17,7 +17,7 @@ class CharactersActionsPopoverVC: UIViewController {
     
     
     
-    @IBOutlet weak var actionDetail: ActionDetail!
+    @IBOutlet weak var actionDetail: ActionDetailStackView!
     
 //    Linked to "Heal" and "Attack" buttons. Create a button for each character of ally team if "Heal" is pressed or each character in ennemy team if "Attack" is pressed
     @IBAction func actionToPerfom(_ sender: UIButton) {
@@ -63,9 +63,9 @@ class CharactersActionsPopoverVC: UIViewController {
     
     
 //    Used to display the character list in ActionDetail StackView according to the action selected: Heal or Attack
-    var alliesAndFoes: [String:Player] = [:]
+    internal var alliesAndFoes: [String:Player] = [:]
     
-    var previousSender : UIButton = UIButton()
+    private var previousSender : UIButton = UIButton()
     
     
     
@@ -80,7 +80,7 @@ class CharactersActionsPopoverVC: UIViewController {
     
     
     
-    func populateCharacterListForActions(action: String) {
+    private func populateCharacterListForActions(action: String) {
         
         
         
@@ -113,6 +113,7 @@ class CharactersActionsPopoverVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    
 
         
     }

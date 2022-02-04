@@ -30,9 +30,12 @@ class HomeScreenVC: UIViewController {
             
 //            if the custom names respect the correct pattern then create a player object for each players with their chosen characters
             
-            player1 = confirmPlayersChoices(playerName: "Player 1", charactersList: player1CharacterList)
+            player1 = confirmPlayersChoices(playerName: "Player 1", charactersList: player1CharacterList, opponent: player2)
             
-            player2 = confirmPlayersChoices(playerName: "Player 2", charactersList: player2CharacterList)
+            player2 = confirmPlayersChoices(playerName: "Player 2", charactersList: player2CharacterList, opponent: player1)
+            
+            setAllyAndOpponent(for: player1, opponent: player2)
+            setAllyAndOpponent(for: player2, opponent: player1)
             
             performSegue(withIdentifier: "goToCombatScreen", sender: self)
             
@@ -144,7 +147,7 @@ class HomeScreenVC: UIViewController {
     
     
 ///     Return a player object with a custom player name and a custom list of characters
-    func confirmPlayersChoices(playerName: String, charactersList: CharacterListStackView) -> Player {
+    private func confirmPlayersChoices(playerName: String, charactersList: CharacterListStackView, opponent: Player) -> Player {
         
         
         
@@ -156,10 +159,10 @@ class HomeScreenVC: UIViewController {
             
             
             
-            var character = character
+            let character = character
             
             character.customName = customNameTextView.text
-            
+             
             player.characters.append(character)
             
             
@@ -176,8 +179,28 @@ class HomeScreenVC: UIViewController {
     }
     
     
+    
+    private func setAllyAndOpponent(for player: Player, opponent: Player) {
+        
+        
+        
+        for character in player.characters {
+            
+            
+            
+            character.owningPlayer = player
+            character.opponent = opponent
+            
+            
+            
+        }
+        
+        
+        
+    }
+    
 ///     Append the custom characters name of a character list in the charactersCustomNames array
-    func getPlayerCharactersCustomNames(for playerCharacterList: CharacterListStackView){
+    private func getPlayerCharactersCustomNames(for playerCharacterList: CharacterListStackView){
         
         
         
