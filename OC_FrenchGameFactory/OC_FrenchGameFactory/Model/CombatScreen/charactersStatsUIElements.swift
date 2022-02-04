@@ -11,9 +11,9 @@ import UIKit
 
 struct charactersStatsUIElements {
     
-    var characterHPLabel: UILabel
+    var characterHPLabel: CharactersHPLabel
     
-    var chararacterWeaponDamageLabel: UILabel
+    var chararacterWeaponDamageLabel: CharactersWeaponDamageLabel
     
     var characterButton: CharactersButton
     

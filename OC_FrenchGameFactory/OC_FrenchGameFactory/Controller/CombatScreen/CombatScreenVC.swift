@@ -18,16 +18,16 @@ class CombatScreenVC: UIViewController {
     
     
     
-    @IBOutlet weak var player1Char1WeaponDamage: UILabel!
-    @IBOutlet weak var player1Char1HP: UILabel!
+    @IBOutlet weak var player1Char1WeaponDamage: CharactersWeaponDamageLabel!
+    @IBOutlet weak var player1Char1HP: CharactersHPLabel!
     @IBOutlet weak var player1Char1Button: CharactersButton!
     
-    @IBOutlet weak var player1Char2WeaponDamage: UILabel!
-    @IBOutlet weak var player1Char2HP: UILabel!
+    @IBOutlet weak var player1Char2WeaponDamage: CharactersWeaponDamageLabel!
+    @IBOutlet weak var player1Char2HP: CharactersHPLabel!
     @IBOutlet weak var player1Char2Button: CharactersButton!
     
-    @IBOutlet weak var player1Char3WeaponDamage: UILabel!
-    @IBOutlet weak var player1Char3HP: UILabel!
+    @IBOutlet weak var player1Char3WeaponDamage: CharactersWeaponDamageLabel!
+    @IBOutlet weak var player1Char3HP: CharactersHPLabel!
     @IBOutlet weak var player1Char3Button: CharactersButton!
     
     
@@ -43,16 +43,16 @@ class CombatScreenVC: UIViewController {
     
     
     
-    @IBOutlet weak var player2Char1WeaponDamage: UILabel!
-    @IBOutlet weak var player2Char1HP: UILabel!
+    @IBOutlet weak var player2Char1WeaponDamage: CharactersWeaponDamageLabel!
+    @IBOutlet weak var player2Char1HP: CharactersHPLabel!
     @IBOutlet weak var player2Char1Button: CharactersButton!
     
-    @IBOutlet weak var player2Char2WeaponDamage: UILabel!
-    @IBOutlet weak var player2Char2HP: UILabel!
+    @IBOutlet weak var player2Char2WeaponDamage: CharactersWeaponDamageLabel!
+    @IBOutlet weak var player2Char2HP: CharactersHPLabel!
     @IBOutlet weak var player2Char2Button: CharactersButton!
     
-    @IBOutlet weak var player2Char3WeaponDamage: UILabel!
-    @IBOutlet weak var player2Char3HP: UILabel!
+    @IBOutlet weak var player2Char3WeaponDamage: CharactersWeaponDamageLabel!
+    @IBOutlet weak var player2Char3HP: CharactersHPLabel!
     @IBOutlet weak var player2Char3Button: CharactersButton!
     
    
@@ -113,13 +113,13 @@ class CombatScreenVC: UIViewController {
 ///    Show CharactersActionsPopoverVC as popover/modal when a character is selected to perform an action
     @IBAction func showCharActions(_ sender: CharactersButton) {
         
+        sender.backgroundColor = .orange
+        
         selectedCharacter = sender.correspondingCharacter
         
         alliesAndFoes["Ally"] = selectedCharacter.owningPlayer
         
         alliesAndFoes["Foe"] = selectedCharacter.opponent
-        
-        print(alliesAndFoes)
         
         performSegue(withIdentifier: "selectCharActions", sender: self)
     
@@ -219,8 +219,8 @@ class CombatScreenVC: UIViewController {
             
             
             playerUIElements[index].characterButton.correspondingCharacter = character
-            playerUIElements[index].characterHPLabel.text = "Health: \(character.health)"
-            playerUIElements[index].chararacterWeaponDamageLabel.text = "Weapon: \(character.weapon.damage)"
+            playerUIElements[index].characterHPLabel.hp = character.health
+            playerUIElements[index].chararacterWeaponDamageLabel.weaponDamage = character.weapon.damage
                 
                 
         

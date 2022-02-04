@@ -34,8 +34,8 @@ class HomeScreenVC: UIViewController {
             
             player2 = confirmPlayersChoices(playerName: "Player 2", charactersList: player2CharacterList, opponent: player1)
             
-            setOpponent(for: player1, opponent: player2)
-            setOpponent(for: player2, opponent: player1)
+            setAllyAndOpponent(for: player1, opponent: player2)
+            setAllyAndOpponent(for: player2, opponent: player1)
             
             performSegue(withIdentifier: "goToCombatScreen", sender: self)
             
@@ -162,7 +162,6 @@ class HomeScreenVC: UIViewController {
             let character = character
             
             character.customName = customNameTextView.text
-            character.owningPlayer = player
              
             player.characters.append(character)
             
@@ -181,13 +180,15 @@ class HomeScreenVC: UIViewController {
     
     
     
-    private func setOpponent(for player: Player, opponent: Player) {
+    private func setAllyAndOpponent(for player: Player, opponent: Player) {
         
         
         
         for character in player.characters {
             
             
+            
+            character.owningPlayer = player
             character.opponent = opponent
             
             
