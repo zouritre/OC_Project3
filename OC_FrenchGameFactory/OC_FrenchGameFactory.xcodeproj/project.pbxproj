@@ -20,8 +20,9 @@
 		E94327AB2794CB3D00057345 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E94327AA2794CB3D00057345 /* Assets.xcassets */; };
 		E94327AE2794CB3D00057345 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E94327AC2794CB3D00057345 /* LaunchScreen.storyboard */; };
 		E94F674027AAA1A900A40FE9 /* CharactersActionsPopoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F673F27AAA1A900A40FE9 /* CharactersActionsPopoverVC.swift */; };
-		E94F674227AAFED700A40FE9 /* ActionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F674127AAFED700A40FE9 /* ActionDetail.swift */; };
-		E94F674427AB309E00A40FE9 /* UpdateCharactersStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F674327AB309E00A40FE9 /* UpdateCharactersStats.swift */; };
+		E94F674227AAFED700A40FE9 /* ActionDetailStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F674127AAFED700A40FE9 /* ActionDetailStackView.swift */; };
+		E94F674427AB309E00A40FE9 /* charactersStatsUIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F674327AB309E00A40FE9 /* charactersStatsUIElements.swift */; };
+		E97D9F7327AD5D700047E648 /* CharactersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D9F7227AD5D700047E648 /* CharactersButton.swift */; };
 		E9C0353127A7150000C89285 /* CombatScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C0353027A7150000C89285 /* CombatScreenVC.swift */; };
 		E9D2EB2F27A2C5D10083FE04 /* CharactersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D2EB2E27A2C5D10083FE04 /* CharactersList.swift */; };
 /* End PBXBuildFile section */
@@ -42,8 +43,9 @@
 		E94327AD2794CB3D00057345 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E94327AF2794CB3D00057345 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E94F673F27AAA1A900A40FE9 /* CharactersActionsPopoverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersActionsPopoverVC.swift; sourceTree = "<group>"; };
-		E94F674127AAFED700A40FE9 /* ActionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionDetail.swift; sourceTree = "<group>"; };
-		E94F674327AB309E00A40FE9 /* UpdateCharactersStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCharactersStats.swift; sourceTree = "<group>"; };
+		E94F674127AAFED700A40FE9 /* ActionDetailStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionDetailStackView.swift; sourceTree = "<group>"; };
+		E94F674327AB309E00A40FE9 /* charactersStatsUIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = charactersStatsUIElements.swift; sourceTree = "<group>"; };
+		E97D9F7227AD5D700047E648 /* CharactersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CharactersButton.swift; path = OC_FrenchGameFactory/Controller/CombatScreen/CharactersButton.swift; sourceTree = SOURCE_ROOT; };
 		E9C0353027A7150000C89285 /* CombatScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CombatScreenVC.swift; path = OC_FrenchGameFactory/Controller/CombatScreen/CombatScreenVC.swift; sourceTree = SOURCE_ROOT; };
 		E9D2EB2E27A2C5D10083FE04 /* CharactersList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -59,20 +61,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E9385493279B20E400AE6E53 /* Structures */ = {
-			isa = PBXGroup;
-			children = (
-				E938549F279B253400AE6E53 /* Weapon.swift */,
-				E938549D279B250E00AE6E53 /* Character.swift */,
-				E9385499279B232400AE6E53 /* GameSession.swift */,
-				E938549B279B24D300AE6E53 /* Player.swift */,
-			);
-			path = Structures;
-			sourceTree = "<group>";
-		};
 		E9385497279B22D900AE6E53 /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
+				E935B4E4279CD2A300467908 /* CreateButton.swift */,
+				E938549F279B253400AE6E53 /* Weapon.swift */,
+				E938549B279B24D300AE6E53 /* Player.swift */,
+				E938549D279B250E00AE6E53 /* Character.swift */,
 				E9D2EB2E27A2C5D10083FE04 /* CharactersList.swift */,
 			);
 			path = HomeScreen;
@@ -100,7 +95,6 @@
 				E97404BD27A18E8300CBFAEF /* Controller */,
 				E97404BC27A18E7A00CBFAEF /* View */,
 				E97404BB27A18E7000CBFAEF /* Model */,
-				E9385493279B20E400AE6E53 /* Structures */,
 				E94327A12794CB3C00057345 /* AppDelegate.swift */,
 				E94327A32794CB3C00057345 /* SceneDelegate.swift */,
 				E94327AA2794CB3D00057345 /* Assets.xcassets */,
@@ -113,7 +107,9 @@
 		E94F674527AB30C000A40FE9 /* CombatScreen */ = {
 			isa = PBXGroup;
 			children = (
-				E94F674327AB309E00A40FE9 /* UpdateCharactersStats.swift */,
+				E97D9F7227AD5D700047E648 /* CharactersButton.swift */,
+				E9385499279B232400AE6E53 /* GameSession.swift */,
+				E94F674327AB309E00A40FE9 /* charactersStatsUIElements.swift */,
 			);
 			path = CombatScreen;
 			sourceTree = "<group>";
@@ -158,7 +154,7 @@
 		E9C0353327A745D600C89285 /* CombatScreen */ = {
 			isa = PBXGroup;
 			children = (
-				E94F674127AAFED700A40FE9 /* ActionDetail.swift */,
+				E94F674127AAFED700A40FE9 /* ActionDetailStackView.swift */,
 			);
 			path = CombatScreen;
 			sourceTree = "<group>";
@@ -167,7 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				E93854A1279B256E00AE6E53 /* CharacterListStackView.swift */,
-				E935B4E4279CD2A300467908 /* CreateButton.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -251,6 +246,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E97D9F7327AD5D700047E648 /* CharactersButton.swift in Sources */,
 				E94327A62794CB3C00057345 /* HomeScreenVC.swift in Sources */,
 				E9D2EB2F27A2C5D10083FE04 /* CharactersList.swift in Sources */,
 				E94327A22794CB3C00057345 /* AppDelegate.swift in Sources */,
@@ -263,8 +259,8 @@
 				E93854A2279B256E00AE6E53 /* CharacterListStackView.swift in Sources */,
 				E938549E279B250E00AE6E53 /* Character.swift in Sources */,
 				E93854A0279B253400AE6E53 /* Weapon.swift in Sources */,
-				E94F674427AB309E00A40FE9 /* UpdateCharactersStats.swift in Sources */,
-				E94F674227AAFED700A40FE9 /* ActionDetail.swift in Sources */,
+				E94F674427AB309E00A40FE9 /* charactersStatsUIElements.swift in Sources */,
+				E94F674227AAFED700A40FE9 /* ActionDetailStackView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

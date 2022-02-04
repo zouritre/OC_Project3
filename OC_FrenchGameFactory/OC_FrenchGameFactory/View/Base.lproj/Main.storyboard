@@ -192,7 +192,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="cXo-KU-vqs" userLabel="Player1CharactersButtons">
                                                 <rect key="frame" x="0.0" y="195.5" width="374" height="95"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ed-pl-0Zh" userLabel="Character1">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ed-pl-0Zh" userLabel="Character1" customClass="CharactersButton" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="122.5" height="95"/>
                                                         <color key="backgroundColor" name="AccentColor"/>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
@@ -204,7 +204,7 @@
                                                             <action selector="showCharActions:" destination="gxq-sm-dMp" eventType="touchUpInside" id="zts-GR-nZt"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gnz-UR-OjI" userLabel="Character2">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gnz-UR-OjI" userLabel="Character2" customClass="CharactersButton" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                         <rect key="frame" x="125.5" y="0.0" width="123" height="95"/>
                                                         <color key="backgroundColor" name="AccentColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -215,7 +215,7 @@
                                                             <action selector="showCharActions:" destination="gxq-sm-dMp" eventType="touchUpInside" id="pTo-ne-Ie8"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5h-hi-1Vx" userLabel="Character3">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5h-hi-1Vx" userLabel="Character3" customClass="CharactersButton" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                         <rect key="frame" x="251.5" y="0.0" width="122.5" height="95"/>
                                                         <color key="backgroundColor" name="AccentColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -239,7 +239,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="ENa-qP-tlj" userLabel="Player2CharactersButtons">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="95"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f12-32-RdI" userLabel="Character1">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f12-32-RdI" userLabel="Character1" customClass="CharactersButton" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="122.5" height="95"/>
                                                         <color key="backgroundColor" name="AccentColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -250,7 +250,7 @@
                                                             <action selector="showCharActions:" destination="gxq-sm-dMp" eventType="touchUpInside" id="1Ne-d7-bNn"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ji0-rm-BZc" userLabel="Character2">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ji0-rm-BZc" userLabel="Character2" customClass="CharactersButton" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                         <rect key="frame" x="125.5" y="0.0" width="123" height="95"/>
                                                         <color key="backgroundColor" name="AccentColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -261,7 +261,7 @@
                                                             <action selector="showCharActions:" destination="gxq-sm-dMp" eventType="touchUpInside" id="b7i-IA-ALZ"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Zm-VY-Y0n" userLabel="Character3">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Zm-VY-Y0n" userLabel="Character3" customClass="CharactersButton" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                         <rect key="frame" x="251.5" y="0.0" width="122.5" height="95"/>
                                                         <color key="backgroundColor" name="AccentColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -422,7 +422,7 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="YMp-Gp-Bc3" userLabel="Action Detail" customClass="ActionDetail" customModule="OC_FrenchGameFactory" customModuleProvider="target">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="YMp-Gp-Bc3" userLabel="Action Detail" customClass="ActionDetailStackView" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="35" width="263" height="195"/>
                                     </stackView>
                                 </subviews>

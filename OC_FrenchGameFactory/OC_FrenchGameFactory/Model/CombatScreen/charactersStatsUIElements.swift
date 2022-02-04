@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 
 
-struct UpdateCharactersStats {
+struct charactersStatsUIElements {
     
     var characterHPLabel: UILabel
     
     var chararacterWeaponDamageLabel: UILabel
     
-    var characterButton: UIButton
+    var characterButton: CharactersButton
     
     
     
