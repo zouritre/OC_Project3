@@ -8,8 +8,8 @@
 import Foundation
 
 struct GameSession{
-    var players: [Player]
+    var players: [Player] = []
     var isFinished: Bool = false
-    var actualRound: Int = 0
+    var actualRound: Int = 1
     var winner: String?
 }

@@ -13,6 +13,21 @@ class CombatScreenVC: UIViewController {
     
     
     
+    //MARK: - IBOutlets
+    
+    
+    
+    
+    @IBOutlet weak var actualRound: UILabel!
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //MARK: - IBOutlets Player 1
     
     
@@ -69,7 +84,7 @@ class CombatScreenVC: UIViewController {
     
     
 ///    Contains all informations about the current state of the game
-    internal var gameSession = GameSession(players: [])
+    internal var gameSession = GameSession()
     
 ///  Sent to CharactersActionsPopoverVC to display the list of allies if the "Heal" button is pressed or the list of foes if "Attack" button is pressed depending of the selected character
     private var alliesAndFoes: [String:Player] = [:]
@@ -314,6 +329,27 @@ class CombatScreenVC: UIViewController {
         getTargetCharacterFromGameSession[0].health = targetUIElements[0].characterHPLabel.hp
         
         
+        if getTargetCharacterFromGameSession[0].health <= 0 {
+            
+            
+            targetUIElements[0].characterHPLabel.hp = 0
+            getTargetCharacterFromGameSession[0].health = 0
+            
+            targetUIElements[0].characterButton.isEnabled = false
+            targetUIElements[0].characterButton.backgroundColor = .gray
+            
+            
+        }
+        
+        if gameSession.isFinished {
+            
+        }
+        
+        else {
+            
+            gameSession.actualRound += 1
+            actualRound.text = "Round: \(gameSession.actualRound)"
+        }
     }
     
     
