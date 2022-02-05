@@ -245,6 +245,28 @@ class CombatScreenVC: UIViewController {
                 
                 print("Targetted Character: \(target.customName)")
                 
+                if target.owningPlayer.name == selectedCharacter.owningPlayer.name {
+                    
+                    
+                    switch selectedCharacter.owningPlayer.name {
+                        
+                    case "Player 1":
+                        
+                        let getTargetUIElements = player1UIElements.filter({$0.characterButton.correspondingCharacter.customName == target.customName})
+                        
+                        getTargetUIElements[0].characterHPLabel.hp += selectedCharacter.weapon.damage
+                        
+                    case "Player 2":
+                        
+                        let getTargetUIElements = player2UIElements.filter({$0.characterButton.correspondingCharacter.customName == target.customName})
+                        
+                        getTargetUIElements[0].characterHPLabel.hp += selectedCharacter.weapon.damage
+                        
+                    default:    return
+                        
+                    }
+                }
+                
 
             }
 
