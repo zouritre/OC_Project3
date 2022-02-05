@@ -248,23 +248,17 @@ class CombatScreenVC: UIViewController {
                 if target.owningPlayer.name == selectedCharacter.owningPlayer.name {
                     
                     
-                    switch selectedCharacter.owningPlayer.name {
-                        
-                    case "Player 1":
-                        
-                        let getTargetUIElements = player1UIElements.filter({$0.characterButton.correspondingCharacter.customName == target.customName})
-                        
-                        getTargetUIElements[0].characterHPLabel.hp += selectedCharacter.weapon.damage
-                        
-                    case "Player 2":
-                        
-                        let getTargetUIElements = player2UIElements.filter({$0.characterButton.correspondingCharacter.customName == target.customName})
-                        
-                        getTargetUIElements[0].characterHPLabel.hp += selectedCharacter.weapon.damage
-                        
-                    default:    return
-                        
-                    }
+                    makeDesiredAction(to: target, action: "Heal")
+
+                    
+                }
+                
+                else {
+                    
+                    
+                    makeDesiredAction(to: target, action: "Attack")
+                    
+                    
                 }
                 
 
@@ -276,6 +270,51 @@ class CombatScreenVC: UIViewController {
         
     }
     
+    
+    private func makeDesiredAction(to target: Character, action: String) {
+        
+        switch target.owningPlayer.name {
+            
+        case "Player 1":
+            
+            let getTargetUIElements = player1UIElements.filter({$0.characterButton.correspondingCharacter.customName == target.customName})
+            
+            updateTargettedCharacterHP(targetUIElements: getTargetUIElements, action: action)
+            
+        case "Player 2":
+            
+            let getTargetUIElements = player2UIElements.filter({$0.characterButton.correspondingCharacter.customName == target.customName})
+            
+            updateTargettedCharacterHP(targetUIElements: getTargetUIElements, action: action)
+            
+        default:    return
+            
+        }
+        
+    }
+    
+    
+    private func updateTargettedCharacterHP(targetUIElements: [charactersStatsUIElements], action: String) {
+        
+        
+        switch action {
+            
+        case "Heal": targetUIElements[0].characterHPLabel.hp += selectedCharacter.weapon.damage
+            
+        case "Attack": targetUIElements[0].characterHPLabel.hp -= selectedCharacter.weapon.damage
+            
+        default: return
+            
+        }
+        
+        let getTargetOwningPlayerFromGameSession = gameSession.players.filter({$0.name == targetUIElements[0].characterButton.correspondingCharacter.owningPlayer.name})
+        
+        let getTargetCharacterFromGameSession = getTargetOwningPlayerFromGameSession[0].characters.filter({$0.customName == targetUIElements[0].characterButton.correspondingCharacter.customName})
+        
+        getTargetCharacterFromGameSession[0].health = targetUIElements[0].characterHPLabel.hp
+        
+        
+    }
     
     
     
