@@ -146,7 +146,7 @@ class HomeScreenVC: UIViewController {
     
     
     
-///     Return a player object with a custom player name and a custom list of characters
+///     Return a player object with a custom player name and a custom list of characters they choseb
     private func confirmPlayersChoices(playerName: String, charactersList: CharacterListStackView, opponent: Player) -> Player {
         
         
@@ -179,7 +179,7 @@ class HomeScreenVC: UIViewController {
     }
     
     
-    
+    /// Match each chosen character with their owning player and opponent for processing in combat screen
     private func setAllyAndOpponent(for player: Player, opponent: Player) {
         
         

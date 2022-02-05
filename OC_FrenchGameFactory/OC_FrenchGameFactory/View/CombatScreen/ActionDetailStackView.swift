@@ -10,7 +10,6 @@ import UIKit
 class ActionDetailStackView: UIStackView {
     
     
-    
 /// Store a list of the selected character's allies and foes
     internal var alliesAndFoes: [String:Player] = [:]
     
@@ -19,29 +18,22 @@ class ActionDetailStackView: UIStackView {
     internal func displayAvailableTargetCharacters (action: String) {
         
         
-        
         if action == "Heal" {
-            
             
             
             addButtonsToDetailPanel(for: "Ally")
 
             
-            
         }
-        
         
         
         if action == "Attack" {
             
             
-            
             addButtonsToDetailPanel(for: "Foe")
             
             
-            
         }
-        
         
 
     }
@@ -52,14 +44,11 @@ class ActionDetailStackView: UIStackView {
     private func addButtonsToDetailPanel (for targettedPlayer: String) {
         
         
-        
         if let playerCharacters = alliesAndFoes[targettedPlayer]?.characters {
-            
             
             
             for character in playerCharacters{
             
-                
                 
                 let characterButton = CharactersButton()
                 
@@ -71,20 +60,20 @@ class ActionDetailStackView: UIStackView {
                 addArrangedSubview(characterButton)
                 
                 
-                
             }
-            
             
             
         }
             
             
-            
     }
     
-    ///     Send the targetted character info to CombatScreenVC using Notification
+    
+    
+    ///     Send the targetted character CharactersButton() to CombatScreenVC using Notification
     @objc func actionToTargettedCharacter (_ sender: CharactersButton){
 
+        
         var target: [String:Character] = [:]
 
         target["target"] = sender.correspondingCharacter
@@ -95,11 +84,8 @@ class ActionDetailStackView: UIStackView {
 
         NotificationCenter.default.post(notification)
 
-        print(sender.correspondingCharacter.customName)
-
 
     }
-    
     
 
 }

@@ -77,6 +77,7 @@ class CombatScreenVC: UIViewController {
 ///    Apply this value on targetted character Health depending if "Heal" button is pressed (perform addition for healing) or "Attack" button is pressed (perform substraction)
     private var selectedCharacter = Character()
     
+///     Store the currently selected character button to reset its background color to defaultwhen another character is selected
     private var selectedCharacterButton = CharactersButton()
     
 //    Below variables contains match every character of each players with his corresponding UI elements
@@ -115,18 +116,21 @@ class CombatScreenVC: UIViewController {
 ///    Show CharactersActionsPopoverVC as popover/modal when a character is selected to perform an action
     @IBAction func showCharActions(_ sender: CharactersButton) {
         
+        
         selectedCharacterButton = sender
         
+//        set the currently selected character button background color to orange for clarityd
         sender.backgroundColor = .orange
         
         selectedCharacter = sender.correspondingCharacter
         
+//        Store the currently selected character owning player and foe
         alliesAndFoes["Ally"] = selectedCharacter.owningPlayer
         
         alliesAndFoes["Foe"] = selectedCharacter.opponent
         
+//        Show a popover wich display the available actions to perform by the selected character: Heal or Attack
         performSegue(withIdentifier: "selectCharActions", sender: self)
-    
     
     
     }
@@ -145,7 +149,6 @@ class CombatScreenVC: UIViewController {
     
 
     private func setupCharactersStats(){
-        
         
         
 //        Match every character with their corresponding UI elements and push them to an array respective to their owning player
@@ -178,8 +181,8 @@ class CombatScreenVC: UIViewController {
         
         
         
+//        Set the values of each label and button of the UI to display the stats of every player's characters
         for player in gameSession.players {
-            
             
             
             if player.name == "Player 1" {
@@ -189,37 +192,29 @@ class CombatScreenVC: UIViewController {
                 setLabelValues(playerUIElements: player1UIElements, player: player)
                 
                 
-                
             }
             
                 
-                
             else if player.name == "Player 2" {
-                
                 
                 
                 setLabelValues(playerUIElements: player2UIElements, player: player)
                 
                 
-                
             }
-            
             
             
         }
         
         
-        
     }
     
     
-    
+
     private func setLabelValues (playerUIElements: [charactersStatsUIElements], player: Player) {
         
         
-        
         for (index, character) in player.characters.enumerated() {
-            
             
             
             playerUIElements[index].characterButton.correspondingCharacter = character
@@ -227,31 +222,29 @@ class CombatScreenVC: UIViewController {
             playerUIElements[index].chararacterWeaponDamageLabel.weaponDamage = character.weapon.damage
                 
                 
-        
         }
         
         
     }
     
     
-    
+//    When a character is selected as a target from the CharactersActionsPopoverVC update the target UI elements depending of the action taken
     @objc func updateTargettedCharacterUIs(_ sender: Notification){
 
 
         if let dict = sender.userInfo as NSDictionary? {
 
 
-
             if let target = dict["target"] as? Character{
-
                 
+//                Dismiss the popover after a target have been selected from CharactersActionsPopoverVC
+                dismiss(animated: true, completion: nil)
+
+//                Reset the previously selected character button to default background color
                 selectedCharacterButton.backgroundColor = .systemBlue
                 
                 print("Targetted Character: \(target.customName)")
                 
-                dismiss(animated: true, completion: nil)
-
-
 
             }
 
@@ -273,17 +266,16 @@ class CombatScreenVC: UIViewController {
     override func viewDidLoad() {
         
         
-        
         super.viewDidLoad()
         
+//        When the combat screen appear, populate the UI with the selected player's characters stats
         setupCharactersStats()
         
-        
+//        Listen for notifications from the CharactersActionsPopoverVC
         NotificationCenter.default.addObserver(
-            
             self, selector: #selector(updateTargettedCharacterUIs(_:)),
-            
             name: Notification.Name("targettedCharacter"), object: nil)
+        
         
     }
     
@@ -304,26 +296,18 @@ class CombatScreenVC: UIViewController {
     {
         
         
-        
         if segue.destination is CharactersActionsPopoverVC {
             
             
-            
             let vc = segue.destination as? CharactersActionsPopoverVC
-            
-//            print("Allies: \(alliesAndFoes["Ally"]!)")
-//            print("Foes: \(alliesAndFoes["Foe"]!)")
                 
             vc?.alliesAndFoes = alliesAndFoes
-        
         
         
         }
         
         
-        
     }
-    
     
 
 }
