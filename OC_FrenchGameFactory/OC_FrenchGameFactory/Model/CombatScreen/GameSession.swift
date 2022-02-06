@@ -13,5 +13,5 @@ struct GameSession{
     var actualRound: Int = 1
     var winner: String?
     var chestAvailable: Bool = false
-    var whoIsPlaying: Character = Character()
+    var character_sTurnToPlay: Character = Character()
 }

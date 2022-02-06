@@ -89,11 +89,8 @@ class CombatScreenVC: UIViewController {
 ///  Sent to CharactersActionsPopoverVC to display the list of allies if the "Heal" button is pressed or the list of foes if "Attack" button is pressed depending of the selected character
     private var alliesAndFoes: [String:Player] = [:]
     
-///    Apply this value on targetted character Health depending if "Heal" button is pressed (perform addition for healing) or "Attack" button is pressed (perform substraction)
-    private var selectedCharacter = Character()
-    
 ///     Store the currently selected character button to reset its background color to defaultwhen another character is selected
-    private var selectedCharacterButton = CharactersButton()
+    private var character_s_TurnToPlayButton = CharactersButton()
     
 //    Below variables contains match every character of each players with his corresponding UI elements
     
@@ -132,18 +129,16 @@ class CombatScreenVC: UIViewController {
     @IBAction func showCharActions(_ sender: CharactersButton) {
         
         
-        selectedCharacterButton = sender
-        
-//        set the currently selected character button background color to orange for clarityd
+//        set the currently selected character button background color to orange for clarity
         sender.backgroundColor = .orange
         
-        selectedCharacter = sender.correspondingCharacter
+        character_s_TurnToPlayButton = sender
         
 //        Store the currently selected character owning player and foe with their updated stats from gameSession variable to be later sent to CharactersActionsPopoverVC
-        alliesAndFoes["Ally"] = gameSession.players.filter({$0.name == selectedCharacter.owningPlayer.name})[0]
+        alliesAndFoes["Ally"] = gameSession.players.filter({$0.name == character_s_TurnToPlayButton.correspondingCharacter.owningPlayer.name})[0]
         
         
-        alliesAndFoes["Foe"] = gameSession.players.filter({$0.name == selectedCharacter.opponent.name})[0]
+        alliesAndFoes["Foe"] = gameSession.players.filter({$0.name == character_s_TurnToPlayButton.correspondingCharacter.opponent.name})[0]
         
 //        Show a popover wich display the available actions to perform by the selected character: Heal or Attack
         performSegue(withIdentifier: "selectCharActions", sender: self)
@@ -255,12 +250,9 @@ class CombatScreenVC: UIViewController {
                 
 //                Dismiss the popover after a target have been selected from CharactersActionsPopoverVC
                 dismiss(animated: true, completion: nil)
-
-//                Reset the previously selected character button to default background color
-                selectedCharacterButton.backgroundColor = .systemBlue
                 
                 
-                if target.owningPlayer.name == selectedCharacter.owningPlayer.name {
+                if target.owningPlayer.name == character_s_TurnToPlayButton.correspondingCharacter.owningPlayer.name {
                     
                     
                     makeDesiredAction(to: target, action: "Heal")
@@ -318,9 +310,9 @@ class CombatScreenVC: UIViewController {
         
         switch action {
             
-        case "Heal": targetUIElements.characterHPLabel.hp += selectedCharacter.weapon.damage
+        case "Heal": targetUIElements.characterHPLabel.hp += character_s_TurnToPlayButton.correspondingCharacter.weapon.damage
             
-        case "Attack": targetUIElements.characterHPLabel.hp -= selectedCharacter.weapon.damage
+        case "Attack": targetUIElements.characterHPLabel.hp -= character_s_TurnToPlayButton.correspondingCharacter.weapon.damage
             
         default: return
             
@@ -337,9 +329,9 @@ class CombatScreenVC: UIViewController {
             
             
             targetUIElements.characterHPLabel.hp = 0
+            
             getTargetCharacterFromGameSession[0].health = 0
             
-            targetUIElements.characterButton.isEnabled = false
             targetUIElements.characterButton.backgroundColor = .red
             
             
@@ -354,6 +346,56 @@ class CombatScreenVC: UIViewController {
             gameSession.actualRound += 1
             actualRound.text = "Round: \(gameSession.actualRound)"
         }
+        
+        
+        character_s_TurnToPlayButton.isEnabled = false
+        character_s_TurnToPlayButton.backgroundColor = .systemGray
+        
+        
+    }
+    
+    
+    private func setFirstCharacterTurnToPlay () {
+        
+        
+        let getRandomPlayer = gameSession.players.randomElement()!
+        
+        let getRandomCharacter = getRandomPlayer.characters.randomElement()!
+        
+        gameSession.character_sTurnToPlay = getRandomCharacter
+        
+        
+        switch gameSession.character_sTurnToPlay.owningPlayer.name {
+            
+            
+            
+        case "Player 1":    enableFirstCharacter_s_TurnToPlayButton(owningPlayerUIelements: player1UIElements)
+            
+        case "Player 2":    enableFirstCharacter_s_TurnToPlayButton(owningPlayerUIelements: player2UIElements)
+            
+        default:    return
+            
+            
+            
+        }
+        
+        
+    }
+    
+    
+    private func enableFirstCharacter_s_TurnToPlayButton(owningPlayerUIelements: [charactersStatsUIElements]) {
+        
+        
+        let getcharacter_sTurnToPlayUIelements = owningPlayerUIelements.filter({$0.characterButton.correspondingCharacter.customName == gameSession.character_sTurnToPlay.customName})
+        getcharacter_sTurnToPlayUIelements[0].characterButton.isEnabled = true
+        getcharacter_sTurnToPlayUIelements[0].characterButton.backgroundColor = .systemBlue
+        
+    }
+    
+    
+    private func setNextCharacterTurnToPlay() {
+        
+        
     }
     
     
@@ -371,6 +413,8 @@ class CombatScreenVC: UIViewController {
         
 //        When the combat screen appear, populate the UI with the selected player's characters stats
         setupCharactersStats()
+        
+        setFirstCharacterTurnToPlay()
         
 //        Listen for notifications from the CharactersActionsPopoverVC
         NotificationCenter.default.addObserver(
