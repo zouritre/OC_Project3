@@ -139,10 +139,11 @@ class CombatScreenVC: UIViewController {
         
         selectedCharacter = sender.correspondingCharacter
         
-//        Store the currently selected character owning player and foe
-        alliesAndFoes["Ally"] = selectedCharacter.owningPlayer
+//        Store the currently selected character owning player and foe with their updated stats from gameSession variable to be later sent to CharactersActionsPopoverVC
+        alliesAndFoes["Ally"] = gameSession.players.filter({$0.name == selectedCharacter.owningPlayer.name})[0]
         
-        alliesAndFoes["Foe"] = selectedCharacter.opponent
+        
+        alliesAndFoes["Foe"] = gameSession.players.filter({$0.name == selectedCharacter.opponent.name})[0]
         
 //        Show a popover wich display the available actions to perform by the selected character: Heal or Attack
         performSegue(withIdentifier: "selectCharActions", sender: self)
@@ -168,29 +169,29 @@ class CombatScreenVC: UIViewController {
         
 //        Match every character with their corresponding UI elements and push them to an array respective to their owning player
         
-        player1Character1 = charactersStatsUIElements(characterHPLabel: player1Char1HP, chararacterWeaponDamageLabel: player1Char1WeaponDamage, characterButton: player1Char1Button)
+        player1Character1 = charactersStatsUIElements(characterHPLabel: player1Char1HP, characterWeaponDamageLabel: player1Char1WeaponDamage, characterButton: player1Char1Button)
         
         player1UIElements.append(player1Character1)
         
-        player1Character2 = charactersStatsUIElements(characterHPLabel: player1Char2HP, chararacterWeaponDamageLabel: player1Char2WeaponDamage, characterButton: player1Char2Button)
+        player1Character2 = charactersStatsUIElements(characterHPLabel: player1Char2HP, characterWeaponDamageLabel: player1Char2WeaponDamage, characterButton: player1Char2Button)
         
         player1UIElements.append(player1Character2)
         
-        player1Character3 = charactersStatsUIElements(characterHPLabel: player1Char3HP, chararacterWeaponDamageLabel: player1Char3WeaponDamage, characterButton: player1Char3Button)
+        player1Character3 = charactersStatsUIElements(characterHPLabel: player1Char3HP, characterWeaponDamageLabel: player1Char3WeaponDamage, characterButton: player1Char3Button)
         
         player1UIElements.append(player1Character3)
         
         
         
-        player2Character1 = charactersStatsUIElements(characterHPLabel: player2Char1HP, chararacterWeaponDamageLabel: player2Char1WeaponDamage, characterButton: player2Char1Button)
+        player2Character1 = charactersStatsUIElements(characterHPLabel: player2Char1HP, characterWeaponDamageLabel: player2Char1WeaponDamage, characterButton: player2Char1Button)
         
         player2UIElements.append(player2Character1)
         
-        player2Character2 = charactersStatsUIElements(characterHPLabel: player2Char2HP, chararacterWeaponDamageLabel: player2Char2WeaponDamage, characterButton: player2Char2Button)
+        player2Character2 = charactersStatsUIElements(characterHPLabel: player2Char2HP, characterWeaponDamageLabel: player2Char2WeaponDamage, characterButton: player2Char2Button)
         
         player2UIElements.append(player2Character2)
         
-        player2Character3 = charactersStatsUIElements(characterHPLabel: player2Char3HP, chararacterWeaponDamageLabel: player2Char3WeaponDamage, characterButton: player2Char3Button)
+        player2Character3 = charactersStatsUIElements(characterHPLabel: player2Char3HP, characterWeaponDamageLabel: player2Char3WeaponDamage, characterButton: player2Char3Button)
         
         player2UIElements.append(player2Character3)
         
@@ -234,7 +235,7 @@ class CombatScreenVC: UIViewController {
             
             playerUIElements[index].characterButton.correspondingCharacter = character
             playerUIElements[index].characterHPLabel.hp = character.health
-            playerUIElements[index].chararacterWeaponDamageLabel.weaponDamage = character.weapon.damage
+            playerUIElements[index].characterWeaponDamageLabel.weaponDamage = character.weapon.damage
                 
                 
         }
@@ -258,7 +259,6 @@ class CombatScreenVC: UIViewController {
 //                Reset the previously selected character button to default background color
                 selectedCharacterButton.backgroundColor = .systemBlue
                 
-                print("Targetted Character: \(target.customName)")
                 
                 if target.owningPlayer.name == selectedCharacter.owningPlayer.name {
                     
@@ -285,22 +285,26 @@ class CombatScreenVC: UIViewController {
         
     }
     
-    
+    /// Get target character UI elements
     private func makeDesiredAction(to target: Character, action: String) {
         
+        
         switch target.owningPlayer.name {
+            
             
         case "Player 1":
             
             let getTargetUIElements = player1UIElements.filter({$0.characterButton.correspondingCharacter.customName == target.customName})
             
-            updateTargettedCharacterHP(targetUIElements: getTargetUIElements, action: action)
+            updateTargettedCharacterHP(targetUIElements: getTargetUIElements[0], action: action)
+            
             
         case "Player 2":
             
             let getTargetUIElements = player2UIElements.filter({$0.characterButton.correspondingCharacter.customName == target.customName})
             
-            updateTargettedCharacterHP(targetUIElements: getTargetUIElements, action: action)
+            updateTargettedCharacterHP(targetUIElements: getTargetUIElements[0], action: action)
+            
             
         default:    return
             
@@ -308,35 +312,35 @@ class CombatScreenVC: UIViewController {
         
     }
     
-    
-    private func updateTargettedCharacterHP(targetUIElements: [charactersStatsUIElements], action: String) {
+    /// Update target UI elements, then gameSession variable according to the action taken, check if the game is finish otherwise go to the next round
+    private func updateTargettedCharacterHP(targetUIElements: charactersStatsUIElements, action: String) {
         
         
         switch action {
             
-        case "Heal": targetUIElements[0].characterHPLabel.hp += selectedCharacter.weapon.damage
+        case "Heal": targetUIElements.characterHPLabel.hp += selectedCharacter.weapon.damage
             
-        case "Attack": targetUIElements[0].characterHPLabel.hp -= selectedCharacter.weapon.damage
+        case "Attack": targetUIElements.characterHPLabel.hp -= selectedCharacter.weapon.damage
             
         default: return
             
         }
         
-        let getTargetOwningPlayerFromGameSession = gameSession.players.filter({$0.name == targetUIElements[0].characterButton.correspondingCharacter.owningPlayer.name})
+        let getTargetOwningPlayerFromGameSession = gameSession.players.filter({$0.name == targetUIElements.characterButton.correspondingCharacter.owningPlayer.name})
         
-        let getTargetCharacterFromGameSession = getTargetOwningPlayerFromGameSession[0].characters.filter({$0.customName == targetUIElements[0].characterButton.correspondingCharacter.customName})
+        let getTargetCharacterFromGameSession = getTargetOwningPlayerFromGameSession[0].characters.filter({$0.customName == targetUIElements.characterButton.correspondingCharacter.customName})
         
-        getTargetCharacterFromGameSession[0].health = targetUIElements[0].characterHPLabel.hp
+        getTargetCharacterFromGameSession[0].health = targetUIElements.characterHPLabel.hp
         
         
         if getTargetCharacterFromGameSession[0].health <= 0 {
             
             
-            targetUIElements[0].characterHPLabel.hp = 0
+            targetUIElements.characterHPLabel.hp = 0
             getTargetCharacterFromGameSession[0].health = 0
             
-            targetUIElements[0].characterButton.isEnabled = false
-            targetUIElements[0].characterButton.backgroundColor = .gray
+            targetUIElements.characterButton.isEnabled = false
+            targetUIElements.characterButton.backgroundColor = .red
             
             
         }

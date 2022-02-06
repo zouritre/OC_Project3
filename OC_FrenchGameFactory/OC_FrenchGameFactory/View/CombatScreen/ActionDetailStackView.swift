@@ -49,15 +49,25 @@ class ActionDetailStackView: UIStackView {
             
             for character in playerCharacters{
             
+//                If this character is dead, does not create an action button for him
+                if character.health == 0 {
+                    continue
+                }
                 
-                let characterButton = CharactersButton()
+                else  {
+                    
+                    
+                    let characterButton = CharactersButton()
+                    
+                    characterButton.correspondingCharacter = character
+                    characterButton.backgroundColor = .cyan
+                    characterButton.setTitleColor(.red, for: .normal)
+                    characterButton.addTarget(self, action: #selector(actionToTargettedCharacter(_:)), for: .touchUpInside)
+                    
+                    addArrangedSubview(characterButton)
+                    
+                }
                 
-                characterButton.correspondingCharacter = character
-                characterButton.backgroundColor = .cyan
-                characterButton.setTitleColor(.red, for: .normal)
-                characterButton.addTarget(self, action: #selector(actionToTargettedCharacter(_:)), for: .touchUpInside)
-                
-                addArrangedSubview(characterButton)
                 
                 
             }
@@ -70,7 +80,7 @@ class ActionDetailStackView: UIStackView {
     
     
     
-    ///     Send the targetted character CharactersButton() to CombatScreenVC using Notification
+    ///     Send the targetted character CharactersButton() to CombatScreenVC using Notification when an action has been chosen
     @objc func actionToTargettedCharacter (_ sender: CharactersButton){
 
         
