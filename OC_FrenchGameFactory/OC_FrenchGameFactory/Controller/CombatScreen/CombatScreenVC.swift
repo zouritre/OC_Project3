@@ -20,6 +20,7 @@ class CombatScreenVC: UIViewController {
     
     @IBOutlet weak var actualRound: UILabel!
     
+    @IBOutlet weak var chestAvailable: UIButton!
     
     
     
@@ -90,26 +91,11 @@ class CombatScreenVC: UIViewController {
     private var alliesAndFoes: [String:Player] = [:]
     
 ///     Store the currently selected character button to reset its background color to defaultwhen another character is selected
-    private var character_s_TurnToPlayButton = CharactersButton()
+    private var characterWhoPlayThisRound = Character()
     
-//    Below variables contains match every character of each players with his corresponding UI elements
+    private var player1CharacterTurnToPlay = Character()
     
-    private var player1Character1 : charactersStatsUIElements!
-    
-    private var player1Character2 : charactersStatsUIElements!
-    
-    private var player1Character3 : charactersStatsUIElements!
-    
-    private var player2Character1 : charactersStatsUIElements!
-
-    private var player2Character2 : charactersStatsUIElements!
-
-    private var player2Character3 : charactersStatsUIElements!
-    
-//    Match very characters corresponding UI elements to their respective owning player to be processed at at game start in setupCharactersStats()
-    private var player1UIElements : [charactersStatsUIElements] = []
-    
-    private var player2UIElements : [charactersStatsUIElements] = []
+    private var player2CharacterTurnToPlay = Character()
 
     
     
@@ -130,15 +116,18 @@ class CombatScreenVC: UIViewController {
         
         
 //        set the currently selected character button background color to orange for clarity
-        sender.backgroundColor = .orange
+        let getSenderOwningPlayerFromGameSession = gameSession.players.filter({$0.name == sender.correspondingCharacter.owningPlayer.name})
+        let getSenderCharacterFromGameSession = getSenderOwningPlayerFromGameSession[0].characters.filter({$0.customName == sender.correspondingCharacter.customName})[0]
         
-        character_s_TurnToPlayButton = sender
+        getSenderCharacterFromGameSession.UIelements.characterButton.backgroundColor = .orange
+        
+        characterWhoPlayThisRound = sender.correspondingCharacter
         
 //        Store the currently selected character owning player and foe with their updated stats from gameSession variable to be later sent to CharactersActionsPopoverVC
-        alliesAndFoes["Ally"] = gameSession.players.filter({$0.name == character_s_TurnToPlayButton.correspondingCharacter.owningPlayer.name})[0]
+        alliesAndFoes["Ally"] = gameSession.players.filter({$0.name == characterWhoPlayThisRound.owningPlayer.name})[0]
         
         
-        alliesAndFoes["Foe"] = gameSession.players.filter({$0.name == character_s_TurnToPlayButton.correspondingCharacter.opponent.name})[0]
+        alliesAndFoes["Foe"] = gameSession.players.filter({$0.name == characterWhoPlayThisRound.opponent.name})[0]
         
 //        Show a popover wich display the available actions to perform by the selected character: Heal or Attack
         performSegue(withIdentifier: "selectCharActions", sender: self)
@@ -162,6 +151,24 @@ class CombatScreenVC: UIViewController {
     private func setupCharactersStats(){
         
         
+        var player1Character1 : charactersStatsUIElements!
+        
+        var player1Character2 : charactersStatsUIElements!
+        
+        var player1Character3 : charactersStatsUIElements!
+        
+        var player2Character1 : charactersStatsUIElements!
+
+        var player2Character2 : charactersStatsUIElements!
+
+        var player2Character3 : charactersStatsUIElements!
+        
+        
+        var player1UIElements : [charactersStatsUIElements] = []
+        
+        var player2UIElements : [charactersStatsUIElements] = []
+        
+        
 //        Match every character with their corresponding UI elements and push them to an array respective to their owning player
         
         player1Character1 = charactersStatsUIElements(characterHPLabel: player1Char1HP, characterWeaponDamageLabel: player1Char1WeaponDamage, characterButton: player1Char1Button)
@@ -175,6 +182,10 @@ class CombatScreenVC: UIViewController {
         player1Character3 = charactersStatsUIElements(characterHPLabel: player1Char3HP, characterWeaponDamageLabel: player1Char3WeaponDamage, characterButton: player1Char3Button)
         
         player1UIElements.append(player1Character3)
+        
+        
+        setUIelementsToCharacters(for: gameSession.players[0], UIelements: player1UIElements)
+
         
         
         
@@ -191,50 +202,25 @@ class CombatScreenVC: UIViewController {
         player2UIElements.append(player2Character3)
         
         
+        setUIelementsToCharacters(for: gameSession.players[1], UIelements: player2UIElements)
         
-//        Set the values of each label and button of the UI to display the stats of every player's characters
-        for player in gameSession.players {
-            
-            
-            if player.name == "Player 1" {
-                
-                
-                
-                setLabelValues(playerUIElements: player1UIElements, player: player)
-                
-                
-            }
-            
-                
-            else if player.name == "Player 2" {
-                
-                
-                setLabelValues(playerUIElements: player2UIElements, player: player)
-                
-                
-            }
-            
-            
-        }
+        
+        let gameSessionUIelements = GameSessionUIelements(actualRound: actualRound, chestAvailable: chestAvailable)
+        
+        gameSession.uiElements = gameSessionUIelements
         
         
     }
     
     
+    private func setUIelementsToCharacters(for player: Player, UIelements: [charactersStatsUIElements]) {
+        
+        for (index, _) in player.characters.enumerated() {
+            
+            UIelements[index].characterButton.correspondingCharacter = player.characters[index]
 
-    private func setLabelValues (playerUIElements: [charactersStatsUIElements], player: Player) {
-        
-        
-        for (index, character) in player.characters.enumerated() {
-            
-            
-            playerUIElements[index].characterButton.correspondingCharacter = character
-            playerUIElements[index].characterHPLabel.hp = character.health
-            playerUIElements[index].characterWeaponDamageLabel.weaponDamage = character.weapon.damage
-                
-                
+            player.characters[index].UIelements = UIelements[index]
         }
-        
         
     }
     
@@ -252,7 +238,7 @@ class CombatScreenVC: UIViewController {
                 dismiss(animated: true, completion: nil)
                 
                 
-                if target.owningPlayer.name == character_s_TurnToPlayButton.correspondingCharacter.owningPlayer.name {
+                if target.owningPlayer.name == characterWhoPlayThisRound.owningPlayer.name {
                     
                     
                     makeDesiredAction(to: target, action: "Heal")
@@ -281,61 +267,31 @@ class CombatScreenVC: UIViewController {
     private func makeDesiredAction(to target: Character, action: String) {
         
         
-        switch target.owningPlayer.name {
-            
-            
-        case "Player 1":
-            
-            let getTargetUIElements = player1UIElements.filter({$0.characterButton.correspondingCharacter.customName == target.customName})
-            
-            updateTargettedCharacterHP(targetUIElements: getTargetUIElements[0], action: action)
-            
-            
-        case "Player 2":
-            
-            let getTargetUIElements = player2UIElements.filter({$0.characterButton.correspondingCharacter.customName == target.customName})
-            
-            updateTargettedCharacterHP(targetUIElements: getTargetUIElements[0], action: action)
-            
-            
-        default:    return
-            
-        }
-        
-    }
-    
-    /// Update target UI elements, then gameSession variable according to the action taken, check if the game is finish otherwise go to the next round
-    private func updateTargettedCharacterHP(targetUIElements: charactersStatsUIElements, action: String) {
+        let getTargetOwningPlayerFromGameSession = gameSession.players.filter({$0.name == target.owningPlayer.name})
+        let getTargetCharacterFromGameSession = getTargetOwningPlayerFromGameSession[0].characters.filter({$0.customName == target.customName})[0]
         
         
         switch action {
             
-        case "Heal": targetUIElements.characterHPLabel.hp += character_s_TurnToPlayButton.correspondingCharacter.weapon.damage
+        case "Heal": getTargetCharacterFromGameSession.health += characterWhoPlayThisRound.weapon.damage
             
-        case "Attack": targetUIElements.characterHPLabel.hp -= character_s_TurnToPlayButton.correspondingCharacter.weapon.damage
+        case "Attack": getTargetCharacterFromGameSession.health -= characterWhoPlayThisRound.weapon.damage
             
         default: return
             
         }
         
-        let getTargetOwningPlayerFromGameSession = gameSession.players.filter({$0.name == targetUIElements.characterButton.correspondingCharacter.owningPlayer.name})
         
-        let getTargetCharacterFromGameSession = getTargetOwningPlayerFromGameSession[0].characters.filter({$0.customName == targetUIElements.characterButton.correspondingCharacter.customName})
-        
-        getTargetCharacterFromGameSession[0].health = targetUIElements.characterHPLabel.hp
-        
-        
-        if getTargetCharacterFromGameSession[0].health <= 0 {
+        if getTargetCharacterFromGameSession.health <= 0 {
             
             
-            targetUIElements.characterHPLabel.hp = 0
+            getTargetCharacterFromGameSession.health = 0
             
-            getTargetCharacterFromGameSession[0].health = 0
-            
-            targetUIElements.characterButton.backgroundColor = .red
+            getTargetCharacterFromGameSession.UIelements.characterButton.backgroundColor = .red
             
             
         }
+        
         
         if gameSession.isFinished {
             
@@ -344,59 +300,27 @@ class CombatScreenVC: UIViewController {
         else {
             
             gameSession.actualRound += 1
-            actualRound.text = "Round: \(gameSession.actualRound)"
-        }
-        
-        
-        character_s_TurnToPlayButton.isEnabled = false
-        character_s_TurnToPlayButton.backgroundColor = .systemGray
-        
-        
-    }
-    
-    
-    private func setFirstCharacterTurnToPlay () {
-        
-        
-        let getRandomPlayer = gameSession.players.randomElement()!
-        
-        let getRandomCharacter = getRandomPlayer.characters.randomElement()!
-        
-        gameSession.character_sTurnToPlay = getRandomCharacter
-        
-        
-        switch gameSession.character_sTurnToPlay.owningPlayer.name {
-            
-            
-            
-        case "Player 1":    enableFirstCharacter_s_TurnToPlayButton(owningPlayerUIelements: player1UIElements)
-            
-        case "Player 2":    enableFirstCharacter_s_TurnToPlayButton(owningPlayerUIelements: player2UIElements)
-            
-        default:    return
-            
-            
             
         }
         
         
-    }
-    
-    
-    private func enableFirstCharacter_s_TurnToPlayButton(owningPlayerUIelements: [charactersStatsUIElements]) {
-        
-        
-        let getcharacter_sTurnToPlayUIelements = owningPlayerUIelements.filter({$0.characterButton.correspondingCharacter.customName == gameSession.character_sTurnToPlay.customName})
-        getcharacter_sTurnToPlayUIelements[0].characterButton.isEnabled = true
-        getcharacter_sTurnToPlayUIelements[0].characterButton.backgroundColor = .systemBlue
-        
-    }
-    
-    
-    private func setNextCharacterTurnToPlay() {
+        characterWhoPlayThisRound.UIelements.characterButton.isEnabled = false
+        characterWhoPlayThisRound.UIelements.characterButton.backgroundColor = .systemGray
         
         
     }
+    
+    
+    private func setFirstPlayerToStartPlaying(){
+        
+        let getRandomPlayer: Player = gameSession.players.randomElement()!
+        
+        let getRandomCharacterFromThatPlayer = getRandomPlayer.characters.randomElement()
+        
+        getRandomCharacterFromThatPlayer?.UIelements.characterButton.isEnabled = true
+        getRandomCharacterFromThatPlayer?.UIelements.characterButton.backgroundColor =  .systemBlue
+    }
+
     
     
     
@@ -414,7 +338,10 @@ class CombatScreenVC: UIViewController {
 //        When the combat screen appear, populate the UI with the selected player's characters stats
         setupCharactersStats()
         
-        setFirstCharacterTurnToPlay()
+        setFirstPlayerToStartPlaying()
+        
+        gameSession.actualRound = 1
+        
         
 //        Listen for notifications from the CharactersActionsPopoverVC
         NotificationCenter.default.addObserver(

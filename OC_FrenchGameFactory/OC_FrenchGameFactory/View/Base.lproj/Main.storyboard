@@ -379,6 +379,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="actualRound" destination="hiS-3k-nol" id="JNz-vs-S9M"/>
+                        <outlet property="chestAvailable" destination="GYh-QP-UOe" id="pWI-Q9-5QV"/>
                         <outlet property="player1Char1Button" destination="5ed-pl-0Zh" id="Xnh-PE-nas"/>
                         <outlet property="player1Char1HP" destination="pHs-kw-2WR" id="VCF-aV-FYc"/>
                         <outlet property="player1Char1WeaponDamage" destination="ZSA-9Z-K12" id="7e4-bM-Y4X"/>

@@ -22,6 +22,7 @@
 		E94F674027AAA1A900A40FE9 /* CharactersActionsPopoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F673F27AAA1A900A40FE9 /* CharactersActionsPopoverVC.swift */; };
 		E94F674227AAFED700A40FE9 /* ActionDetailStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F674127AAFED700A40FE9 /* ActionDetailStackView.swift */; };
 		E94F674427AB309E00A40FE9 /* charactersStatsUIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F674327AB309E00A40FE9 /* charactersStatsUIElements.swift */; };
+		E96F52B427B099EB00523923 /* GameSessionUIelements.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F52B327B099EB00523923 /* GameSessionUIelements.swift */; };
 		E97D9F7327AD5D700047E648 /* CharactersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D9F7227AD5D700047E648 /* CharactersButton.swift */; };
 		E97D9F7527AD745E0047E648 /* CharactersHPLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D9F7427AD745E0047E648 /* CharactersHPLabel.swift */; };
 		E97D9F7727AD74790047E648 /* CharactersWeaponDamageLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D9F7627AD74790047E648 /* CharactersWeaponDamageLabel.swift */; };
@@ -47,6 +48,7 @@
 		E94F673F27AAA1A900A40FE9 /* CharactersActionsPopoverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersActionsPopoverVC.swift; sourceTree = "<group>"; };
 		E94F674127AAFED700A40FE9 /* ActionDetailStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionDetailStackView.swift; sourceTree = "<group>"; };
 		E94F674327AB309E00A40FE9 /* charactersStatsUIElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = charactersStatsUIElements.swift; sourceTree = "<group>"; };
+		E96F52B327B099EB00523923 /* GameSessionUIelements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSessionUIelements.swift; sourceTree = "<group>"; };
 		E97D9F7227AD5D700047E648 /* CharactersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CharactersButton.swift; path = OC_FrenchGameFactory/Controller/CombatScreen/CharactersButton.swift; sourceTree = SOURCE_ROOT; };
 		E97D9F7427AD745E0047E648 /* CharactersHPLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersHPLabel.swift; sourceTree = "<group>"; };
 		E97D9F7627AD74790047E648 /* CharactersWeaponDamageLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersWeaponDamageLabel.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				E97D9F7627AD74790047E648 /* CharactersWeaponDamageLabel.swift */,
 				E9385499279B232400AE6E53 /* GameSession.swift */,
 				E94F674327AB309E00A40FE9 /* charactersStatsUIElements.swift */,
+				E96F52B327B099EB00523923 /* GameSessionUIelements.swift */,
 			);
 			path = CombatScreen;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				E97D9F7727AD74790047E648 /* CharactersWeaponDamageLabel.swift in Sources */,
 				E97D9F7527AD745E0047E648 /* CharactersHPLabel.swift in Sources */,
 				E93854A2279B256E00AE6E53 /* CharacterListStackView.swift in Sources */,
+				E96F52B427B099EB00523923 /* GameSessionUIelements.swift in Sources */,
 				E938549E279B250E00AE6E53 /* Character.swift in Sources */,
 				E93854A0279B253400AE6E53 /* Weapon.swift in Sources */,
 				E94F674427AB309E00A40FE9 /* charactersStatsUIElements.swift in Sources */,
