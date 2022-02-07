@@ -93,9 +93,16 @@ class CombatScreenVC: UIViewController {
 ///     Store the currently selected character button to reset its background color to defaultwhen another character is selected
     private var characterWhoPlayThisRound = Character()
     
-    private var player1CharacterTurnToPlay = Character()
-    
-    private var player2CharacterTurnToPlay = Character()
+    private var characterWhoPlayThisRoundIndex : Int! {
+        
+        didSet{
+            
+            if characterWhoPlayThisRoundIndex > gameSession.players[0].characters.count-1 {
+                characterWhoPlayThisRoundIndex = 0
+                
+            }
+        }
+    }
 
     
     
@@ -115,13 +122,7 @@ class CombatScreenVC: UIViewController {
     @IBAction func showCharActions(_ sender: CharactersButton) {
         
         
-//        set the currently selected character button background color to orange for clarity
-        let getSenderOwningPlayerFromGameSession = gameSession.players.filter({$0.name == sender.correspondingCharacter.owningPlayer.name})
-        let getSenderCharacterFromGameSession = getSenderOwningPlayerFromGameSession[0].characters.filter({$0.customName == sender.correspondingCharacter.customName})[0]
-        
-        getSenderCharacterFromGameSession.UIelements.characterButton.backgroundColor = .orange
-        
-        characterWhoPlayThisRound = sender.correspondingCharacter
+        characterWhoPlayThisRound.UIelements.characterButton.backgroundColor = .orange
         
 //        Store the currently selected character owning player and foe with their updated stats from gameSession variable to be later sent to CharactersActionsPopoverVC
         alliesAndFoes["Ally"] = gameSession.players.filter({$0.name == characterWhoPlayThisRound.owningPlayer.name})[0]
@@ -293,7 +294,14 @@ class CombatScreenVC: UIViewController {
         }
         
         
+        characterWhoPlayThisRound.UIelements.characterButton.isEnabled = false
+        characterWhoPlayThisRound.UIelements.characterButton.backgroundColor = .systemGray
+        
+        checkIfGameIsFinish()
+        
         if gameSession.isFinished {
+            
+            print("Game Over!")
             
         }
         
@@ -301,28 +309,98 @@ class CombatScreenVC: UIViewController {
             
             gameSession.actualRound += 1
             
+            setNextCharacterToPlay()
+            
         }
         
+    }
+    
+
+    private func checkIfGameIsFinish () {
         
-        characterWhoPlayThisRound.UIelements.characterButton.isEnabled = false
-        characterWhoPlayThisRound.UIelements.characterButton.backgroundColor = .systemGray
         
+        switch characterWhoPlayThisRound.owningPlayer.name {
+            
+        case gameSession.players[0].name: checkIfAllCharactersAreDead(for: gameSession.players[1])
+            
+            
+        case gameSession.players[1].name: checkIfAllCharactersAreDead(for: gameSession.players[0])
+            
+            
+        default: return
+            
+        }
         
     }
+    
+    
+    private func checkIfAllCharactersAreDead(for player: Player){
+        
+        
+        let getAllCharactersAlive = player.characters.filter({$0.health > 0})
+        
+        gameSession.isFinished = (getAllCharactersAlive.count == 0) ? true : false
+    }
+    
+    
+    
+    private func setNextCharacterToPlay () {
+        
+        characterWhoPlayThisRoundIndex! += 1
+        
+        switch characterWhoPlayThisRound.owningPlayer.name {
+            
+        case gameSession.players[0].name:
+            
+            enableUIsForNextCharacterToPlay(for: gameSession.players[1])
+            
+        case gameSession.players[1].name:
+            
+            enableUIsForNextCharacterToPlay(for: gameSession.players[0])
+            
+        default: return
+            
+        }
+    }
+    
+    
+    func enableUIsForNextCharacterToPlay(for player: Player) {
+        
+        if player.characters[characterWhoPlayThisRoundIndex!].health == 0 {
+            
+            
+            characterWhoPlayThisRound = player.characters[characterWhoPlayThisRoundIndex!]
+            
+            setNextCharacterToPlay()
+            
+        }
+        
+        else {
+            
+            player.characters[characterWhoPlayThisRoundIndex!].UIelements.characterButton.isEnabled = true
+            player.characters[characterWhoPlayThisRoundIndex!].UIelements.characterButton.backgroundColor = .systemBlue
+            
+            characterWhoPlayThisRound = player.characters[characterWhoPlayThisRoundIndex!]
+            
+        }
+    
+    }
+    
     
     
     private func setFirstPlayerToStartPlaying(){
         
         let getRandomPlayer: Player = gameSession.players.randomElement()!
         
-        let getRandomCharacterFromThatPlayer = getRandomPlayer.characters.randomElement()
+        let getRandomCharacterIndex = getRandomPlayer.characters.indices.randomElement()
         
-        getRandomCharacterFromThatPlayer?.UIelements.characterButton.isEnabled = true
-        getRandomCharacterFromThatPlayer?.UIelements.characterButton.backgroundColor =  .systemBlue
+        getRandomPlayer.characters[getRandomCharacterIndex!].UIelements.characterButton.isEnabled = true
+        getRandomPlayer.characters[getRandomCharacterIndex!].UIelements.characterButton.backgroundColor =  .systemBlue
+        
+        characterWhoPlayThisRound = getRandomPlayer.characters[getRandomCharacterIndex!]
+        characterWhoPlayThisRoundIndex = getRandomCharacterIndex!
+        
     }
-
-    
-    
     
     
     //MARK: - View Did Load
