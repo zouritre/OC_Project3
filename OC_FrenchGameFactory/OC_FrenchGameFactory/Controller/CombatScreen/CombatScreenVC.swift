@@ -22,6 +22,25 @@ class CombatScreenVC: UIViewController {
     
     @IBOutlet weak var chestAvailable: UIButton!
     
+    @IBOutlet weak var displayWinner: UILabel!
+    
+    
+//    Give a new weapon to the currently playing character when he open the chest
+    @IBAction func setNewWeaponToCharacter(_ sender: UIButton) {
+        
+        
+        sender.isEnabled = false
+        sender.backgroundColor = .lightText
+        
+        let getOwningPlayerFromGameSession = gameSession.players.filter({$0.name == characterWhoPlayThisRound.owningPlayer.name})[0]
+        
+        let getCharacterFromGameSession = getOwningPlayerFromGameSession.characters.filter({$0.customName == characterWhoPlayThisRound.customName})[0]
+        getCharacterFromGameSession.weapon.damage = Int.random(in: 3...10)
+        
+        
+    }
+    
+    
     
     
     
@@ -293,7 +312,7 @@ class CombatScreenVC: UIViewController {
             
         }
         
-        
+//        disable the UI button of the character who just played this round
         characterWhoPlayThisRound.UIelements.characterButton.isEnabled = false
         characterWhoPlayThisRound.UIelements.characterButton.backgroundColor = .systemGray
         
@@ -301,7 +320,8 @@ class CombatScreenVC: UIViewController {
         
         if gameSession.isFinished {
             
-            print("Game Over!")
+            displayWinner.text = "\(gameSession.winner!) won the game!"
+            displayWinner.isHidden = false
             
         }
         
@@ -321,10 +341,20 @@ class CombatScreenVC: UIViewController {
         
         switch characterWhoPlayThisRound.owningPlayer.name {
             
-        case gameSession.players[0].name: checkIfAllCharactersAreDead(for: gameSession.players[1])
+//            if the character who play this round is player 1 and the game is finished, he's the winner
+        case gameSession.players[0].name:
+            
+            checkIfAllCharactersAreDead(for: gameSession.players[1])
+            
+            gameSession.winner = gameSession.isFinished ? gameSession.players[0].name : nil
             
             
-        case gameSession.players[1].name: checkIfAllCharactersAreDead(for: gameSession.players[0])
+//            if the character who play this round is player 2 and the game is finished, he's the winner
+        case gameSession.players[1].name:
+            
+            checkIfAllCharactersAreDead(for: gameSession.players[0])
+            
+            gameSession.winner = gameSession.isFinished ? gameSession.players[1].name : nil
             
             
         default: return
@@ -339,6 +369,7 @@ class CombatScreenVC: UIViewController {
         
         let getAllCharactersAlive = player.characters.filter({$0.health > 0})
         
+//        Game is finish if there are not character alive in the ennemy team
         gameSession.isFinished = (getAllCharactersAlive.count == 0) ? true : false
     }
     
@@ -361,10 +392,20 @@ class CombatScreenVC: UIViewController {
         default: return
             
         }
+        
+        checkIfChestIsAvailable()
+        
     }
     
     
-    func enableUIsForNextCharacterToPlay(for player: Player) {
+    private func checkIfChestIsAvailable() {
+        
+        
+        gameSession.chestAvailable = Bool.random()
+        
+    }
+    
+    private func enableUIsForNextCharacterToPlay(for player: Player) {
         
         if player.characters[characterWhoPlayThisRoundIndex!].health == 0 {
             
@@ -395,11 +436,10 @@ class CombatScreenVC: UIViewController {
         
         let getRandomCharacterIndex = getRandomPlayer.characters.indices.randomElement()
         
-        getRandomPlayer.characters[getRandomCharacterIndex!].UIelements.characterButton.isEnabled = true
-        getRandomPlayer.characters[getRandomCharacterIndex!].UIelements.characterButton.backgroundColor =  .systemBlue
-        
         characterWhoPlayThisRound = getRandomPlayer.characters[getRandomCharacterIndex!]
         characterWhoPlayThisRoundIndex = getRandomCharacterIndex!
+        
+        setNextCharacterToPlay()
         
     }
     
