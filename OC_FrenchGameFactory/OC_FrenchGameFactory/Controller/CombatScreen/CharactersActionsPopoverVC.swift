@@ -23,7 +23,6 @@ class CharactersActionsPopoverVC: UIViewController {
     @IBAction func actionToPerfom(_ sender: UIButton) {
         
         
-        
 //        Set previously selected button to default blue
         previousSender.backgroundColor = .systemBlue
         previousSender = sender
@@ -43,9 +42,7 @@ class CharactersActionsPopoverVC: UIViewController {
         default: return
             
             
-            
         }
-        
         
         
     }
@@ -59,6 +56,7 @@ class CharactersActionsPopoverVC: UIViewController {
     
     
     // MARK: - Variables
+    
     
     
     
@@ -83,7 +81,6 @@ class CharactersActionsPopoverVC: UIViewController {
     private func populateCharacterListForActions(action: String) {
         
         
-        
 //      Remove all existing subviews (buttons) in the ActionDetail StackView to avoid        infinite stacking
         actionDetail.subviews.forEach({ $0.removeFromSuperview() });
         
@@ -92,7 +89,6 @@ class CharactersActionsPopoverVC: UIViewController {
         
 //      Populate the StackView with new buttons
         actionDetail.displayAvailableTargetCharacters(action: action);
-        
         
         
     }
@@ -111,13 +107,12 @@ class CharactersActionsPopoverVC: UIViewController {
 
 
     override func viewDidLoad() {
+        
+        
         super.viewDidLoad()
         
-    
-
         
     }
-    
     
 
 }

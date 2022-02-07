@@ -10,7 +10,7 @@ import UIKit
 class CharactersHPLabel: UILabel {
 
 
-    var hp = 0 {
+    var hp : Int = 0 {
         
         willSet{
             text = "Health: \(newValue)"

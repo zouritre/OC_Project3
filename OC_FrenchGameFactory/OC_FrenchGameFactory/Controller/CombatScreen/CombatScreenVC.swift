@@ -13,6 +13,41 @@ class CombatScreenVC: UIViewController {
     
     
     
+    //MARK: - IBOutlets
+    
+    
+    
+    
+    @IBOutlet weak var actualRound: UILabel!
+    
+    @IBOutlet weak var chestAvailable: UIButton!
+    
+    @IBOutlet weak var displayWinner: UILabel!
+    
+    
+//    Give a new weapon to the currently playing character when he open the chest
+    @IBAction func setNewWeaponToCharacter(_ sender: UIButton) {
+        
+        
+        sender.isEnabled = false
+        sender.backgroundColor = .lightText
+        
+        let getOwningPlayerFromGameSession = gameSession.players.filter({$0.name == characterWhoPlayThisRound.owningPlayer.name})[0]
+        
+        let getCharacterFromGameSession = getOwningPlayerFromGameSession.characters.filter({$0.customName == characterWhoPlayThisRound.customName})[0]
+        getCharacterFromGameSession.weapon.damage = Int.random(in: 3...10)
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //MARK: - IBOutlets Player 1
     
     
@@ -69,34 +104,23 @@ class CombatScreenVC: UIViewController {
     
     
 ///    Contains all informations about the current state of the game
-    internal var gameSession = GameSession(players: [])
+    internal var gameSession = GameSession()
     
 ///  Sent to CharactersActionsPopoverVC to display the list of allies if the "Heal" button is pressed or the list of foes if "Attack" button is pressed depending of the selected character
     private var alliesAndFoes: [String:Player] = [:]
     
-///    Apply this value on targetted character Health depending if "Heal" button is pressed (perform addition for healing) or "Attack" button is pressed (perform substraction)
-    private var selectedCharacter = Character()
+    private var characterWhoPlayThisRound = Character()
     
-    private var selectedCharacterButton = CharactersButton()
-    
-//    Below variables contains match every character of each players with his corresponding UI elements
-    
-    private var player1Character1 : charactersStatsUIElements!
-    
-    private var player1Character2 : charactersStatsUIElements!
-    
-    private var player1Character3 : charactersStatsUIElements!
-    
-    private var player2Character1 : charactersStatsUIElements!
-
-    private var player2Character2 : charactersStatsUIElements!
-
-    private var player2Character3 : charactersStatsUIElements!
-    
-//    Match very characters corresponding UI elements to their respective owning player to be processed at at game start in setupCharactersStats()
-    private var player1UIElements : [charactersStatsUIElements] = []
-    
-    private var player2UIElements : [charactersStatsUIElements] = []
+    private var characterWhoPlayThisRoundIndex : Int! {
+        
+        didSet{
+            
+            if characterWhoPlayThisRoundIndex > gameSession.players[0].characters.count-1 {
+                characterWhoPlayThisRoundIndex = 0
+                
+            }
+        }
+    }
 
     
     
@@ -115,18 +139,17 @@ class CombatScreenVC: UIViewController {
 ///    Show CharactersActionsPopoverVC as popover/modal when a character is selected to perform an action
     @IBAction func showCharActions(_ sender: CharactersButton) {
         
-        selectedCharacterButton = sender
         
-        sender.backgroundColor = .orange
+        characterWhoPlayThisRound.UIelements.characterButton.backgroundColor = .orange
         
-        selectedCharacter = sender.correspondingCharacter
+//        Store the currently selected character owning player and foe with their updated stats from gameSession variable to be later sent to CharactersActionsPopoverVC
+        alliesAndFoes["Ally"] = gameSession.players.filter({$0.name == characterWhoPlayThisRound.owningPlayer.name})[0]
         
-        alliesAndFoes["Ally"] = selectedCharacter.owningPlayer
         
-        alliesAndFoes["Foe"] = selectedCharacter.opponent
+        alliesAndFoes["Foe"] = gameSession.players.filter({$0.name == characterWhoPlayThisRound.opponent.name})[0]
         
+//        Show a popover wich display the available actions to perform by the selected character: Heal or Attack
         performSegue(withIdentifier: "selectCharActions", sender: self)
-    
     
     
     }
@@ -143,115 +166,114 @@ class CombatScreenVC: UIViewController {
     
     
     
-
+/// Set combat screen UI elements to display player's characters stats at game start
     private func setupCharactersStats(){
         
+        
+        var player1Character1 : charactersStatsUIElements!
+        
+        var player1Character2 : charactersStatsUIElements!
+        
+        var player1Character3 : charactersStatsUIElements!
+        
+        var player2Character1 : charactersStatsUIElements!
+
+        var player2Character2 : charactersStatsUIElements!
+
+        var player2Character3 : charactersStatsUIElements!
+        
+        
+        var player1UIElements : [charactersStatsUIElements] = []
+        
+        var player2UIElements : [charactersStatsUIElements] = []
         
         
 //        Match every character with their corresponding UI elements and push them to an array respective to their owning player
         
-        player1Character1 = charactersStatsUIElements(characterHPLabel: player1Char1HP, chararacterWeaponDamageLabel: player1Char1WeaponDamage, characterButton: player1Char1Button)
+        player1Character1 = charactersStatsUIElements(characterHPLabel: player1Char1HP, characterWeaponDamageLabel: player1Char1WeaponDamage, characterButton: player1Char1Button)
         
         player1UIElements.append(player1Character1)
         
-        player1Character2 = charactersStatsUIElements(characterHPLabel: player1Char2HP, chararacterWeaponDamageLabel: player1Char2WeaponDamage, characterButton: player1Char2Button)
+        player1Character2 = charactersStatsUIElements(characterHPLabel: player1Char2HP, characterWeaponDamageLabel: player1Char2WeaponDamage, characterButton: player1Char2Button)
         
         player1UIElements.append(player1Character2)
         
-        player1Character3 = charactersStatsUIElements(characterHPLabel: player1Char3HP, chararacterWeaponDamageLabel: player1Char3WeaponDamage, characterButton: player1Char3Button)
+        player1Character3 = charactersStatsUIElements(characterHPLabel: player1Char3HP, characterWeaponDamageLabel: player1Char3WeaponDamage, characterButton: player1Char3Button)
         
         player1UIElements.append(player1Character3)
         
         
+        setUIelementsToCharacters(for: gameSession.players[0], UIelements: player1UIElements)
+
         
-        player2Character1 = charactersStatsUIElements(characterHPLabel: player2Char1HP, chararacterWeaponDamageLabel: player2Char1WeaponDamage, characterButton: player2Char1Button)
+        
+        
+        player2Character1 = charactersStatsUIElements(characterHPLabel: player2Char1HP, characterWeaponDamageLabel: player2Char1WeaponDamage, characterButton: player2Char1Button)
         
         player2UIElements.append(player2Character1)
         
-        player2Character2 = charactersStatsUIElements(characterHPLabel: player2Char2HP, chararacterWeaponDamageLabel: player2Char2WeaponDamage, characterButton: player2Char2Button)
+        player2Character2 = charactersStatsUIElements(characterHPLabel: player2Char2HP, characterWeaponDamageLabel: player2Char2WeaponDamage, characterButton: player2Char2Button)
         
         player2UIElements.append(player2Character2)
         
-        player2Character3 = charactersStatsUIElements(characterHPLabel: player2Char3HP, chararacterWeaponDamageLabel: player2Char3WeaponDamage, characterButton: player2Char3Button)
+        player2Character3 = charactersStatsUIElements(characterHPLabel: player2Char3HP, characterWeaponDamageLabel: player2Char3WeaponDamage, characterButton: player2Char3Button)
         
         player2UIElements.append(player2Character3)
         
         
+        setUIelementsToCharacters(for: gameSession.players[1], UIelements: player2UIElements)
         
-        for player in gameSession.players {
-            
-            
-            
-            if player.name == "Player 1" {
-                
-                
-                
-                setLabelValues(playerUIElements: player1UIElements, player: player)
-                
-                
-                
-            }
-            
-                
-                
-            else if player.name == "Player 2" {
-                
-                
-                
-                setLabelValues(playerUIElements: player2UIElements, player: player)
-                
-                
-                
-            }
-            
-            
-            
-        }
+//        store the central bar views in Game Session
+        let gameSessionUIelements = GameSessionUIelements(actualRound: actualRound, chestAvailable: chestAvailable)
         
+        gameSession.uiElements = gameSessionUIelements
         
         
     }
     
-    
-    
-    private func setLabelValues (playerUIElements: [charactersStatsUIElements], player: Player) {
+///     Set every Character object
+    private func setUIelementsToCharacters(for player: Player, UIelements: [charactersStatsUIElements]) {
         
-        
-        
-        for (index, character) in player.characters.enumerated() {
+        for (index, _) in player.characters.enumerated() {
             
-            
-            
-            playerUIElements[index].characterButton.correspondingCharacter = character
-            playerUIElements[index].characterHPLabel.hp = character.health
-            playerUIElements[index].chararacterWeaponDamageLabel.weaponDamage = character.weapon.damage
-                
-                
-        
+//            for each UI elements characterButton in the array define their correspondingCharacter variable before pushing them to the character UIelements variable
+            UIelements[index].characterButton.correspondingCharacter = player.characters[index]
+
+            player.characters[index].UIelements = UIelements[index]
         }
-        
         
     }
     
     
-    
+//    When a character is selected as a target from the CharactersActionsPopoverVC update the target UI elements depending of the action taken
     @objc func updateTargettedCharacterUIs(_ sender: Notification){
 
 
         if let dict = sender.userInfo as NSDictionary? {
 
 
-
             if let target = dict["target"] as? Character{
-
                 
-                selectedCharacterButton.backgroundColor = .systemBlue
-                
-                print("Targetted Character: \(target.customName)")
-                
+//                Dismiss the popover after a target have been selected from CharactersActionsPopoverVC
                 dismiss(animated: true, completion: nil)
+                
+                
+                if target.owningPlayer.name == characterWhoPlayThisRound.owningPlayer.name {
+                    
+                    
+                    makeDesiredAction(to: target, action: "Heal")
 
-
+                    
+                }
+                
+                else {
+                    
+                    
+                    makeDesiredAction(to: target, action: "Attack")
+                    
+                    
+                }
+                
 
             }
 
@@ -261,8 +283,165 @@ class CombatScreenVC: UIViewController {
         
     }
     
+    /// Update the targetted character health UI depending on the action chosen by the player and check if game is finished
+    private func makeDesiredAction(to target: Character, action: String) {
+        
+        
+        let getTargetOwningPlayerFromGameSession = gameSession.players.filter({$0.name == target.owningPlayer.name})
+        let getTargetCharacterFromGameSession = getTargetOwningPlayerFromGameSession[0].characters.filter({$0.customName == target.customName})[0]
+        
+        
+        switch action {
+            
+        case "Heal": getTargetCharacterFromGameSession.health += characterWhoPlayThisRound.weapon.damage
+            
+        case "Attack": getTargetCharacterFromGameSession.health -= characterWhoPlayThisRound.weapon.damage
+            
+        default: return
+            
+        }
+        
+        
+        if getTargetCharacterFromGameSession.health <= 0 {
+            
+//            Prevent the health UI to display negative numbers
+            getTargetCharacterFromGameSession.health = 0
+            
+            getTargetCharacterFromGameSession.UIelements.characterButton.backgroundColor = .red
+            
+            
+        }
+        
+//        disable the UI button of the character who just played this round
+        characterWhoPlayThisRound.UIelements.characterButton.isEnabled = false
+        characterWhoPlayThisRound.UIelements.characterButton.backgroundColor = .systemGray
+        
+        checkIfGameIsFinish()
+        
+        if gameSession.isFinished {
+            
+            displayWinner.text = "\(gameSession.winner!) won the game!"
+            displayWinner.isHidden = false
+            
+        }
+        
+        else {
+            
+            gameSession.actualRound += 1
+            
+            setNextCharacterToPlay()
+            
+        }
+        
+    }
+    
+
+    private func checkIfGameIsFinish () {
+        
+        
+        switch characterWhoPlayThisRound.owningPlayer.name {
+            
+//            if the character who play this round is player 1 and the game is finished, he's the winner
+        case gameSession.players[0].name:
+            
+            checkIfAllCharactersAreDead(for: gameSession.players[1])
+            
+            gameSession.winner = gameSession.isFinished ? gameSession.players[0].name : nil
+            
+            
+//            if the character who play this round is player 2 and the game is finished, he's the winner
+        case gameSession.players[1].name:
+            
+            checkIfAllCharactersAreDead(for: gameSession.players[0])
+            
+            gameSession.winner = gameSession.isFinished ? gameSession.players[1].name : nil
+            
+            
+        default: return
+            
+        }
+        
+    }
     
     
+    private func checkIfAllCharactersAreDead(for player: Player){
+        
+        
+        let getAllCharactersAlive = player.characters.filter({$0.health > 0})
+        
+//        Game is finish if there are not character alive in the ennemy team
+        gameSession.isFinished = (getAllCharactersAlive.count == 0) ? true : false
+    }
+    
+    
+    
+    private func setNextCharacterToPlay () {
+        
+        characterWhoPlayThisRoundIndex! += 1
+        
+        switch characterWhoPlayThisRound.owningPlayer.name {
+            
+        case gameSession.players[0].name:
+            
+            enableUIsForNextCharacterToPlay(for: gameSession.players[1])
+            
+        case gameSession.players[1].name:
+            
+            enableUIsForNextCharacterToPlay(for: gameSession.players[0])
+            
+        default: return
+            
+        }
+        
+        checkIfChestIsAvailable()
+        
+    }
+    
+    
+    private func checkIfChestIsAvailable() {
+        
+        
+        gameSession.chestAvailable = Bool.random()
+        
+    }
+    
+    private func enableUIsForNextCharacterToPlay(for player: Player) {
+        
+        if player.characters[characterWhoPlayThisRoundIndex!].health == 0 {
+            
+//            Skip this character, not enabling his button on the UI, if the character is dead
+            characterWhoPlayThisRound = player.characters[characterWhoPlayThisRoundIndex!]
+            
+            setNextCharacterToPlay()
+            
+        }
+        
+        else {
+            
+//            Enable the character UI if he's still alive (health > 0 )
+            player.characters[characterWhoPlayThisRoundIndex!].UIelements.characterButton.isEnabled = true
+            player.characters[characterWhoPlayThisRoundIndex!].UIelements.characterButton.backgroundColor = .systemBlue
+            
+            characterWhoPlayThisRound = player.characters[characterWhoPlayThisRoundIndex!]
+            
+        }
+    
+    }
+    
+    
+/// Select a random player character to start the first round
+    private func setFirstPlayerToStartPlaying(){
+        
+        let getRandomPlayer: Player = gameSession.players.randomElement()!
+        
+        let getRandomCharacterIndex = getRandomPlayer.characters.indices.randomElement()
+        
+        characterWhoPlayThisRound = getRandomPlayer.characters[getRandomCharacterIndex!]
+        characterWhoPlayThisRoundIndex = getRandomCharacterIndex!
+        
+        setNextCharacterToPlay()
+        
+    }
     
     
     //MARK: - View Did Load
@@ -273,17 +452,21 @@ class CombatScreenVC: UIViewController {
     override func viewDidLoad() {
         
         
-        
         super.viewDidLoad()
         
+//        When the combat screen appear, populate the UI with the selected player's characters stats
         setupCharactersStats()
         
+        setFirstPlayerToStartPlaying()
         
+        gameSession.actualRound += 1
+        
+        
+//        Listen for notifications from the CharactersActionsPopoverVC
         NotificationCenter.default.addObserver(
-            
             self, selector: #selector(updateTargettedCharacterUIs(_:)),
-            
             name: Notification.Name("targettedCharacter"), object: nil)
+        
         
     }
     
@@ -304,26 +487,18 @@ class CombatScreenVC: UIViewController {
     {
         
         
-        
         if segue.destination is CharactersActionsPopoverVC {
             
             
-            
             let vc = segue.destination as? CharactersActionsPopoverVC
-            
-//            print("Allies: \(alliesAndFoes["Ally"]!)")
-//            print("Foes: \(alliesAndFoes["Foe"]!)")
                 
             vc?.alliesAndFoes = alliesAndFoes
-        
         
         
         }
         
         
-        
     }
-    
     
 
 }

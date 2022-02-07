@@ -139,13 +139,13 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="fcc-1O-PZW" userLabel="Player1Character1Stats">
                                                         <rect key="frame" x="0.0" y="0.0" width="122.5" height="94.5"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSA-9Z-K12" customClass="CharactersWeaponDamageLabel" customModule="OC_FrenchGameFactory" customModuleProvider="target">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weapon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSA-9Z-K12" customClass="CharactersWeaponDamageLabel" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="122.5" height="45.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHs-kw-2WR" customClass="CharactersHPLabel" customModule="OC_FrenchGameFactory" customModuleProvider="target">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Health" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHs-kw-2WR" customClass="CharactersHPLabel" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="48.5" width="122.5" height="46"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
@@ -192,9 +192,9 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="cXo-KU-vqs" userLabel="Player1CharactersButtons">
                                                 <rect key="frame" x="0.0" y="195.5" width="374" height="95"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ed-pl-0Zh" userLabel="Character1" customClass="CharactersButton" customModule="OC_FrenchGameFactory" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ed-pl-0Zh" userLabel="Character1" customClass="CharactersButton" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="122.5" height="95"/>
-                                                        <color key="backgroundColor" name="AccentColor"/>
+                                                        <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="Character1">
@@ -204,9 +204,9 @@
                                                             <action selector="showCharActions:" destination="gxq-sm-dMp" eventType="touchUpInside" id="zts-GR-nZt"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gnz-UR-OjI" userLabel="Character2" customClass="CharactersButton" customModule="OC_FrenchGameFactory" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gnz-UR-OjI" userLabel="Character2" customClass="CharactersButton" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                         <rect key="frame" x="125.5" y="0.0" width="123" height="95"/>
-                                                        <color key="backgroundColor" name="AccentColor"/>
+                                                        <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="Character2">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -215,9 +215,9 @@
                                                             <action selector="showCharActions:" destination="gxq-sm-dMp" eventType="touchUpInside" id="pTo-ne-Ie8"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5h-hi-1Vx" userLabel="Character3" customClass="CharactersButton" customModule="OC_FrenchGameFactory" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5h-hi-1Vx" userLabel="Character3" customClass="CharactersButton" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                         <rect key="frame" x="251.5" y="0.0" width="122.5" height="95"/>
-                                                        <color key="backgroundColor" name="AccentColor"/>
+                                                        <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="Character3">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -230,8 +230,31 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="oqM-Zq-wox" userLabel="CentralBar">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="oqM-Zq-wox" userLabel="CentralBar">
                                         <rect key="frame" x="0.0" y="290.5" width="374" height="142.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GYh-QP-UOe">
+                                                <rect key="frame" x="0.0" y="55.5" width="101" height="31"/>
+                                                <color key="backgroundColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Open Chest"/>
+                                                <connections>
+                                                    <action selector="setNewWeaponToCharacter:" destination="gxq-sm-dMp" eventType="touchUpInside" id="Zg7-S9-cWv"/>
+                                                </connections>
+                                            </button>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Winner is" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqg-h2-31N" userLabel="Winner">
+                                                <rect key="frame" x="103.5" y="61" width="0.0" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Round: " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hiS-3k-nol" userLabel="actualRound">
+                                                <rect key="frame" x="316" y="61" width="58" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="f7m-YW-dkV" userLabel="Player2StackView">
                                         <rect key="frame" x="0.0" y="433" width="374" height="292"/>
@@ -239,9 +262,9 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="ENa-qP-tlj" userLabel="Player2CharactersButtons">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="95"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f12-32-RdI" userLabel="Character1" customClass="CharactersButton" customModule="OC_FrenchGameFactory" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f12-32-RdI" userLabel="Character1" customClass="CharactersButton" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="122.5" height="95"/>
-                                                        <color key="backgroundColor" name="AccentColor"/>
+                                                        <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="Character1">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -250,9 +273,9 @@
                                                             <action selector="showCharActions:" destination="gxq-sm-dMp" eventType="touchUpInside" id="1Ne-d7-bNn"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ji0-rm-BZc" userLabel="Character2" customClass="CharactersButton" customModule="OC_FrenchGameFactory" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ji0-rm-BZc" userLabel="Character2" customClass="CharactersButton" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                         <rect key="frame" x="125.5" y="0.0" width="123" height="95"/>
-                                                        <color key="backgroundColor" name="AccentColor"/>
+                                                        <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="Character2">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -261,9 +284,9 @@
                                                             <action selector="showCharActions:" destination="gxq-sm-dMp" eventType="touchUpInside" id="b7i-IA-ALZ"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Zm-VY-Y0n" userLabel="Character3" customClass="CharactersButton" customModule="OC_FrenchGameFactory" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Zm-VY-Y0n" userLabel="Character3" customClass="CharactersButton" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                         <rect key="frame" x="251.5" y="0.0" width="122.5" height="95"/>
-                                                        <color key="backgroundColor" name="AccentColor"/>
+                                                        <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="Character3">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -280,13 +303,13 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="dA4-wO-b8j" userLabel="Player2Character1Stats">
                                                         <rect key="frame" x="0.0" y="0.0" width="122.5" height="95.5"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Luh-ih-yto" customClass="CharactersHPLabel" customModule="OC_FrenchGameFactory" customModuleProvider="target">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Health" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Luh-ih-yto" customClass="CharactersHPLabel" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="122.5" height="46.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVU-Xp-5Bz" customClass="CharactersWeaponDamageLabel" customModule="OC_FrenchGameFactory" customModuleProvider="target">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weapon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVU-Xp-5Bz" customClass="CharactersWeaponDamageLabel" customModule="OC_FrenchGameFactory" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="49.5" width="122.5" height="46"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
@@ -359,6 +382,9 @@
                     <navigationItem key="navigationItem" title="Combat Screen" id="8C5-ZN-Jmo"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="actualRound" destination="hiS-3k-nol" id="JNz-vs-S9M"/>
+                        <outlet property="chestAvailable" destination="GYh-QP-UOe" id="pWI-Q9-5QV"/>
+                        <outlet property="displayWinner" destination="aqg-h2-31N" id="ZsA-is-FEW"/>
                         <outlet property="player1Char1Button" destination="5ed-pl-0Zh" id="Xnh-PE-nas"/>
                         <outlet property="player1Char1HP" destination="pHs-kw-2WR" id="VCF-aV-FYc"/>
                         <outlet property="player1Char1WeaponDamage" destination="ZSA-9Z-K12" id="7e4-bM-Y4X"/>
@@ -369,14 +395,14 @@
                         <outlet property="player1Char3HP" destination="8PE-Sa-Fcc" id="Kzn-8D-ODm"/>
                         <outlet property="player1Char3WeaponDamage" destination="36W-jS-PVr" id="RyF-dM-5aq"/>
                         <outlet property="player2Char1Button" destination="f12-32-RdI" id="DcJ-Xd-jUX"/>
-                        <outlet property="player2Char1HP" destination="KVU-Xp-5Bz" id="srQ-Ix-6cU"/>
-                        <outlet property="player2Char1WeaponDamage" destination="Luh-ih-yto" id="oEa-i0-LOF"/>
+                        <outlet property="player2Char1HP" destination="Luh-ih-yto" id="ojg-hZ-wPr"/>
+                        <outlet property="player2Char1WeaponDamage" destination="KVU-Xp-5Bz" id="YHT-wK-LQV"/>
                         <outlet property="player2Char2Button" destination="Ji0-rm-BZc" id="Vi0-bK-LJh"/>
-                        <outlet property="player2Char2HP" destination="nmW-lS-bzL" id="aGS-Hr-A51"/>
-                        <outlet property="player2Char2WeaponDamage" destination="bXb-9z-Xzn" id="Dcn-aS-Pti"/>
+                        <outlet property="player2Char2HP" destination="bXb-9z-Xzn" id="7JF-HG-04D"/>
+                        <outlet property="player2Char2WeaponDamage" destination="nmW-lS-bzL" id="gIh-ht-2RC"/>
                         <outlet property="player2Char3Button" destination="3Zm-VY-Y0n" id="CAn-dj-8Ot"/>
-                        <outlet property="player2Char3HP" destination="9LT-md-FUM" id="oyg-Hw-fBD"/>
-                        <outlet property="player2Char3WeaponDamage" destination="04t-na-9VJ" id="tg0-t8-1eG"/>
+                        <outlet property="player2Char3HP" destination="04t-na-9VJ" id="XNe-gS-olI"/>
+                        <outlet property="player2Char3WeaponDamage" destination="9LT-md-FUM" id="ore-XA-otJ"/>
                         <segue destination="uF6-Ah-hT0" kind="presentation" identifier="selectCharActions" id="boc-3D-zVC"/>
                     </connections>
                 </viewController>
@@ -450,6 +476,9 @@
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

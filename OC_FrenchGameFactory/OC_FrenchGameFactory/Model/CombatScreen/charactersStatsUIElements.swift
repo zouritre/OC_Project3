@@ -13,7 +13,7 @@ struct charactersStatsUIElements {
     
     var characterHPLabel: CharactersHPLabel
     
-    var chararacterWeaponDamageLabel: CharactersWeaponDamageLabel
+    var characterWeaponDamageLabel: CharactersWeaponDamageLabel
     
     var characterButton: CharactersButton
     

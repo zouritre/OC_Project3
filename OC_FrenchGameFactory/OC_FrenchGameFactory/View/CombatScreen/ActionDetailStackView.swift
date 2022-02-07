@@ -10,7 +10,6 @@ import UIKit
 class ActionDetailStackView: UIStackView {
     
     
-    
 /// Store a list of the selected character's allies and foes
     internal var alliesAndFoes: [String:Player] = [:]
     
@@ -19,29 +18,22 @@ class ActionDetailStackView: UIStackView {
     internal func displayAvailableTargetCharacters (action: String) {
         
         
-        
         if action == "Heal" {
-            
             
             
             addButtonsToDetailPanel(for: "Ally")
 
             
-            
         }
-        
         
         
         if action == "Attack" {
             
             
-            
             addButtonsToDetailPanel(for: "Foe")
             
             
-            
         }
-        
         
 
     }
@@ -52,39 +44,46 @@ class ActionDetailStackView: UIStackView {
     private func addButtonsToDetailPanel (for targettedPlayer: String) {
         
         
-        
         if let playerCharacters = alliesAndFoes[targettedPlayer]?.characters {
-            
             
             
             for character in playerCharacters{
             
+//                If this character is dead, does not create an action button for him
+                if character.health == 0 {
+                    continue
+                }
                 
-                
-                let characterButton = CharactersButton()
-                
-                characterButton.correspondingCharacter = character
-                characterButton.backgroundColor = .cyan
-                characterButton.setTitleColor(.red, for: .normal)
-                characterButton.addTarget(self, action: #selector(actionToTargettedCharacter(_:)), for: .touchUpInside)
-                
-                addArrangedSubview(characterButton)
+                else  {
+                    
+                    
+                    let characterButton = CharactersButton()
+                    
+                    characterButton.correspondingCharacter = character
+                    characterButton.backgroundColor = .cyan
+                    characterButton.setTitleColor(.red, for: .normal)
+                    characterButton.addTarget(self, action: #selector(actionToTargettedCharacter(_:)), for: .touchUpInside)
+                    
+                    addArrangedSubview(characterButton)
+                    
+                }
                 
                 
                 
             }
             
             
-            
         }
-            
             
             
     }
     
-    ///     Send the targetted character info to CombatScreenVC using Notification
+    
+    
+    ///     Send the targetted character CharactersButton() to CombatScreenVC using Notification when an action has been chosen
     @objc func actionToTargettedCharacter (_ sender: CharactersButton){
 
+        
         var target: [String:Character] = [:]
 
         target["target"] = sender.correspondingCharacter
@@ -95,11 +94,8 @@ class ActionDetailStackView: UIStackView {
 
         NotificationCenter.default.post(notification)
 
-        print(sender.correspondingCharacter.customName)
-
 
     }
-    
     
 
 }

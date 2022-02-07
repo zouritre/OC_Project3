@@ -7,14 +7,53 @@
 
 import Foundation
 
-class Character{
+class Character {
     var originalName : String
+    
+    
     var customName: String
-    var health: Int
-    var weapon: Weapon
+    
+    var health: Int {
+        
+        willSet{
+            
+            if let UIelements = UIelements{
+                
+                UIelements.characterHPLabel.hp = newValue
+                
+            }
+        }
+    }
+    
+    var weapon: Weapon {
+        
+        willSet{
+            
+            if let UIelements = UIelements{
+                
+                UIelements.characterWeaponDamageLabel.weaponDamage = newValue.damage
+                
+            }
+        }
+    }
+    
     var chestAvailable: Bool
+    
     var owningPlayer: Player
+    
     var opponent: Player
+    
+    var UIelements : charactersStatsUIElements! {
+        
+        willSet{
+            
+            newValue.characterButton.setTitle(customName, for: .normal)
+            newValue.characterHPLabel.hp = health
+            newValue.characterWeaponDamageLabel.weaponDamage = weapon.damage
+        
+        }
+        
+    }
     
     init(originalName: String, customName: String, health: Int, weapon: Weapon, chestAvailable: Bool, owningPlayer: Player, opponent: Player){
         
