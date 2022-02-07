@@ -90,7 +90,6 @@ class CombatScreenVC: UIViewController {
 ///  Sent to CharactersActionsPopoverVC to display the list of allies if the "Heal" button is pressed or the list of foes if "Attack" button is pressed depending of the selected character
     private var alliesAndFoes: [String:Player] = [:]
     
-///     Store the currently selected character button to reset its background color to defaultwhen another character is selected
     private var characterWhoPlayThisRound = Character()
     
     private var characterWhoPlayThisRoundIndex : Int! {
@@ -148,7 +147,7 @@ class CombatScreenVC: UIViewController {
     
     
     
-
+/// Set combat screen UI elements to display player's characters stats at game start
     private func setupCharactersStats(){
         
         
@@ -205,7 +204,7 @@ class CombatScreenVC: UIViewController {
         
         setUIelementsToCharacters(for: gameSession.players[1], UIelements: player2UIElements)
         
-        
+//        store the central bar views in Game Session
         let gameSessionUIelements = GameSessionUIelements(actualRound: actualRound, chestAvailable: chestAvailable)
         
         gameSession.uiElements = gameSessionUIelements
@@ -213,11 +212,12 @@ class CombatScreenVC: UIViewController {
         
     }
     
-    
+///     Set every Character object
     private func setUIelementsToCharacters(for player: Player, UIelements: [charactersStatsUIElements]) {
         
         for (index, _) in player.characters.enumerated() {
             
+//            for each UI elements characterButton in the array define their correspondingCharacter variable before pushing them to the character UIelements variable
             UIelements[index].characterButton.correspondingCharacter = player.characters[index]
 
             player.characters[index].UIelements = UIelements[index]
@@ -264,7 +264,7 @@ class CombatScreenVC: UIViewController {
         
     }
     
-    /// Get target character UI elements
+    /// Update the targetted character health UI depending on the action chosen by the player and check if game is finished
     private func makeDesiredAction(to target: Character, action: String) {
         
         
@@ -285,7 +285,7 @@ class CombatScreenVC: UIViewController {
         
         if getTargetCharacterFromGameSession.health <= 0 {
             
-            
+//            Prevent the health UI to display negative numbers
             getTargetCharacterFromGameSession.health = 0
             
             getTargetCharacterFromGameSession.UIelements.characterButton.backgroundColor = .red
@@ -368,7 +368,7 @@ class CombatScreenVC: UIViewController {
         
         if player.characters[characterWhoPlayThisRoundIndex!].health == 0 {
             
-            
+//            Skip this character, not enabling his button on the UI, if the character is dead
             characterWhoPlayThisRound = player.characters[characterWhoPlayThisRoundIndex!]
             
             setNextCharacterToPlay()
@@ -377,6 +377,7 @@ class CombatScreenVC: UIViewController {
         
         else {
             
+//            Enable the character UI if he's still alive (health > 0 )
             player.characters[characterWhoPlayThisRoundIndex!].UIelements.characterButton.isEnabled = true
             player.characters[characterWhoPlayThisRoundIndex!].UIelements.characterButton.backgroundColor = .systemBlue
             
@@ -387,7 +388,7 @@ class CombatScreenVC: UIViewController {
     }
     
     
-    
+/// Select a random player character to start the first round
     private func setFirstPlayerToStartPlaying(){
         
         let getRandomPlayer: Player = gameSession.players.randomElement()!
@@ -418,7 +419,7 @@ class CombatScreenVC: UIViewController {
         
         setFirstPlayerToStartPlaying()
         
-        gameSession.actualRound = 1
+        gameSession.actualRound += 1
         
         
 //        Listen for notifications from the CharactersActionsPopoverVC
