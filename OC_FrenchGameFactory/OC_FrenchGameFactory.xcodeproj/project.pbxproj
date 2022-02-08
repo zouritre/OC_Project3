@@ -27,6 +27,7 @@
 		E97D9F7527AD745E0047E648 /* CharactersHPLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D9F7427AD745E0047E648 /* CharactersHPLabel.swift */; };
 		E97D9F7727AD74790047E648 /* CharactersWeaponDamageLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D9F7627AD74790047E648 /* CharactersWeaponDamageLabel.swift */; };
 		E9C0353127A7150000C89285 /* CombatScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C0353027A7150000C89285 /* CombatScreenVC.swift */; };
+		E9C2FD3E27B300AA007E5149 /* EndGameStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C2FD3D27B300AA007E5149 /* EndGameStatsVC.swift */; };
 		E9D2EB2F27A2C5D10083FE04 /* CharactersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D2EB2E27A2C5D10083FE04 /* CharactersList.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		E97D9F7427AD745E0047E648 /* CharactersHPLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersHPLabel.swift; sourceTree = "<group>"; };
 		E97D9F7627AD74790047E648 /* CharactersWeaponDamageLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersWeaponDamageLabel.swift; sourceTree = "<group>"; };
 		E9C0353027A7150000C89285 /* CombatScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CombatScreenVC.swift; path = OC_FrenchGameFactory/Controller/CombatScreen/CombatScreenVC.swift; sourceTree = SOURCE_ROOT; };
+		E9C2FD3D27B300AA007E5149 /* EndGameStatsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameStatsVC.swift; sourceTree = "<group>"; };
 		E9D2EB2E27A2C5D10083FE04 /* CharactersList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,6 +152,7 @@
 		E97404BD27A18E8300CBFAEF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E9C2FD3F27B300D5007E5149 /* EndGame */,
 				E9C0353227A71BB300C89285 /* CombatScreen */,
 				E9D2EB3127A2D53B0083FE04 /* HomeScreen */,
 			);
@@ -174,6 +177,14 @@
 				E94F674127AAFED700A40FE9 /* ActionDetailStackView.swift */,
 			);
 			path = CombatScreen;
+			sourceTree = "<group>";
+		};
+		E9C2FD3F27B300D5007E5149 /* EndGame */ = {
+			isa = PBXGroup;
+			children = (
+				E9C2FD3D27B300AA007E5149 /* EndGameStatsVC.swift */,
+			);
+			path = EndGame;
 			sourceTree = "<group>";
 		};
 		E9D2EB3027A2CC000083FE04 /* HomeScreen */ = {
@@ -263,6 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9C2FD3E27B300AA007E5149 /* EndGameStatsVC.swift in Sources */,
 				E97D9F7327AD5D700047E648 /* CharactersButton.swift in Sources */,
 				E94327A62794CB3C00057345 /* HomeScreenVC.swift in Sources */,
 				E9D2EB2F27A2C5D10083FE04 /* CharactersList.swift in Sources */,

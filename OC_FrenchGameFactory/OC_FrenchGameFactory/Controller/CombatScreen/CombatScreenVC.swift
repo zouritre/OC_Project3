@@ -28,20 +28,22 @@ class CombatScreenVC: UIViewController {
 //    Give a new weapon to the currently playing character when he open the chest
     @IBAction func setNewWeaponToCharacter(_ sender: UIButton) {
         
-        
+//        Disable "Open chest" button after it's been clicked once to prevent using it multiple times per turn
         sender.isEnabled = false
         sender.backgroundColor = .lightText
         
         let getOwningPlayerFromGameSession = gameSession.players.filter({$0.name == characterWhoPlayThisRound.owningPlayer.name})[0]
         
         let getCharacterFromGameSession = getOwningPlayerFromGameSession.characters.filter({$0.customName == characterWhoPlayThisRound.customName})[0]
+        
+//        Give the character who is playing this round a random weapon with damage varying between 3 and 10
         getCharacterFromGameSession.weapon.damage = Int.random(in: 3...10)
         
         
     }
     
     
-    
+    @IBOutlet weak var showWinner: UIStackView!
     
     
     
@@ -321,7 +323,8 @@ class CombatScreenVC: UIViewController {
         if gameSession.isFinished {
             
             displayWinner.text = "\(gameSession.winner!) won the game!"
-            displayWinner.isHidden = false
+
+            showWinner.isHidden = false
             
         }
         
@@ -493,6 +496,16 @@ class CombatScreenVC: UIViewController {
             let vc = segue.destination as? CharactersActionsPopoverVC
                 
             vc?.alliesAndFoes = alliesAndFoes
+        
+        
+        }
+        
+        if segue.destination is EndGameStatsVC {
+            
+            
+            let vc = segue.destination as? EndGameStatsVC
+                
+            vc?.gameSessionStats = gameSession
         
         
         }

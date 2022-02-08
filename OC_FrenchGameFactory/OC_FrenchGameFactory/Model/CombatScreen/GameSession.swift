@@ -35,7 +35,6 @@ struct GameSession{
                 
                 uiElement.isEnabled = newValue
                 uiElement.backgroundColor = newValue ? .systemBlue : .lightText
-                print(newValue)
                 
             }
         }
