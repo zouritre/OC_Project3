@@ -11,8 +11,6 @@ class EndGameStatsVC: UIViewController {
     
     var gameSessionStats = GameSession()
     
-    //MARK: IBOutlets
-    
     
     
     @IBOutlet weak var mainStackView: UIStackView!

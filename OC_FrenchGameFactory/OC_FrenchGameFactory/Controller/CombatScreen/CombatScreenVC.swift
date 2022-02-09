@@ -113,6 +113,7 @@ class CombatScreenVC: UIViewController {
     
     private var characterWhoPlayThisRound = Character()
     
+///     Used to set the next character who will play the round
     private var characterWhoPlayThisRoundIndex : Int! {
         
         didSet{
@@ -144,7 +145,7 @@ class CombatScreenVC: UIViewController {
         
         characterWhoPlayThisRound.UIelements.characterButton.backgroundColor = .orange
         
-//        Store the currently selected character owning player and foe with their updated stats from gameSession variable to be later sent to CharactersActionsPopoverVC
+//        Store the currently selected character owning player and foe with their updated stats from gameSession variable and send it to CharactersActionsPopoverVC
         alliesAndFoes["Ally"] = gameSession.players.filter({$0.name == characterWhoPlayThisRound.owningPlayer.name})[0]
         
         
@@ -382,6 +383,7 @@ class CombatScreenVC: UIViewController {
         
         characterWhoPlayThisRoundIndex! += 1
         
+//        enable UIs of the character who is currently playing opponent
         switch characterWhoPlayThisRound.owningPlayer.name {
             
         case gameSession.players[0].name:
@@ -396,6 +398,7 @@ class CombatScreenVC: UIViewController {
             
         }
         
+//        Randomly "spawn" a chest at the beginning of the character turn
         checkIfChestIsAvailable()
         
     }

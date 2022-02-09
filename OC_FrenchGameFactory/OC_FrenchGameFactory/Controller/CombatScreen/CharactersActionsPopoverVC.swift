@@ -81,10 +81,10 @@ class CharactersActionsPopoverVC: UIViewController {
     private func populateCharacterListForActions(action: String) {
         
         
-//      Remove all existing subviews (buttons) in the ActionDetail StackView to avoid        infinite stacking
+//      Remove all existing subviews (buttons) in the ActionDetail StackView to avoid infinite stacking
         actionDetail.subviews.forEach({ $0.removeFromSuperview() });
         
-//      Tell the stackView wich player is on the side of the selected character (the one     who is performing the  action) and wich is not to create their corresponding         buttons in the StackView
+//      Tell the stackView wich player is on the side of the selected character (the one who is performing the  action) and wich is not to create their corresponding         buttons in the StackView
         actionDetail.alliesAndFoes = alliesAndFoes
         
 //      Populate the StackView with new buttons
