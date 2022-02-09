@@ -28,20 +28,22 @@ class CombatScreenVC: UIViewController {
 //    Give a new weapon to the currently playing character when he open the chest
     @IBAction func setNewWeaponToCharacter(_ sender: UIButton) {
         
-        
+//        Disable "Open chest" button after it's been clicked once to prevent using it multiple times per turn
         sender.isEnabled = false
         sender.backgroundColor = .lightText
         
         let getOwningPlayerFromGameSession = gameSession.players.filter({$0.name == characterWhoPlayThisRound.owningPlayer.name})[0]
         
         let getCharacterFromGameSession = getOwningPlayerFromGameSession.characters.filter({$0.customName == characterWhoPlayThisRound.customName})[0]
+        
+//        Give the character who is playing this round a random weapon with damage varying between 3 and 10
         getCharacterFromGameSession.weapon.damage = Int.random(in: 3...10)
         
         
     }
     
     
-    
+    @IBOutlet weak var showWinner: UIStackView!
     
     
     
@@ -111,6 +113,7 @@ class CombatScreenVC: UIViewController {
     
     private var characterWhoPlayThisRound = Character()
     
+///     Used to set the next character who will play the round
     private var characterWhoPlayThisRoundIndex : Int! {
         
         didSet{
@@ -142,7 +145,7 @@ class CombatScreenVC: UIViewController {
         
         characterWhoPlayThisRound.UIelements.characterButton.backgroundColor = .orange
         
-//        Store the currently selected character owning player and foe with their updated stats from gameSession variable to be later sent to CharactersActionsPopoverVC
+//        Store the currently selected character owning player and foe with their updated stats from gameSession variable and send it to CharactersActionsPopoverVC
         alliesAndFoes["Ally"] = gameSession.players.filter({$0.name == characterWhoPlayThisRound.owningPlayer.name})[0]
         
         
@@ -321,7 +324,8 @@ class CombatScreenVC: UIViewController {
         if gameSession.isFinished {
             
             displayWinner.text = "\(gameSession.winner!) won the game!"
-            displayWinner.isHidden = false
+
+            showWinner.isHidden = false
             
         }
         
@@ -379,6 +383,7 @@ class CombatScreenVC: UIViewController {
         
         characterWhoPlayThisRoundIndex! += 1
         
+//        enable UIs of the character who is currently playing opponent
         switch characterWhoPlayThisRound.owningPlayer.name {
             
         case gameSession.players[0].name:
@@ -393,6 +398,7 @@ class CombatScreenVC: UIViewController {
             
         }
         
+//        Randomly "spawn" a chest at the beginning of the character turn
         checkIfChestIsAvailable()
         
     }
@@ -493,6 +499,16 @@ class CombatScreenVC: UIViewController {
             let vc = segue.destination as? CharactersActionsPopoverVC
                 
             vc?.alliesAndFoes = alliesAndFoes
+        
+        
+        }
+        
+        if segue.destination is EndGameStatsVC {
+            
+            
+            let vc = segue.destination as? EndGameStatsVC
+                
+            vc?.gameSessionStats = gameSession
         
         
         }

@@ -242,12 +242,25 @@
                                                     <action selector="setNewWeaponToCharacter:" destination="gxq-sm-dMp" eventType="touchUpInside" id="Zg7-S9-cWv"/>
                                                 </connections>
                                             </button>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Winner is" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqg-h2-31N" userLabel="Winner">
-                                                <rect key="frame" x="103.5" y="61" width="0.0" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4Ig-IQ-STS">
+                                                <rect key="frame" x="103.5" y="45.5" width="0.0" height="51.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Winner is" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqg-h2-31N" userLabel="Winner">
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zx9-Ii-Hrc">
+                                                        <rect key="frame" x="0.0" y="20.5" width="0.0" height="31"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="filled" title="Show Stats"/>
+                                                        <connections>
+                                                            <segue destination="TB4-sb-L05" kind="show" identifier="" id="BHW-py-SIB"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Round: " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hiS-3k-nol" userLabel="actualRound">
                                                 <rect key="frame" x="316" y="61" width="58" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -403,6 +416,7 @@
                         <outlet property="player2Char3Button" destination="3Zm-VY-Y0n" id="CAn-dj-8Ot"/>
                         <outlet property="player2Char3HP" destination="04t-na-9VJ" id="XNe-gS-olI"/>
                         <outlet property="player2Char3WeaponDamage" destination="9LT-md-FUM" id="ore-XA-otJ"/>
+                        <outlet property="showWinner" destination="4Ig-IQ-STS" id="ZtF-Pb-lsK"/>
                         <segue destination="uF6-Ah-hT0" kind="presentation" identifier="selectCharActions" id="boc-3D-zVC"/>
                     </connections>
                 </viewController>
@@ -469,7 +483,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wFn-NP-T9R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1166.6666666666667" y="-576.5625"/>
+            <point key="canvasLocation" x="361" y="113"/>
+        </scene>
+        <!--End Game StatsVC-->
+        <scene sceneID="Tmj-88-m7t">
+            <objects>
+                <viewController id="TB4-sb-L05" customClass="EndGameStatsVC" customModule="OC_FrenchGameFactory" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TYt-Xy-RL3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="V0E-zH-99w">
+                                <rect key="frame" x="20" y="88" width="374" height="725"/>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="8Qf-uc-M5t"/>
+                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                        <constraints>
+                            <constraint firstItem="V0E-zH-99w" firstAttribute="top" secondItem="8Qf-uc-M5t" secondAttribute="top" id="5Kj-xB-3LC"/>
+                            <constraint firstItem="8Qf-uc-M5t" firstAttribute="bottom" secondItem="V0E-zH-99w" secondAttribute="bottom" id="SJo-d5-pcg"/>
+                            <constraint firstItem="8Qf-uc-M5t" firstAttribute="trailing" secondItem="V0E-zH-99w" secondAttribute="trailing" constant="20" id="rri-5G-QNg"/>
+                            <constraint firstItem="V0E-zH-99w" firstAttribute="leading" secondItem="8Qf-uc-M5t" secondAttribute="leading" constant="20" id="zdL-3E-DQl"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="p76-Tl-Keo"/>
+                    <connections>
+                        <outlet property="mainStackView" destination="V0E-zH-99w" id="P3t-48-AYl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="224-ij-RXM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1250.7246376811595" y="-577.23214285714278"/>
         </scene>
     </scenes>
     <resources>
@@ -484,6 +528,9 @@
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

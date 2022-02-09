@@ -146,7 +146,7 @@ class HomeScreenVC: UIViewController {
     
     
     
-///     Return a player object with a custom player name and a custom list of characters they choseb
+///     Return a player object with a custom player name and a custom list of characters they chose
     private func confirmPlayersChoices(playerName: String, charactersList: CharacterListStackView, opponent: Player) -> Player {
         
         
@@ -578,9 +578,7 @@ class HomeScreenVC: UIViewController {
     {
         
         
-        
         if segue.destination is CombatScreenVC {
-            
             
             
             let vc = segue.destination as? CombatScreenVC
@@ -588,9 +586,7 @@ class HomeScreenVC: UIViewController {
             vc?.gameSession.players = [player1, player2]
         
         
-        
         }
-        
         
         
     }
