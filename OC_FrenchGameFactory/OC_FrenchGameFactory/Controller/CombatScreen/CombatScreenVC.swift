@@ -287,10 +287,16 @@ class CombatScreenVC: UIViewController {
     }
     
     /// Update the targetted character health UI depending on the action chosen by the player and check if game is finished
+    
+    /// test
+    /// - Parameters:
+    ///   - target: testtar
+    ///   - action: testact
     private func makeDesiredAction(to target: Character, action: String) {
         
         
         let getTargetOwningPlayerFromGameSession = gameSession.players.filter({$0.name == target.owningPlayer.name})
+        
         let getTargetCharacterFromGameSession = getTargetOwningPlayerFromGameSession[0].characters.filter({$0.customName == target.customName})[0]
         
         
