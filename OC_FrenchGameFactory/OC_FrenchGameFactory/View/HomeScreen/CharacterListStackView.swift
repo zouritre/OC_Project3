@@ -18,13 +18,13 @@ class CharacterListStackView: UIStackView{
     //MARK: - Variables
     
     
-///     When a character button is tapped, append this dictionnary with  his corresponding character custom name TextView along with his character object
+    /// When a character button is tapped, append this dictionnary with  his corresponding character custom name TextView along with his character object
     var chosenCharacters: [UITextView:Character] = [:]
     
-///     Match this StackView instance with a player who owns it.
+    /// Match this StackView instance with a player who owns it.
     var viewOwningPlayer: String?
     
-///     This variable is sent to the main VC with viewOwningPlayer var as key and a bool to tell if this player is ready or not
+    /// This variable is sent to the main VC with viewOwningPlayer var as key and a bool to tell if this player is ready or not
     var notifyPlayerIsReady: [String:Bool] = [:]
     
     
@@ -79,19 +79,19 @@ class CharacterListStackView: UIStackView{
     ///   - distribution: The distribution of the arranged views along the stack view’s axis.
     ///   - spacing: The distance between each elements of the stack
     /// - Returns: A custom StackView
-        private func createStackView(axis: NSLayoutConstraint.Axis, distribution: UIStackView.Distribution, spacing: CGFloat) -> UIStackView{
-            
-            
-            let stackView = UIStackView()
-            
-            stackView.axis = axis
-            stackView.distribution = distribution
-            stackView.spacing = spacing
-            
-            return stackView
-            
-            
-        }
+    private func createStackView(axis: NSLayoutConstraint.Axis, distribution: UIStackView.Distribution, spacing: CGFloat) -> UIStackView{
+        
+        
+        let stackView = UIStackView()
+        
+        stackView.axis = axis
+        stackView.distribution = distribution
+        stackView.spacing = spacing
+        
+        return stackView
+        
+        
+    }
     
     
     

@@ -17,10 +17,10 @@ class CharactersList {
         
         var characterList : [Character] = []
         
-        characterList.append(Character(originalName: "Raisin", customName: "", health: 10, weapon: Weapon(damage: 5), owningPlayer: Player(name: "", characters: []), opponent: Player(name: "", characters: [])))
-        characterList.append(Character(originalName: "Kiwi", customName: "", health: 11, weapon: Weapon(damage: 6), owningPlayer: Player(name: "", characters: []), opponent: Player(name: "", characters: [])))
-        characterList.append(Character(originalName: "Orange", customName: "", health: 12, weapon: Weapon(damage: 7), owningPlayer: Player(name: "", characters: []), opponent: Player(name: "", characters: [])))
-        characterList.append(Character(originalName: "Citron", customName: "", health: 13, weapon: Weapon(damage: 8), owningPlayer: Player(name: "", characters: []), opponent: Player(name: "", characters: [])))
+        characterList.append(Character(originalName: "Raisin", customName: "", health: 10, maxHealth: 10, weapon: Weapon(damage: 5), owningPlayer: Player(name: "", characters: []), opponent: Player(name: "", characters: [])))
+        characterList.append(Character(originalName: "Kiwi", customName: "", health: 11, maxHealth: 11, weapon: Weapon(damage: 6), owningPlayer: Player(name: "", characters: []), opponent: Player(name: "", characters: [])))
+        characterList.append(Character(originalName: "Orange", customName: "", health: 12, maxHealth: 12, weapon: Weapon(damage: 7), owningPlayer: Player(name: "", characters: []), opponent: Player(name: "", characters: [])))
+        characterList.append(Character(originalName: "Citron", customName: "", health: 13, maxHealth: 13, weapon: Weapon(damage: 8), owningPlayer: Player(name: "", characters: []), opponent: Player(name: "", characters: [])))
         
         return characterList
         

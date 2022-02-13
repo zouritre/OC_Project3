@@ -36,6 +36,8 @@ class Character {
         
     }
     
+    var maxHealth: Int
+    
     
 //    Create an observable to update weapon damage UI dynamically
     var weapon: Weapon {
@@ -82,12 +84,13 @@ class Character {
     }
     
     
-    init(originalName: String, customName: String, health: Int, weapon: Weapon, owningPlayer: Player, opponent: Player){
+    init(originalName: String, customName: String, health: Int, maxHealth: Int, weapon: Weapon, owningPlayer: Player, opponent: Player){
         
         
         self.originalName = originalName
         self.customName = customName
         self.health = health
+        self.maxHealth = maxHealth
         self.weapon = weapon
         self.owningPlayer = owningPlayer
         self.opponent = opponent
@@ -100,7 +103,7 @@ class Character {
     convenience init() {
     
         
-        self.init(originalName: "", customName: "", health: 0, weapon: Weapon(damage: 0), owningPlayer: Player(name: "", characters: []), opponent: Player(name: "", characters: []))
+        self.init(originalName: "", customName: "", health: 0, maxHealth: 0, weapon: Weapon(damage: 0), owningPlayer: Player(name: "", characters: []), opponent: Player(name: "", characters: []))
     
     
     }

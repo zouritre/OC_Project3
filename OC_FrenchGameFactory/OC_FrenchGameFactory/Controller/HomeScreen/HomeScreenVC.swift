@@ -57,7 +57,7 @@ class HomeScreenVC: UIViewController {
     }
     
     
-    @IBOutlet weak var StartGameButton: UIButton!
+    @IBOutlet weak var startGameButton: UIButton!
     
     @IBOutlet weak var player2CharacterList: CharacterListStackView!
     
@@ -89,7 +89,7 @@ class HomeScreenVC: UIViewController {
 //    Store every custom names chosen by players for their characters to check for duplicates
     var charactersCustomName : [String] = []
     
-    var foundDuplicate : Bool = false
+    
     
     
     
@@ -169,28 +169,12 @@ class HomeScreenVC: UIViewController {
     }
     
     
-    
-    /// Check if there are duplicate names among the player's custom names they chose for their characters
-    /// - Parameters:
-    ///   - player1CharacterList: The custom StackView containing player1's chosen characters
-    ///   - player2CharacterList: The custom StackView containing player2's chosen characters
-    /// - Returns: True if a duplicate name has been found after comparing the two players's  list of characters
-    private func foundDuplicateCustomNames(compare player1CharacterList: CharacterListStackView, with player2CharacterList: CharacterListStackView) -> Bool{
-        
-        
-        findDuplicates(for: player1CharacterList)
-        findDuplicates(for: player2CharacterList)
-        
-        
-        return foundDuplicate
-        
-        
-    }
-    
-    
     /// Compare the custom names of a character list with those store in the charactersCustomNames array and find if it appears at least 2 times
     /// - Parameter playerCharacterList: A custom StackView containing a list of a player's chosen characters
-    func findDuplicates(for playerCharacterList: CharacterListStackView){
+    func findDuplicates(for playerCharacterList: CharacterListStackView) -> Bool{
+        
+        
+        var foundDuplicate : Bool = false
         
         
         for (customNameTextView, _) in playerCharacterList.chosenCharacters{
@@ -221,7 +205,6 @@ class HomeScreenVC: UIViewController {
             
             else {
                 
-                
 //                    Check passed successfully
                 
                 customNameTextView.backgroundColor = .tintColor
@@ -232,6 +215,9 @@ class HomeScreenVC: UIViewController {
             
             
         }
+        
+        
+        return foundDuplicate
         
         
     }
@@ -313,10 +299,12 @@ class HomeScreenVC: UIViewController {
         else {
             
             
-            let foundDuplicateCustomNames = foundDuplicateCustomNames(compare: player1, with: player2)
+            let foundDuplicateCustomNamesForPlayer1 = findDuplicates(for: player1)
             
+            let foundDuplicateCustomNamesForPlayer2 = findDuplicates(for: player2)
+
             
-            if foundDuplicateCustomNames {
+            if foundDuplicateCustomNamesForPlayer1 || foundDuplicateCustomNamesForPlayer2 {
                 
                 
                 correctNames = false
@@ -396,7 +384,7 @@ class HomeScreenVC: UIViewController {
         if player1IsReady && player2IsReady {
             
             
-            StartGameButton.isEnabled = true
+            startGameButton.isEnabled = true
             
             
         }
@@ -405,7 +393,7 @@ class HomeScreenVC: UIViewController {
         else {
             
             
-            StartGameButton.isEnabled = false
+            startGameButton.isEnabled = false
         
         
         }

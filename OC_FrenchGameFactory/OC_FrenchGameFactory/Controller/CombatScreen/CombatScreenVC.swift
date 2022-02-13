@@ -25,7 +25,8 @@ class CombatScreenVC: UIViewController {
     @IBOutlet weak var displayWinner: UILabel!
     
     
-//    Give a new weapon to the currently playing character when he open the chest
+    /// Give a new weapon to the currently playing character when he open the chest
+    /// - Parameter sender: The object who called that action
     @IBAction func setNewWeaponToCharacter(_ sender: UIButton) {
         
 //        Disable "Open chest" button after it's been clicked once to prevent using it multiple times per turn
@@ -42,7 +43,7 @@ class CombatScreenVC: UIViewController {
         
     }
     
-    
+//    Display the winner and a button wich perform a segue to the EndGameStatsVC
     @IBOutlet weak var showWinner: UIStackView!
     
     
@@ -105,15 +106,15 @@ class CombatScreenVC: UIViewController {
     
     
     
-///    Contains all informations about the current state of the game
+    /// Contains all informations about the current state of the game
     internal var gameSession = GameSession()
     
-///  Sent to CharactersActionsPopoverVC to display the list of allies if the "Heal" button is pressed or the list of foes if "Attack" button is pressed depending of the selected character
+    /// Sent to CharactersActionsPopoverVC to display the list of allies if the "Heal" button is pressed or the list of foes if "Attack" button is pressed depending of the selected character
     private var alliesAndFoes: [String:Player] = [:]
     
     private var characterWhoPlayThisRound = Character()
     
-///     Used to set the next character who will play the round
+    /// Used to set the character who will play the next round
     private var characterWhoPlayThisRoundIndex : Int! {
         
         didSet{
@@ -139,19 +140,20 @@ class CombatScreenVC: UIViewController {
     
     
     
-///    Show CharactersActionsPopoverVC as popover/modal when a character is selected to perform an action
+    /// Show CharactersActionsPopoverVC as popover/modal when a character is selected to perform an action
+    /// - Parameter sender: The object who called that action
     @IBAction func showCharActions(_ sender: CharactersButton) {
         
-        
+//        Set the sender background color to orange
         characterWhoPlayThisRound.UIelements.characterButton.backgroundColor = .orange
         
-//        Store the currently selected character owning player and foe with their updated stats from gameSession variable and send it to CharactersActionsPopoverVC
+//        Store the owning player and opponent of the character who is playing this round
         alliesAndFoes["Ally"] = gameSession.players.filter({$0.name == characterWhoPlayThisRound.owningPlayer.name})[0]
         
         
         alliesAndFoes["Foe"] = gameSession.players.filter({$0.name == characterWhoPlayThisRound.opponent.name})[0]
         
-//        Show a popover wich display the available actions to perform by the selected character: Heal or Attack
+//        Show a popover wich display the available actions to perform by the character who is playing this round: Heal or Attack
         performSegue(withIdentifier: "selectCharActions", sender: self)
     
     
@@ -164,12 +166,169 @@ class CombatScreenVC: UIViewController {
     
     
     
-     
+    
+    //MARK: - Make action on targetted character
+    
+    
+    
+    
+    /// When a character is selected as a target from the CharactersActionsPopoverVC update the target UI elements depending of the action taken
+    /// - Parameter sender: The object that called this action
+    @objc func updateTargettedCharacterUIs(_ sender: Notification){
+
+
+        if let dict = sender.userInfo as NSDictionary? {
+
+
+            if let target = dict["target"] as? Character{
+                
+//                Dismiss the popover after a target have been selected from CharactersActionsPopoverVC
+                dismiss(animated: true, completion: nil)
+                
+                
+                if target.owningPlayer.name == characterWhoPlayThisRound.owningPlayer.name {
+                    
+                    
+                    makeDesiredAction(to: target, action: "Heal")
+
+                    
+                }
+                
+                else {
+                    
+                    
+                    makeDesiredAction(to: target, action: "Attack")
+                    
+                    
+                }
+                
+
+            }
+
+
+        }
+        
+        
+    }
+    
+    
+    /// Update the targetted character health UI depending on the action chosen by the player and check if game is finished
+    /// - Parameters:
+    ///   - target: The targetted character on wich to perform to perform the action
+    ///   - action: The action to perform: heal or attack
+    private func makeDesiredAction(to target: Character, action: String) {
+        
+        
+        let getTargetOwningPlayerFromGameSession = gameSession.players.filter({$0.name == target.owningPlayer.name})
+        
+        let getTargetCharacterFromGameSession = getTargetOwningPlayerFromGameSession[0].characters.filter({$0.customName == target.customName})[0]
+        
+        
+        switch action {
+            
+        case "Heal": getTargetCharacterFromGameSession.health += characterWhoPlayThisRound.weapon.damage
+            
+        case "Attack": getTargetCharacterFromGameSession.health -= characterWhoPlayThisRound.weapon.damage
+            
+        default: return
+            
+        }
+        
+        
+        if getTargetCharacterFromGameSession.health > getTargetCharacterFromGameSession.maxHealth{
+            
+//            Prevent the health UI to display numbers higher than the character maximum health
+            getTargetCharacterFromGameSession.health = getTargetCharacterFromGameSession.maxHealth
+            
+            
+        }
+        
+        
+        if getTargetCharacterFromGameSession.health <= 0 {
+            
+//            Prevent the health UI to display negative numbers
+            getTargetCharacterFromGameSession.health = 0
+            
+            getTargetCharacterFromGameSession.UIelements.characterButton.backgroundColor = .red
+            
+            
+        }
+        
+//        disable the UI button of the character who just played this round
+        characterWhoPlayThisRound.UIelements.characterButton.isEnabled = false
+        characterWhoPlayThisRound.UIelements.characterButton.backgroundColor = .systemGray
+        
+        checkIfGameIsFinish()
+        
+        if gameSession.isFinished {
+            
+            displayWinner.text = "\(gameSession.winner!) won the game!"
+
+            showWinner.isHidden = false
+            
+        }
+        
+        else {
+            
+            gameSession.actualRound += 1
+            
+            setNextCharacterToPlay()
+            
+        }
+        
+    }
+    
+
+    private func checkIfGameIsFinish() {
+        
+        
+        switch characterWhoPlayThisRound.owningPlayer.name {
+            
+//            if the character who play this round is player 1 and all characters in ennemy team are dead, he's the winner
+        case gameSession.players[0].name:
+            
+            checkIfAllCharactersAreDead(for: gameSession.players[1])
+            
+            gameSession.winner = gameSession.isFinished ? gameSession.players[0].name : nil
+            
+            
+//            if the character who play this round is player 2 and all characters in ennemy team are dead, he's the winner
+        case gameSession.players[1].name:
+            
+            checkIfAllCharactersAreDead(for: gameSession.players[0])
+            
+            gameSession.winner = gameSession.isFinished ? gameSession.players[1].name : nil
+            
+            
+        default: return
+            
+        }
+        
+    }
+    
+    
+    private func checkIfAllCharactersAreDead(for player: Player){
+        
+        
+        let getAllCharactersAlive = player.characters.filter({$0.health > 0})
+        
+//        Game is finish if there are not character alive in the ennemy team
+        gameSession.isFinished = (getAllCharactersAlive.count == 0) ? true : false
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //MARK: - Setup UI with every player characters stats
     
     
     
-/// Set combat screen UI elements to display player's characters stats at game start
+    /// Set combat screen UI elements to display player's characters stats at game start
     private func setupCharactersStats(){
         
         
@@ -191,7 +350,7 @@ class CombatScreenVC: UIViewController {
         var player2UIElements : [charactersStatsUIElements] = []
         
         
-//        Match every character with their corresponding UI elements and push them to an array respective to their owning player
+//        Get each characters UI elements and push them to an array respective to the player who own these characters
         
         player1Character1 = charactersStatsUIElements(characterHPLabel: player1Char1HP, characterWeaponDamageLabel: player1Char1WeaponDamage, characterButton: player1Char1Button)
         
@@ -234,12 +393,16 @@ class CombatScreenVC: UIViewController {
         
     }
     
-///     Set every Character object
+    
+    /// Display the stats of each player's characters at their respective location on the UI
+    /// - Parameters:
+    ///   - player: The Player object who own the UI elements
+    ///   - UIelements: An array contaning all UI elements for each character of a player
     private func setUIelementsToCharacters(for player: Player, UIelements: [charactersStatsUIElements]) {
         
         for (index, _) in player.characters.enumerated() {
             
-//            for each UI elements characterButton in the array define their correspondingCharacter variable before pushing them to the character UIelements variable
+//            for each characterButton property in the array UI elements set the correspondingCharacter property before pushing the array to each player character UIelements property
             UIelements[index].characterButton.correspondingCharacter = player.characters[index]
 
             player.characters[index].UIelements = UIelements[index]
@@ -248,148 +411,27 @@ class CombatScreenVC: UIViewController {
     }
     
     
-//    When a character is selected as a target from the CharactersActionsPopoverVC update the target UI elements depending of the action taken
-    @objc func updateTargettedCharacterUIs(_ sender: Notification){
-
-
-        if let dict = sender.userInfo as NSDictionary? {
-
-
-            if let target = dict["target"] as? Character{
-                
-//                Dismiss the popover after a target have been selected from CharactersActionsPopoverVC
-                dismiss(animated: true, completion: nil)
-                
-                
-                if target.owningPlayer.name == characterWhoPlayThisRound.owningPlayer.name {
-                    
-                    
-                    makeDesiredAction(to: target, action: "Heal")
-
-                    
-                }
-                
-                else {
-                    
-                    
-                    makeDesiredAction(to: target, action: "Attack")
-                    
-                    
-                }
-                
-
-            }
-
-
-        }
+    /// Select a random player character to start the first round
+    private func setFirstPlayerToStartPlaying(){
         
+        let getRandomPlayer: Player = gameSession.players.randomElement()!
+        
+        let getRandomCharacterIndex = getRandomPlayer.characters.indices.randomElement()
+        
+        characterWhoPlayThisRound = getRandomPlayer.characters[getRandomCharacterIndex!]
+        characterWhoPlayThisRoundIndex = getRandomCharacterIndex!
+        
+        setNextCharacterToPlay()
         
     }
-    
-    /// Update the targetted character health UI depending on the action chosen by the player and check if game is finished
-    
-    /// test
-    /// - Parameters:
-    ///   - target: testtar
-    ///   - action: testact
-    private func makeDesiredAction(to target: Character, action: String) {
-        
-        
-        let getTargetOwningPlayerFromGameSession = gameSession.players.filter({$0.name == target.owningPlayer.name})
-        
-        let getTargetCharacterFromGameSession = getTargetOwningPlayerFromGameSession[0].characters.filter({$0.customName == target.customName})[0]
-        
-        
-        switch action {
-            
-        case "Heal": getTargetCharacterFromGameSession.health += characterWhoPlayThisRound.weapon.damage
-            
-        case "Attack": getTargetCharacterFromGameSession.health -= characterWhoPlayThisRound.weapon.damage
-            
-        default: return
-            
-        }
-        
-        
-        if getTargetCharacterFromGameSession.health <= 0 {
-            
-//            Prevent the health UI to display negative numbers
-            getTargetCharacterFromGameSession.health = 0
-            
-            getTargetCharacterFromGameSession.UIelements.characterButton.backgroundColor = .red
-            
-            
-        }
-        
-//        disable the UI button of the character who just played this round
-        characterWhoPlayThisRound.UIelements.characterButton.isEnabled = false
-        characterWhoPlayThisRound.UIelements.characterButton.backgroundColor = .systemGray
-        
-        checkIfGameIsFinish()
-        
-        if gameSession.isFinished {
-            
-            displayWinner.text = "\(gameSession.winner!) won the game!"
 
-            showWinner.isHidden = false
-            
-        }
-        
-        else {
-            
-            gameSession.actualRound += 1
-            
-            setNextCharacterToPlay()
-            
-        }
-        
-    }
     
-
-    private func checkIfGameIsFinish () {
-        
-        
-        switch characterWhoPlayThisRound.owningPlayer.name {
-            
-//            if the character who play this round is player 1 and the game is finished, he's the winner
-        case gameSession.players[0].name:
-            
-            checkIfAllCharactersAreDead(for: gameSession.players[1])
-            
-            gameSession.winner = gameSession.isFinished ? gameSession.players[0].name : nil
-            
-            
-//            if the character who play this round is player 2 and the game is finished, he's the winner
-        case gameSession.players[1].name:
-            
-            checkIfAllCharactersAreDead(for: gameSession.players[0])
-            
-            gameSession.winner = gameSession.isFinished ? gameSession.players[1].name : nil
-            
-            
-        default: return
-            
-        }
-        
-    }
-    
-    
-    private func checkIfAllCharactersAreDead(for player: Player){
-        
-        
-        let getAllCharactersAlive = player.characters.filter({$0.health > 0})
-        
-//        Game is finish if there are not character alive in the ennemy team
-        gameSession.isFinished = (getAllCharactersAlive.count == 0) ? true : false
-    }
-    
-    
-    
-    private func setNextCharacterToPlay () {
+    /// Enable the UI of the opponent of the player who just played the previous round
+    private func setNextCharacterToPlay() {
         
         characterWhoPlayThisRoundIndex! += 1
         
-//        enable UIs of the character who is currently playing opponent
+//        enable the button of the character who is currently playing
         switch characterWhoPlayThisRound.owningPlayer.name {
             
         case gameSession.players[0].name:
@@ -410,27 +452,23 @@ class CombatScreenVC: UIViewController {
     }
     
     
-    private func checkIfChestIsAvailable() {
-        
-        
-        gameSession.chestAvailable = Bool.random()
-        
-    }
-    
+    /// Enable the button of the character who will play this round if he's health is above 0, otherwise skip it
+    /// - Parameter player: The player who own the character whose turn to play this round
     private func enableUIsForNextCharacterToPlay(for player: Player) {
         
         if player.characters[characterWhoPlayThisRoundIndex!].health == 0 {
             
-//            Skip this character, not enabling his button on the UI, if the character is dead
             characterWhoPlayThisRound = player.characters[characterWhoPlayThisRoundIndex!]
             
+            
+//            Loop again, skipping this character, not enabling his button on the UI, if the character is dead
             setNextCharacterToPlay()
             
         }
         
         else {
             
-//            Enable the character UI if he's still alive (health > 0 )
+//            Enable the character UI button if he's still alive (health > 0 )
             player.characters[characterWhoPlayThisRoundIndex!].UIelements.characterButton.isEnabled = true
             player.characters[characterWhoPlayThisRoundIndex!].UIelements.characterButton.backgroundColor = .systemBlue
             
@@ -441,19 +479,14 @@ class CombatScreenVC: UIViewController {
     }
     
     
-/// Select a random player character to start the first round
-    private func setFirstPlayerToStartPlaying(){
+    /// Randomly enable or disable the "Open chest" button on the central bar of the UI
+    private func checkIfChestIsAvailable() {
         
-        let getRandomPlayer: Player = gameSession.players.randomElement()!
         
-        let getRandomCharacterIndex = getRandomPlayer.characters.indices.randomElement()
-        
-        characterWhoPlayThisRound = getRandomPlayer.characters[getRandomCharacterIndex!]
-        characterWhoPlayThisRoundIndex = getRandomCharacterIndex!
-        
-        setNextCharacterToPlay()
+        gameSession.chestAvailable = Bool.random()
         
     }
+    
     
     
     //MARK: - View Did Load
@@ -466,7 +499,7 @@ class CombatScreenVC: UIViewController {
         
         super.viewDidLoad()
         
-//        When the combat screen appear, populate the UI with the selected player's characters stats
+//        When the combat screen appear, populate the UI with the player's characters stats
         setupCharactersStats()
         
         setFirstPlayerToStartPlaying()
@@ -474,7 +507,7 @@ class CombatScreenVC: UIViewController {
         gameSession.actualRound += 1
         
         
-//        Listen for notifications from the CharactersActionsPopoverVC
+//        Listen for notifications from ActionDetailStackView of CharactersActionsPopoverVC
         NotificationCenter.default.addObserver(
             self, selector: #selector(updateTargettedCharacterUIs(_:)),
             name: Notification.Name("targettedCharacter"), object: nil)
