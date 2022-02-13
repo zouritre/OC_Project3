@@ -10,12 +10,14 @@ import UIKit
 class ActionDetailStackView: UIStackView {
     
     
-/// Store a list of the selected character's allies and foes
+    /// Store a list of the selected character's allies and foes
     internal var alliesAndFoes: [String:Player] = [:]
     
     
     
-    internal func displayAvailableTargetCharacters (action: String) {
+    /// Create the corresponding buttons for each character in the selected character team if "Heal" is pressed or for each in ennemy team if "Attack" is pressed
+    /// - Parameter action: The action for wich to create the buttons on the UI
+    internal func displayAvailableTargetCharacters(action: String) {
         
         
         if action == "Heal" {
@@ -40,8 +42,7 @@ class ActionDetailStackView: UIStackView {
     
     
     
-///         Create the corresponding buttons for each character in the selected character team if "Heal" is pressed or for each in ennemy team if "Attack" is pressed
-    private func addButtonsToDetailPanel (for targettedPlayer: String) {
+    private func addButtonsToDetailPanel(for targettedPlayer: String) {
         
         
         if let playerCharacters = alliesAndFoes[targettedPlayer]?.characters {
@@ -80,8 +81,9 @@ class ActionDetailStackView: UIStackView {
     
     
     
-    ///     Send the targetted character CharactersButton() to CombatScreenVC using Notification when an action has been chosen
-    @objc func actionToTargettedCharacter (_ sender: CharactersButton){
+    /// Send the targetted character CharactersButton() to CombatScreenVC using Notification when an action has been chosen
+    /// - Parameter sender: The object thta called the action
+    @objc func actionToTargettedCharacter(_ sender: CharactersButton){
 
         
         var target: [String:Character] = [:]

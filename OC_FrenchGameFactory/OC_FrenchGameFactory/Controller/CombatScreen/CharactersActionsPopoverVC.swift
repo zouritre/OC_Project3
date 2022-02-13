@@ -19,7 +19,9 @@ class CharactersActionsPopoverVC: UIViewController {
     
     @IBOutlet weak var actionDetail: ActionDetailStackView!
     
-//    Linked to "Heal" and "Attack" buttons. Create a button for each character of ally team if "Heal" is pressed or each character in ennemy team if "Attack" is pressed
+
+    /// Linked to "Heal" and "Attack" buttons. Create a button for each character in ally team if "Heal" is pressed or each character in ennemy team if "Attack" is pressed
+    /// - Parameter sender: The object that called the action
     @IBAction func actionToPerfom(_ sender: UIButton) {
         
         
@@ -30,10 +32,8 @@ class CharactersActionsPopoverVC: UIViewController {
         sender.backgroundColor = .orange
         
         
-        
         switch sender.currentTitle {
         
-            
             
         case "Heal": populateCharacterListForActions(action: "Heal")
             
@@ -63,6 +63,7 @@ class CharactersActionsPopoverVC: UIViewController {
 //    Used to display the character list in ActionDetail StackView according to the action selected: Heal or Attack
     internal var alliesAndFoes: [String:Player] = [:]
     
+//    The "Heal" or "Attack" button
     private var previousSender : UIButton = UIButton()
     
     
@@ -78,13 +79,15 @@ class CharactersActionsPopoverVC: UIViewController {
     
     
     
+    /// Tell actionDetail StackView to create buttons corresponding to the action chosen by the player
+    /// - Parameter action: The action chosen by the player
     private func populateCharacterListForActions(action: String) {
         
         
 //      Remove all existing subviews (buttons) in the ActionDetail StackView to avoid infinite stacking
         actionDetail.subviews.forEach({ $0.removeFromSuperview() });
         
-//      Tell the stackView wich player is on the side of the selected character (the one who is performing the  action) and wich is not to create their corresponding         buttons in the StackView
+//      Tell the stackView wich player is on the side of the selected character (the one who is performing the  action) and wich is not to create their corresponding buttons in the StackView
         actionDetail.alliesAndFoes = alliesAndFoes
         
 //      Populate the StackView with new buttons

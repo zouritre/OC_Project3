@@ -103,9 +103,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="jPp-BD-vCK"/>
                     <connections>
-                        <outlet property="StartGameButton" destination="qs3-J9-qnU" id="lsp-Ez-LQ5"/>
                         <outlet property="player1CharacterList" destination="o9E-7J-SEn" id="mj4-tk-nkH"/>
                         <outlet property="player2CharacterList" destination="qAD-7F-2DX" id="ebB-x2-rc5"/>
+                        <outlet property="startGameButton" destination="qs3-J9-qnU" id="lsp-Ez-LQ5"/>
                         <segue destination="gxq-sm-dMp" kind="show" identifier="goToCombatScreen" id="qfu-G3-0Wv"/>
                     </connections>
                 </viewController>

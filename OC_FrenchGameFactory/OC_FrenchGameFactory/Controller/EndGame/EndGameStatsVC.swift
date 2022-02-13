@@ -84,7 +84,7 @@ class EndGameStatsVC: UIViewController {
             
             playerStats.addArrangedSubview(charactersStats)
             
-            mainStackView.addArrangedSubview(playerStats)
+            self.mainStackView.addArrangedSubview(playerStats)
             
         }
         
